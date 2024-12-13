@@ -147,7 +147,7 @@ const ProfileForm = ({ userProfile }) => {
           name="userResume"
           onChange={handleChange}
           value={formData.userResume}
-          required
+          
           readOnly={edit === "resume" ? false : true}
         />
         <div className="col-span-1">
