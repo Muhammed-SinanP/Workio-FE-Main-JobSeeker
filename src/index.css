@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Noto+Sans&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .outerDiv {
+    @apply  w-full ;
+  }
+  .innerDiv{
+    @apply max-w-[1536px] m-auto
+  }
+  .inputStyle {
+    @apply border border-brandColor rounded-sm cursor-pointer px-1 py-0.5;
+  }
+  .inputStyle:focus {
+    @apply outline-none border-brandColor;
+  }
+  .inputStyle:hover {
+    @apply border-brandColor;
+  }
+
+  .signBtn {
+    @apply flex items-center justify-center border-0.5 cursor-pointer border-black px-1 pl-0 py-0.5 pr-1.5 rounded-sm;
+  }
+  .signBtn:hover {
+    @apply shadow bg-brandColor text-white border-brandColor;
+  }
+  .signBtn:active {
+    @apply bg-brandColor-dark border-brandColor-dark;
+  }
+
+  .searchInput{
+  @apply md:border-r  h-10  px-1
+  }
+  .searchInput:focus{
+    @apply outline-none
+  }
+
+}

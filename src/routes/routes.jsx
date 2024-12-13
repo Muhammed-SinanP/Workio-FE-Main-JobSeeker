@@ -1,23 +1,80 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../pages/Layout";
+import MainLayout from "../layouts/MainLayout";
+import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
+
+import RegisterPage from "../pages/RegisterPage";
+import JobPage from "../pages/JobPage";
+import MyProfile from "../pages/MyProfilePage";
+import MyApplications from "../pages/MyApplications";
+import JobDetails from "../pages/JobDetails";
+import JobDetailsMain from "../pages/JobDetailsMain";
+import ProtectedRoutes from "./ProtectedRoutes";
+import ErrorPage from "../pages/ErrorPage";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <MainLayout />,
+    errorElement:<ErrorPage/>,
     children: [
       {
-        path: "job",
-        element: <div>Jobs page</div>,
+        path:"",
+        element:<HomePage/>,
+        children:[
+          {path:"/home/jobDetails/:jobId",
+            element:<JobDetails/>
+          }
+        ]
       },
       {
-        path: "myProfile",
-        element: <div>profile page</div>,
+        path: "/forgotPassword",
+        element: <ForgotPasswordPage />,
       },
       {
-        path: "myApplications",
-        element: <div>applications page</div>,
+        path: "/resetPassword/:resetToken",
+        element: <ResetPasswordPage/>,
+      },
+      {
+        path: "jobs",
+        element: <JobPage/>,
+      },
+      {
+        path: "jobDetails/:jobId",
+        element: <JobDetailsMain/>,
+      },
+      {
+        element:<ProtectedRoutes signIn={true}/>,
+        children:[
+          {
+            path: "myProfile",
+            element: <MyProfile/>,
+          },
+          {
+            path: "myApplications",
+            element: <MyApplications/>,
+          },
+        ]
+      },
+     
+      
+      {
+        path: "sign",
+        element:<ProtectedRoutes signIn={false}/>,
+        children: [
+          {
+            path:"login",
+            element:<LoginPage/>
+          },
+          {
+            path:"register",
+            element:<RegisterPage/>
+          },
+        ],
       },
     ],
   },
+ 
 ]);
