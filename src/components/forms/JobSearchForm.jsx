@@ -5,6 +5,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import WorkIcon from '@mui/icons-material/Work';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 
 const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
@@ -69,7 +70,8 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
       }
     }
     else{
-      window.alert("login first")
+      toast.error("Login first")
+      navigate("/sign/login")
     }
    
  

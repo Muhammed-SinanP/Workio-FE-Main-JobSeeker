@@ -78,7 +78,8 @@ const JobCardBig = ({ job }) => {
       }
     }
     else{
-      window.alert("login first")
+      toast.error("Login first")
+      navigate("/sign/login")
     }
    
    
