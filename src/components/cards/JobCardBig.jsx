@@ -106,7 +106,7 @@ const JobCardBig = ({ job }) => {
         </div>
         {!smallHead && <div className="flex items-center ">
           <CurrencyRupeeIcon fontSize="small" />
-          {job?.sallaryRange?.min} - {job?.sallaryRange?.max}
+          {job?.sallaryRange?.min} - {job?.sallaryRange?.max} <span className="font-light">LPA</span>
         </div>}
         {!smallHead && <div>
           <button onClick={()=>sendApplication(job?._id)} className="btn text-lg bg-brandColor hover:bg-brandColor-dark text-white">
