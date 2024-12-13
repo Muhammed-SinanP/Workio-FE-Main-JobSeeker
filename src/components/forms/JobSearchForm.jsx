@@ -82,7 +82,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
             id="jobTitle"
             name="jobTitle"
             type="text"
-            placeholder="job title"
+            placeholder="Job title"
             className="searchInput bg-white dark:bg-darkColor-input"
             onChange={handleChange}
             value={formData.jobTitle}
@@ -95,7 +95,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
             id="jobLocation"
             name="jobLocation"
             type="text"
-            placeholder="location"
+            placeholder="Location"
             className="searchInput bg-white dark:bg-darkColor-input"
             onChange={handleChange}
             value={formData.jobLocation}
@@ -113,14 +113,14 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
             required
           >
             <option value="" disabled className="hidden " >
-             Experience
+             Min experience
             </option>
             <option value={0} className='text-xs '>Fresher/Less than 1year</option>
             <option value={1}  className='text-xs'>
-              1 year
+              1+ year
             </option>
-            <option value={2} className='text-xs'>2 year</option>
-            <option value={3} className='text-xs'>3 year</option>
+            <option value={2} className='text-xs'>2+ year</option>
+            <option value={3} className='text-xs'>3+ year</option>
           </select>
           </div>
           <div>
