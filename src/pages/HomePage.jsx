@@ -75,7 +75,7 @@ const HomePage = () => {
     
 <div className=" dark:bg-darkColor-text ">
       <div className="innerDiv dark:bg-darkColor-text  pt-4 pb-10">
-         <div className="p-4 px-8 md:px-10  xl:px-20 text-center font-bold text-xl lg:text-2xl  tracking-wide text-brandColor-dark dark:text-gray-100">Find the perfect job for YOU</div>
+         <div className="p-4 px-8 md:px-10  xl:px-20 text-center font-bold text-xl lg:text-2xl  tracking-wide text-brandColor-dark dark:text-darkColor">Find the perfect job for YOU</div>
          <div className=" grid grid-cols-12  gap-4 md:gap-3 lg:gap-4 p-4 px-8 md:px-10 xl:gap-5 xl:px-20 pb-10">
 
           {userSuggestions.map((element,index)=>

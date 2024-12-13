@@ -81,7 +81,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
             name="jobTitle"
             type="text"
             placeholder="job title"
-            className="searchInput"
+            className="searchInput bg-white dark:bg-darkColor-input"
             onChange={handleChange}
             value={formData.jobTitle}
             required
@@ -94,7 +94,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
             name="jobLocation"
             type="text"
             placeholder="location"
-            className="searchInput"
+            className="searchInput bg-white dark:bg-darkColor-input"
             onChange={handleChange}
             value={formData.jobLocation}
           />
@@ -105,7 +105,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
           <select
             id="jobExperience"
             name="jobExperience"
-            className={`searchInput border-none text-xs cursor-pointer  ${formData.jobExperience === ""? "text-[#9CA3AF]":"text-black dark:text-darkColor-text"}`}
+            className={`searchInput border-none text-xs cursor-pointer bg-white dark:bg-darkColor-input ${formData.jobExperience === ""? "text-[#9CA3AF]":"text-black dark:text-darkColor-text"}`}
             onChange={handleChange}
             value={formData.jobExperience}
             required

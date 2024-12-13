@@ -26,7 +26,7 @@ const JobCardSm = ({ element,selectedCard,cardClick }) => {
 
   function trimDescription(text) {
     if (text && text.length > descriptionLength) {
-      return `${text.slice(0, descriptionLenght)}...`;
+      return `${text.slice(0, descriptionLength)}...`;
     } else {
       return text;
     }
