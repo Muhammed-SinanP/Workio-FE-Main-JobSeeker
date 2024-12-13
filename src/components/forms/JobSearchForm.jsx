@@ -33,7 +33,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
   }
   async function handleSubmit(e){
     e.preventDefault()
-    if(userLoggedIn){
+    
       setIsJobLoading(true)
       try {
        const response = await axiosInstance({
@@ -68,11 +68,7 @@ const JobSearchForm = ({setFilteredJobs ,setJobsFound,setSelectedCard}) => {
        console.log("err in filtereing",err.message)
        setIsJobLoading(false)
       }
-    }
-    else{
-      toast.error("Login first")
-      navigate("/sign/login")
-    }
+   
    
  
    }
