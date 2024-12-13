@@ -59,21 +59,24 @@ const ApplicationsTable = () => {
     {
       when: (row) => row.status === "Approved",
       style: {
-        color: "green",
-        fontWeight:"bold"
+        backgroundColor: "green",
+       
+        fontWeight:"semibold"
       },
     },
     {
       when: (row) => row.status === "In-review",
       style: {
-        color: "yellow",
+        
+        backgroundColor:"yellow",
         fontWeight:"semibold"
       },
     },
     {
       when: (row) => row.status === "Rejected",
       style: {
-        color: "red", // Green text
+        backgroundColor: "red", 
+        fontWeight:"semibold"
       },
     },
   ];
