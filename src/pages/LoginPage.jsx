@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AuthForm from "../components/forms/AuthForm";
 import { useState } from "react";
 
@@ -8,7 +8,9 @@ const LoginPage = () => {
     userEmail: "",
     userPassword: "",
   });
- 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="outerDiv ">
       <div className="innerDiv h-full  flex justify-center items-center  py-4">
