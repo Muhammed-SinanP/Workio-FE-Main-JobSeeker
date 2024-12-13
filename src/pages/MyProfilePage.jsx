@@ -69,7 +69,7 @@ const MyProfile = () => {
               </div>
             </div>
             <div className="bg-white dark:bg-darkColor p-4 rounded-md  shadow-sm shadow-gray-500">
-              <div className="border  rounded-md p-4">
+              <div className="border  rounded-md p-2 sm:p-4">
                 <div className="flex flex-col gap-1">
                   <div className="flex items-end gap-2">
                     <div className="bg-homeColor-light rounded-md p-0.5 px-1">

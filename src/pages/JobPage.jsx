@@ -20,6 +20,10 @@ const JobPage = () => {
 
   }
 
+  if(error){
+    return <div className="pt-10 text-center">Error occured while fetching jobs..</div>
+  }
+
   return (
     <div className="outerDiv">
       <div className="innerDiv min-h-screen ">
@@ -28,11 +32,13 @@ const JobPage = () => {
         ) : (
           <div className="lg:px-6 md:px-28 p-6 grid grid-cols-12  gap-4  min-h-44 ">
             {jobs &&
-              jobs.length > 0 &&
+              jobs.length > 0 ?
               jobs.map((element, index) => (
                 
                 <JobCardSm key={index} element={element} cardClick={cardClick}/>
-              ))}
+              )):
+              <div className="col-span-12 text-center">No jobs posted</div>
+              }
           </div>
         )}
       </div>
