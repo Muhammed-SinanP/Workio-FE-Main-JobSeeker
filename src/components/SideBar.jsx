@@ -63,7 +63,7 @@ const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
         />
          {userLoggedIn ? (
           <div className="flex items-start gap-3 justify-start px-2   border-b">
-            <DarkModeBtn />
+            
             <div
               onClick={() => navigate("/")}
               className="cursor-pointer flex pb-1 "
@@ -78,7 +78,7 @@ const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
           </div>
         ) : (
           <div className="flex flex-wrap items-center justify-start px-2 sm:justify-center gap-2 py-2 sm:hidden border-b">
-            <DarkModeBtn /> <LoginBtn />
+             <LoginBtn />
             <RegisterBtn />
           </div>
         )}

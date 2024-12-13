@@ -113,12 +113,17 @@ const Header = () => {
             Employer/Post Job
           </div>
         </div>
-        <div
+        
+         <div className="sm:hidden flex items-center gap-2">
+          <div><DarkModeBtn/></div>
+           <div className="border-r-0.5 border-black h-6 mb-0.5"></div>
+         <div
             onClick={navigateToEmployer}
 
-            className="text-gray-700 dark:text-darkColor-text dark:hover:text-gray-200  sm:hidden cursor-pointer text-xs font-normal hover:text-gray-900 mb-1"
+            className="text-gray-700 dark:text-darkColor-text dark:hover:text-gray-200  sm:hidden cursor-pointer text-xs font-normal hover:text-gray-900 "
           >
             Employer<CallMadeIcon fontSize="small" className="p-1 pl-0"/>
+          </div>
           </div>
 
       </div>
