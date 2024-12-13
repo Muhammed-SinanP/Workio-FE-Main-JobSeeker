@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import DataTable from "react-data-table-component";
-import DarkModeBtn from "./buttons/DarkModeBtn";
 
 const ApplicationsTable = () => {
   const [applications, error, isLoading] = useFetch("/user/myApplications");

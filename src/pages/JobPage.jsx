@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {useNavigate} from "react-router-dom"
 import useFetch from "../hooks/useFetch";
-import { axiosInstance } from "../config/axiosInstance";
+
 import JobCardSm from "../components/cards/JobCardSm";
 
 const JobPage = () => {

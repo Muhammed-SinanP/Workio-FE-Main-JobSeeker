@@ -15,7 +15,7 @@ import brandLogo from "../../assets/logo.png";
 import CallMadeIcon from '@mui/icons-material/CallMade';
 
 
-import UserOptions from "../User/UserOptions";
+import UserOptions from "../user/UserOptions";
 
 import DarkModeBtn from "../buttons/DarkModeBtn";
 
