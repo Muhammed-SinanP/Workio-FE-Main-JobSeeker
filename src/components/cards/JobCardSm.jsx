@@ -55,7 +55,7 @@ const JobCardSm = ({ element,selectedCard,cardClick }) => {
         <div className="border-r h-full"></div>
         <div className="flex items-center -ml-1 pr-1 rounded-sm">
           <CurrencyRupeeIcon fontSize="small" className="py-1 px-0 -mr-1" />
-          {element.sallaryRange?.min}-{element.sallaryRange?.max} <span className="font-light">LPA</span>
+          {element.sallaryRange?.min}-{element.sallaryRange?.max} <span className="font-light ml-1">LPA</span>
         </div>
       </div>
 
