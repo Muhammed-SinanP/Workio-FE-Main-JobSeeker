@@ -5,10 +5,10 @@ import { Outlet, useLocation } from "react-router-dom";
 import { axiosInstance } from "../config/axiosInstance";
 import { saveUserData,clearUserData } from "../redux/features/userSlice";
 import { useDispatch } from "react-redux";
-import SignHeader from "../components/Header/SignHeader";
+import SignHeader from "../components/header/SignHeader";
 import SignFooter from "../components/footer/SignFooter";
 import Footer from "../components/footer/Footer";
-import Header from "../components/Header/Header";
+import Header from "../components/header/Header";
 
 
 const MainLayout = () => {

@@ -14,7 +14,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import brandLogo from "../../assets/logo.png";
 import CallMadeIcon from '@mui/icons-material/CallMade';
 
-import { axiosInstance } from "../../config/axiosInstance";
+
 import UserOptions from "../User/UserOptions";
 
 import DarkModeBtn from "../buttons/DarkModeBtn";
