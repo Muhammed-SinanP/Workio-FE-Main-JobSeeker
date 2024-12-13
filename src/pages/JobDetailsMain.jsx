@@ -16,6 +16,11 @@ const [jobDetails,error,isLoading] = useFetch(`/job/${jobId}`)
     useEffect(()=>{
       setCardLoading(false)
     },[jobDetails])
+
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     
 if(error){
     return <div>{error.message}</div>
