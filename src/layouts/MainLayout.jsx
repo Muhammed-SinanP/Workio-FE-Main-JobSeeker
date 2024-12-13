@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import SignHeader from "../components/header/SignHeader";
 import SignFooter from "../components/footer/SignFooter";
 import Footer from "../components/footer/Footer";
-import Header from "../components/header/Header";
 
+import Header from "../components/header/Header"
 
 const MainLayout = () => {
   const dispatch = useDispatch()

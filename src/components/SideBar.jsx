@@ -140,7 +140,7 @@
 
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import LoginBtn from "./Buttons/LoginBtn";
+import LoginBtn from "./buttons/LoginBtn";
 import RegisterBtn from "./buttons/RegisterBtn";
 import { NavbarData, userNavbarData } from "./Data";
 import { NavLink, useNavigate } from "react-router-dom";

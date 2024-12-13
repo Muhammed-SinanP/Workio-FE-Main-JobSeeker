@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import LoginBtn from "../Buttons/LoginBtn";
+import LoginBtn from "../buttons/LoginBtn";
 import RegisterBtn from "../buttons/RegisterBtn";
 import { useSelector } from "react-redux";
 import { NavbarData } from "../Data";
