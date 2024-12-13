@@ -93,9 +93,9 @@ const AuthForm = ({ isRegister,formData,setFormData }) => {
             </div>
           )}
           <div className="w-full  border-b my-3"></div>
-         <div className="w-full text-center"> <button
+         <div className="w-full text-center flex items-center justify-center"> <button
             onClick={googleSignIn}
-            className="btn btn-sm btn-outline flex items-center justify-center gap-2  border-brandColor hover:bg-brandColor hover:border-brandColor text-brandColor"
+            className="btn w-full btn-sm btn-outline flex items-center justify-center gap-2  border-brandColor hover:bg-brandColor hover:border-brandColor text-brandColor"
           >
             <img src={googleIcon} alt="google icon" className="h-4" />
             <span className="text-sm">Continue with Google</span>
