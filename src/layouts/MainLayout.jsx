@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import Header from "../components/Header/Header";
+
 import { Outlet, useLocation } from "react-router-dom";
 
 import { axiosInstance } from "../config/axiosInstance";
 import { saveUserData,clearUserData } from "../redux/features/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import SignHeader from "../components/Header/SignHeader";
 import SignFooter from "../components/footer/SignFooter";
 import Footer from "../components/footer/Footer";
+import Header from "../components/Header/Header";
 
 
 const MainLayout = () => {
@@ -47,7 +48,7 @@ const MainLayout = () => {
       location.pathname == "/sign/register" ? (
         <SignHeader />
       ) : (
-        <Header />
+        <Header/>
       )}
 
       <div className="flex flex-col grow relative min-h-screen bg-green-50 dark:bg-darkColor-light">
