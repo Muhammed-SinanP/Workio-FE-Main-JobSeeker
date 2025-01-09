@@ -37,7 +37,7 @@ const JobCardSm = ({ element,selectedCard,cardClick }) => {
   return (
     <>
     
-    <div onClick={()=>cardClick(element._id)} className={`border ${selectedCard===element._id ? "md:border-brandColor-dark dark:md:border-darkColor-text dark:md:shadow-gray-200  md:shadow-brandColor-dark":"border-gray-400 "}   flex flex-col gap-1.5 items-start p-3 rounded-md border shadow-sm cursor-pointer hover:shadow-sm hover:border-brandColor-dark dark:hover:border-gray-200 hover:shadow-brandColor-dark dark:hover:shadow-gray-200 xl:col-span-3 lg:col-span-4 md:col-span-6   bg-white dark:bg-darkColor col-start-3 col-end-11 `}>
+    <div onClick={()=>cardClick(element._id)} className={`border ${selectedCard===element._id ? "md:border-brandColor-dark dark:md:border-gray-200 dark:md:shadow-darkColor-input  md:shadow-brandColor-dark":"border-gray-400 "}   flex flex-col gap-1.5 items-start p-3 rounded-md border shadow-sm cursor-pointer hover:shadow-sm hover:border-brandColor-dark dark:border-darkColor-input dark:hover:border-gray-200  hover:shadow-brandColor-dark dark:hover:shadow-darkColor-input  xl:col-span-3 lg:col-span-4 md:col-span-6   bg-white dark:bg-darkColor-input col-start-3 col-end-11 `}>
       <div className="uppercase font-semibold text-lg text-brandColor-dark dark:text-brandColor">
         {element.title}
       </div>
@@ -52,7 +52,7 @@ const JobCardSm = ({ element,selectedCard,cardClick }) => {
           <WorkIcon fontSize="small" className="py-1 px-0 -ml-1" />
           {element.minExperience}+ years
         </div>
-        <div className="border-r h-full"></div>
+        <div className="border-r h-full border-gray-600"></div>
         <div className="flex items-center -ml-1 pr-1 rounded-sm">
           <CurrencyRupeeIcon fontSize="small" className="py-1 px-0 -mr-1" />
           {element.sallaryRange?.min}-{element.sallaryRange?.max} <span className="font-light ml-1">LPA</span>

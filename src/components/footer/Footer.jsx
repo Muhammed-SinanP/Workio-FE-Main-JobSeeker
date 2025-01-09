@@ -22,7 +22,7 @@ const Footer = () => {
             {footerBrandData.map((element, index) => (
               <div
                 key={index}
-                className="cursor-pointer hover:underline text-xs hover:text-gray-50 dark:text-darkColor-text dark:hover:text-gray-100"
+                className="cursor-pointer hover:underline text-xs hover:text-gray-50 dark:text-darkColor-text dark:hover:text-gray-300"
               >
                 {element.title}
               </div>

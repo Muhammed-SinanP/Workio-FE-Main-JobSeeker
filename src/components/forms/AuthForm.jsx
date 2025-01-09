@@ -70,7 +70,7 @@ const AuthForm = ({ isRegister,formData,setFormData }) => {
   }
   return (
    
-        <div className="border shadow-md bg-white dark:bg-darkColor dark:border-none dark:shadow-gray-100 shadow-brandColor-dark rounded-sm border-brandColor px-10 pb-5">
+        <div className="shadow-sm mt-4 bg-white dark:bg-darkColor dark:shadow-darkColor-input shadow-brandColor-dark rounded-md border-brandColor px-10 pb-5">
           <div className="text-center text-xl font-semibold mb-4 mt-2 text-brandColor-dark dark:text-darkColor-text">
             {isRegister ? "Register" : "Login"}
           </div>
@@ -179,8 +179,8 @@ const AuthForm = ({ isRegister,formData,setFormData }) => {
               <input
                 type="submit"
                 value={isRegister?"Register":"Login"}
-                className={`btn border-none btn-sm w-full bg-brandColor text-white hover:bg-brandColor-dark`}
-                disabled={!isFormValid}
+                className={`btn cursor-not-allowed border-none btn-sm w-full bg-brandColor text-white hover:bg-brandColor-dark`}
+                // disabled={!isFormValid}
               />
             </div>
           </form>

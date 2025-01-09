@@ -1,10 +1,6 @@
-
-
-
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import LoginBtn from "./buttons/LoginBtn";
-import RegisterBtn from "./buttons/RegisterBtn";
+
 import { NavbarData, userNavbarData } from "./Data";
 import { NavLink, useNavigate } from "react-router-dom";
 import brandLogo from "../assets/logo.png";
@@ -12,11 +8,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useConfirm } from "material-ui-confirm";
 
 import { axiosInstance } from "../config/axiosInstance";
-import DarkModeBtn from "./buttons/DarkModeBtn";
+
+import SignBtn from "./buttons/SignBtn";
 
 
-const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
- 
+const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
   const confirm = useConfirm();
   const navigate = useNavigate();
   function handleLogout() {
@@ -58,12 +54,11 @@ const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
     >
       <div className="h-full w-full flex flex-col  py-2">
         <CloseIcon
-          className="absolute right-1 top-1 text-gray-600 dark:text-darkColor-text cursor-pointer hover:text-gray-800 dark:hover:text-darkColor-text p-0.5"
+          className="absolute right-1 top-1 hover:text-gray-700 dark:text-darkColor-text cursor-pointer text-gray-800 dark:hover:text-gray-400 p-0.5"
           fontSize="small"
         />
-         {userLoggedIn ? (
-          <div className="flex items-start gap-3 justify-start px-2   border-b">
-            
+        {userLoggedIn ? (
+          <div className="flex items-start gap-3 justify-start px-2 border-b dark:border-darkColor-text">
             <div
               onClick={() => navigate("/")}
               className="cursor-pointer flex pb-1 "
@@ -77,32 +72,33 @@ const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-wrap items-center justify-start px-2 sm:justify-center gap-2 py-2 sm:hidden border-b">
-             <LoginBtn />
-            <RegisterBtn />
+          <div className="flex flex-wrap items-center justify-start px-2 sm:justify-center gap-2 py-2 sm:hidden border-b dark:border-darkColor-text">
+            <SignBtn login={true} />
+            <SignBtn login={false} />
           </div>
         )}
-
-      
-
+        
         <div className=" flex flex-col gap-1 mt-2 h-full">
-          
           {NavbarData &&
             NavbarData.map((element, index) => (
               <NavLink
                 key={index}
                 to={element.path}
                 className={({ isActive }) =>
-                  ` px-4 py-1 font-semibold mx-2 rounded-md flex items-center gap-2 ${
+                  ` px-4 py-1 tracking-wide ${
+                    element.title == "Home" ? "font-medium" : "font-normal"
+                  } mx-2 rounded-md flex items-center gap-2 ${
                     isActive
-                      ? "bg-brandColor  text-white"
-                      : "bg-gray-200 dark:bg-darkColor-text text-black hover:bg-brandColor-light dark:hover:bg-brandColor-lighter"
+                      ? "bg-brandColor-dark dark:bg-brandColor text-white"
+                      : "bg-gray-200 dark:bg-darkColor-text text-black hover:bg-gray-300 dark:hover:bg-gray-400"
                   }`
                 }
               >
                 {element.icon} {element.title}
               </NavLink>
             ))}
+
+            
 
           {userLoggedIn &&
             userNavbarData &&
@@ -111,10 +107,10 @@ const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
                 key={index}
                 to={element.path}
                 className={({ isActive }) =>
-                  ` px-4 py-1  mx-2 rounded-md flex gap-2 items-center  ${
+                  ` px-4 py-1 tracking-wide mx-2 rounded-md flex gap-2 items-center  ${
                     isActive
-                      ? "bg-brandColor text-white"
-                      : "bg-gray-200 dark:bg-darkColor-text text-black hover:bg-brandColor-light dark:hover:bg-brandColor-lighter"
+                      ? "bg-brandColor-dark dark:bg-brandColor text-white"
+                      : "bg-gray-200 dark:bg-darkColor-text text-black hover:bg-gray-300 dark:hover:bg-gray-400"
                   }`
                 }
               >
@@ -122,24 +118,19 @@ const SideBar = ({ userLoggedIn,sideBarOpen, setSideBarOpen }) => {
               </NavLink>
             ))}
 
-          <div className=" h-full w-full  flex flex-col justify-end py-4 mt-8">
-
-          {userLoggedIn && (
-            <div className=" flex justify-center w-full">
-              <button
-                className="px-2 py-1.5 rounded-md  flex items-center  bg-gray-900 shadow-md hover:bg-gray-700 text-white active:shadow-none"
-                onClick={handleLogout}
-              >
-                <LogoutIcon fontSize="small" className="p-1" />
-                <span className="text-xs">Logout</span>
-              </button>
-            </div>
-          )}
-
-
-
+          <div className=" h-full w-full  flex flex-col justify-end py-4 mt-4">
+            {userLoggedIn && (
+              <div className=" flex justify-center w-full">
+                <button
+                  className="px-2 py-1.5 rounded-md  flex items-center  bg-gray-900 shadow-md hover:bg-gray-700 text-white dark:bg-darkColor-text dark:text-darkColor-input dark:hover:bg-gray-400 active:shadow-none"
+                  onClick={handleLogout}
+                >
+                  <LogoutIcon fontSize="small" className="p-1" />
+                  <span className="text-xs">Logout</span>
+                </button>
+              </div>
+            )}
           </div>
-          
         </div>
       </div>
     </div>

@@ -49,7 +49,7 @@ const HomePage = () => {
 
      
 
-      {jobsFound===true && <div className="innerDiv flex justify-center  p-4 pt-10 h-screen rounded-t-md -mt-2">
+      {jobsFound===true && <div className="innerDiv bg-brandColor-lighter dark:bg-darkColor-light flex justify-center  p-4 pt-0 h-screen rounded-t-md -mt-2">
         <div className="w-4/5 sm:w-3/5 md:w-1/3 md:h-5/6 h-full flex flex-col gap-2 overflow-auto px-2 pb-2 scrollbar-hide  ">
           {filteredJobs &&
             filteredJobs.length > 0 &&
@@ -79,10 +79,10 @@ const HomePage = () => {
          <div className=" grid grid-cols-12  gap-4 md:gap-3 lg:gap-4 p-4 px-8 md:px-10 xl:gap-5 xl:px-20 pb-10">
 
           {userSuggestions.map((element,index)=>
-          <div onClick={()=>window.open(element.link)} key={index} className="md:col-span-3 cursor-pointer sm:col-span-6 col-start-4 col-end-10 flex flex-col gap-1 items-center bg-white dark:bg-darkColor dark:shadow-gray-200 py-4 px-2 rounded-md shadow-md">
+          <div onClick={()=>window.open(element.link)} key={index} className="md:col-span-3 cursor-pointer sm:col-span-6 col-start-4 col-end-10 flex flex-col gap-1 items-center bg-white dark:bg-darkColor dark:shadow-darkColor-input py-4 px-2 rounded-md shadow-md">
             <div><img src={element.img} alt={`${element.title} icon`} className="h-8" /></div>
             <div className="font-medium text-brandColor">{element.title}</div>
-            <div className="text-xs">{element.subtitle}</div>
+            <div className="text-xs text-center">{element.subtitle}</div>
           </div>
           )}
           

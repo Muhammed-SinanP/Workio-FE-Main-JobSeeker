@@ -66,13 +66,16 @@ const JobCardBig = ({ job }) => {
         if (response.status === 200) {
           console.log("application sent success");
           toast.success("Application sent")
-          navigate("/myApplications")
+          
         }
       } catch (err) {
         console.log(err);
         if (err.status === 403) {
-          console.log("Already applied once ..");
-          toast.error("Already applied")
+         
+          // toast.error("Already applied")
+          toast('Already applied!', {
+            icon: '❗',
+          });
         }
         console.log("application sent err", err.message);
       }
@@ -85,8 +88,8 @@ const JobCardBig = ({ job }) => {
    
   }
   return (
-    <div className="flex flex-col h-full   border shadow-sm shadow-brandColor-dark dark:shadow-gray-200 border-brandColor-dark dark:border-darkColor-text rounded-md ">
-      <div className="border-b border-brandColor-dark rounded-t-md p-4 flex flex-col gap-2 bg-white dark:bg-darkColor">
+    <div className="flex flex-col h-full   border shadow-sm shadow-brandColor-dark dark:shadow-darkColor-input border-brandColor-dark dark:border-gray-200 rounded-md ">
+      <div className="border-b border-brandColor-dark rounded-t-md p-4 flex flex-col gap-2 bg-white dark:bg-darkColor-input">
         <div className="text-2xl tracking-wide font-semibold text-brandColor-dark dark:text-brandColor flex items-center justify-between">
           {job?.title}
           <div className="flex gap-4 items-center">

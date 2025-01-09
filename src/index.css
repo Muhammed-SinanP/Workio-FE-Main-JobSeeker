@@ -1,16 +1,14 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Noto+Sans&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Noto+Sans&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer components {
   .outerDiv {
-    @apply  w-full ;
+    @apply w-full;
   }
-  .innerDiv{
-    @apply max-w-[1536px] m-auto
+  .innerDiv {
+    @apply max-w-[1536px] m-auto;
   }
   .inputStyle {
     @apply border border-brandColor rounded-sm cursor-pointer px-1 py-0.5;
@@ -23,20 +21,19 @@
   }
 
   .signBtn {
-    @apply flex items-center justify-center border-0.5 cursor-pointer border-black px-1 pl-0 py-0.5 pr-1.5 rounded-sm;
+    @apply flex text-xs font-medium items-center justify-center  cursor-pointer   pr-2 pl-1 py-1  rounded-sm transition-all duration-100 ease-in-out ;
   }
   .signBtn:hover {
-    @apply shadow bg-brandColor text-white border-brandColor;
+    @apply shadow  bg-brandColor-dark text-white;
   }
   .signBtn:active {
-    @apply bg-brandColor-dark border-brandColor-dark;
+    @apply scale-95 shadow-none bg-brandColor-dark;
   }
 
-  .searchInput{
-  @apply md:border-r  h-10  px-1
+  .searchInput {
+    @apply md:border-r bg-white w-full  h-10  px-1;
   }
-  .searchInput:focus{
-    @apply outline-none
+  .searchInput:focus {
+    @apply outline-none;
   }
-
 }

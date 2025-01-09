@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-
-
 const DarkModeBtn = () => {
   const [theme, setTheme] = useState(
-    () =>  localStorage.getItem("theme") || "light"
+    () => localStorage.getItem("theme") || "light"
   );
-   
-  function toggleTheme(){
-    const newTheme = theme === "light"?"dark":"light"
-    setTheme(newTheme)
-    localStorage.setItem("theme",newTheme)
+
+  function toggleTheme() {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   }
-  useEffect(()=>{
-document.documentElement.setAttribute("data-theme",theme)
-  },[theme])
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
   return (
     <div className="flex items-center" title="Switch theme">
       <label className="swap swap-rotate">
