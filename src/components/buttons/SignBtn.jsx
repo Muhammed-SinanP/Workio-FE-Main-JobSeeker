@@ -1,24 +1,23 @@
 import React from "react";
-import PersonIcon from "@mui/icons-material/Person";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+
 import { useNavigate } from "react-router-dom";
 
-const SignBtn = ({ login }) => {
+const SignBtn = ({ action, text, icon }) => {
   const navigate = useNavigate();
   return (
     <button
-      onClick={() => navigate(`${login ? "/sign/login" : "/sign/register"}`)}
-      className={`signBtn  ${
-        login ? "bg-brandColor dark:bg-brandColor-lighter dark:text-darkColor-input" : "bg-black dark:bg-darkColor-text dark:text-darkColor-input"
-      }   text-white   dark:hover:bg-brandColor dark:hover:text-white  dark:active:bg-brandColor-light`}
+      onClick={() =>
+        navigate(`${action === "login" ? "/sign/login" : "/sign/register"}`)
+      }
+      className={`signBtn ${
+        action === "login"
+          ? "bg-brandColor dark:bg-brandColor dark:text-white"
+          : "bg-black dark:bg-darkColor-text dark:text-darkColor-input"
+      } text-white dark:hover:bg-brandColor-dark dark:hover:text-white dark:active:bg-brandColor-light`}
     >
-      {login ? (
-        <PersonIcon fontSize="small" className="p-1" />
-      ) : (
-        <AppRegistrationIcon fontSize="small" className="p-1" />
-      )}
+      {icon && icon}
 
-      <span className="tracking-wide">{login ? "Login" : "Register"}</span>
+      <span className="tracking-wide">{text}</span>
     </button>
   );
 };

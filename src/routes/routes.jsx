@@ -8,7 +8,7 @@ import JobPage from "../pages/JobPage";
 import MyProfile from "../pages/MyProfilePage";
 import MyApplications from "../pages/MyApplications";
 import JobDetails from "../pages/JobDetails";
-import JobDetailsMain from "../pages/JobDetailsMain";
+
 import ProtectedRoutes from "./ProtectedRoutes";
 import ErrorPage from "../pages/ErrorPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
@@ -18,16 +18,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path:"",
-        element:<HomePage/>,
-        children:[
-          {path:"/home/jobDetails/:jobId",
-            element:<JobDetails/>
-          }
-        ]
+        path: "",
+        element: <HomePage />,
       },
       {
         path: "/forgotPassword",
@@ -35,46 +30,44 @@ export const router = createBrowserRouter([
       },
       {
         path: "/resetPassword/:resetToken",
-        element: <ResetPasswordPage/>,
+        element: <ResetPasswordPage />,
       },
       {
         path: "jobs",
-        element: <JobPage/>,
+        element: <JobPage />,
       },
       {
         path: "jobDetails/:jobId",
-        element: <JobDetailsMain/>,
+        element: <JobDetails />,
       },
       {
-        element:<ProtectedRoutes signIn={true}/>,
-        children:[
+        element: <ProtectedRoutes signIn={true} />,
+        children: [
           {
             path: "myProfile",
-            element: <MyProfile/>,
+            element: <MyProfile />,
           },
           {
             path: "myApplications",
-            element: <MyApplications/>,
+            element: <MyApplications />,
           },
-        ]
+        ],
       },
-     
-      
+
       {
         path: "sign",
-        element:<ProtectedRoutes signIn={false}/>,
+        element: <ProtectedRoutes signIn={false} />,
         children: [
           {
-            path:"login",
-            element:<LoginPage/>
+            path: "login",
+            element: <LoginPage />,
           },
           {
-            path:"register",
-            element:<RegisterPage/>
+            path: "register",
+            element: <RegisterPage />,
           },
         ],
       },
     ],
   },
- 
 ]);

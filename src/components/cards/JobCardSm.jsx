@@ -2,11 +2,11 @@ import React from "react";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
-
-const JobCardSm = ({ element,selectedCard,cardClick }) => {
+const JobCardSm = ({ element, cardClick }) => {
   
-  const descriptionLength = 100;
   function calculateDays(date) {
     const createdDate = new Date(date);
     const currentDate = new Date();
@@ -24,55 +24,55 @@ const JobCardSm = ({ element,selectedCard,cardClick }) => {
     return `${dateDiffernce} days ago`;
   }
 
-  function trimDescription(text) {
-    if (text && text.length > descriptionLength) {
-      return `${text.slice(0, descriptionLength)}...`;
-    } else {
-      return text;
-    }
-  }
-
- 
   
+
   return (
     <>
-    
-    <div onClick={()=>cardClick(element._id)} className={`border ${selectedCard===element._id ? "md:border-brandColor-dark dark:md:border-gray-200 dark:md:shadow-darkColor-input  md:shadow-brandColor-dark":"border-gray-400 "}   flex flex-col gap-1.5 items-start p-3 rounded-md border shadow-sm cursor-pointer hover:shadow-sm hover:border-brandColor-dark dark:border-darkColor-input dark:hover:border-gray-200  hover:shadow-brandColor-dark dark:hover:shadow-darkColor-input  xl:col-span-3 lg:col-span-4 md:col-span-6   bg-white dark:bg-darkColor-input col-start-3 col-end-11 `}>
-      <div className="uppercase font-semibold text-lg text-brandColor-dark dark:text-brandColor">
-        {element.title}
-      </div>
-      <div className="text-sm capitalize">{element.employer?.name}</div>
-      <div className="text-xs flex items-center">
-        <LocationOnIcon fontSize="small" className="py-1 px-0 -ml-1" />
-        {element.location?.city}, {element.location?.state},{" "}
-        {element.location?.country}
-      </div>
-      <div className="text-xs flex items-center gap-2">
-        <div className="flex items-center">
-          <WorkIcon fontSize="small" className="py-1 px-0 -ml-1" />
-          {element.minExperience}+ years
+      <div
+        onClick={() => cardClick(element)}
+        className={`relative border border-white  w-full h-full group flex cursor-pointer flex-col items-start gap-1 rounded-md  bg-white p-3  dark:border-darkColor-input dark:bg-darkColor-input `}
+      >
+        <div className="flex w-full justify-between gap-2.5">
+          <div className="text-lg group-hover:underline font-semibold capitalize text-brandColor-dark dark:text-brandColor">
+            {element.title}
+          </div>
+          <div className="text-brandColor-dark dark:text-brandColor">
+            <BookmarkBorderIcon fontSize="small" />
+          </div>
         </div>
-        <div className="border-r h-full border-gray-600"></div>
-        <div className="flex items-center -ml-1 pr-1 rounded-sm">
-          <CurrencyRupeeIcon fontSize="small" className="py-1 px-0 -mr-1" />
-          {element.sallaryRange?.min}-{element.sallaryRange?.max} <span className="font-light ml-1">LPA</span>
+        <div className="text-sm capitalize">{element.employer?.name}</div>
+        <div className="flex items-center text-xs">
+          <LocationOnIcon fontSize="small" className="-ml-1 px-0 py-1" />
+          {element.location?.city}, {element.location?.state},{" "}
+          {element.location?.country}
         </div>
-      </div>
+        <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center">
+            <WorkIcon fontSize="small" className="-ml-1 px-0 py-1" />
+            {element.minExperience}+ years
+          </div>
+          <div className="h-3/5 border-r-0.5 border-darkColor-text"></div>
+          <div className="-ml-1 flex items-center rounded-sm pr-1">
+            <CurrencyRupeeIcon fontSize="small" className="-mr-1 px-0 py-1" />
+            {element.sallaryRange?.min}-{element.sallaryRange?.max}{" "}
+            <span className="ml-1 font-light">LPA</span>
+          </div>
+        </div>
 
-      <div className="flex items-center font-medium gap-1 text-xs">
-        <div className="bg-gray-200 dark:bg-darkColor-light p-1 rounded-sm">{element.jobType}</div>
-        <div className="bg-gray-200 dark:bg-darkColor-light p-1 rounded-sm">{element.workModel}</div>
+        <div className="flex items-center gap-1 text-xs font-medium mb-4">
+          <div className="rounded-sm bg-gray-200 px-1 py-0.5 dark:bg-darkColor-light">
+            {element.jobType}
+          </div>
+          <div className="rounded-sm bg-gray-200 px-1 py-0.5 dark:bg-darkColor-light">
+            {element.workModel}
+          </div>
+        </div>
+        <div className="mt-1 w-full text-end text-xs absolute bottom-2 right-2">
+          Posted {calculateDays(element.createdAt)}
+        </div>
       </div>
-      <div className="text-xs">{trimDescription(element.description)}</div>
-      <div className="w-full text-xs text-end">
-        Posted {calculateDays(element.createdAt)}
-      </div>
-    </div>
-    
     </>
   );
 };
 
 export default JobCardSm;
-
-

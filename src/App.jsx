@@ -6,9 +6,11 @@ import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <>
-      <ConfirmProvider defaultOptions={{
-        confirmationButtonProps: { autoFocus: true },
-      }}>
+      <ConfirmProvider
+        defaultOptions={{
+          confirmationButtonProps: { autoFocus: true },
+        }}
+      >
         <RouterProvider router={router} />
       </ConfirmProvider>
       <Toaster position="top-center" />

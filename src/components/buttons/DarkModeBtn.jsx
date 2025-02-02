@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const DarkModeBtn = () => {
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "light"
+    () => localStorage.getItem("theme") || "light",
   );
 
   function toggleTheme() {
@@ -14,10 +14,14 @@ const DarkModeBtn = () => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
   return (
-    <div className="flex items-center" title="Switch theme">
+    <div className="flex items-center dark:text-darkColor-text" title="Switch theme">
       <label className="swap swap-rotate">
         {/* this hidden checkbox controls the state */}
-        <input type="checkbox" onChange={toggleTheme} />
+        <input
+          type="checkbox"
+          onChange={toggleTheme}
+          checked={theme === "dark"}
+        />
 
         {/* sun icon */}
         <svg

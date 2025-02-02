@@ -5,7 +5,7 @@ import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { axiosInstance } from "../../config/axiosInstance";
-import toast from "react-hot-toast"
+import toast from "react-hot-toast";
 
 const ProfileForm = ({ userProfile }) => {
   const [edit, setEdit] = useState("");
@@ -14,14 +14,14 @@ const ProfileForm = ({ userProfile }) => {
   const [formData, setFormData] = useState({
     userName: "N/A",
     userEmail: "N/A",
-    userResume: "N/A"
+    userResume: "N/A",
   });
 
   useEffect(() => {
     setFormData({
       userName: userProfile?.profile.name || "N/A",
       userEmail: userProfile?.profile.email || "N/A",
-      userResume:userProfile?.profile.resume || "N/A"
+      userResume: userProfile?.profile.resume || "N/A",
     });
   }, [userProfile]);
 
@@ -43,10 +43,13 @@ const ProfileForm = ({ userProfile }) => {
         method: "PUT",
         url: "/user/myProfile",
         data: formData,
+        params:{
+          userRole:"job_seeker"
+        }
       });
 
       if (response.status === 200) {
-        toast.success("Profile update success")
+        toast.success("Profile update success");
         console.log("update profile success");
         setEdit("");
       }
@@ -57,19 +60,19 @@ const ProfileForm = ({ userProfile }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 my-4 text-xs md:text-sm"
+      className="my-4 flex flex-col gap-4 text-xs md:text-sm"
     >
-      <div className="grid grid-cols-12 md:gap-2 gap-0 items-end">
+      <div className="grid grid-cols-12 items-end gap-0 md:gap-2">
         <label
-          className="md:col-span-3 col-span-3 font-medium"
+          className="col-span-3 font-medium md:col-span-3"
           htmlFor="userName"
         >
           Name
         </label>
         <input
           id="userName"
-          className={`md:col-span-6 dark:bg-darkColor col-span-6 inputStyle ${
-            edit === "name" ? "" : "border-none cursor-auto"
+          className={`inputStyle col-span-6 md:col-span-6 dark:bg-darkColor ${
+            edit === "name" ? "" : "cursor-auto border-none"
           }`}
           type="text"
           name="userName"
@@ -90,22 +93,22 @@ const ProfileForm = ({ userProfile }) => {
             <input
               type="submit"
               value="Update"
-              className="cursor-pointer text-white hover:bg-brandColor-dark text-xs px-1.5 p-1 rounded-sm bg-brandColor active:scale-95"
+              className="cursor-pointer rounded-sm bg-brandColor p-1 px-1.5 text-xs text-white hover:bg-brandColor-dark active:scale-95"
             />
           </div>
         )}
       </div>
-      <div className="grid grid-cols-12 md:gap-2 gap-0 items-end">
+      <div className="grid grid-cols-12 items-end gap-0 md:gap-2">
         <label
-          className="md:col-span-3 col-span-3  font-medium"
+          className="col-span-3 font-medium md:col-span-3"
           htmlFor="userEmail"
         >
           Email
         </label>
         <input
           id="userEmail"
-          className={` dark:bg-darkColor md:col-span-6 col-span-6 inputStyle ${
-            edit === "email" ? "" : "border-none cursor-auto"
+          className={`inputStyle col-span-6 md:col-span-6 dark:bg-darkColor ${
+            edit === "email" ? "" : "cursor-auto border-none"
           }`}
           type="email"
           name="userEmail"
@@ -126,28 +129,27 @@ const ProfileForm = ({ userProfile }) => {
             <input
               type="submit"
               value="Update"
-              className="cursor-pointer text-white hover:bg-brandColor-dark text-xs px-1.5 p-1 rounded-sm bg-brandColor active:scale-95"
+              className="cursor-pointer rounded-sm bg-brandColor p-1 px-1.5 text-xs text-white hover:bg-brandColor-dark active:scale-95"
             />
           </div>
         )}
       </div>
-      <div className="grid grid-cols-12 md:gap-2 gap-0 items-end">
+      <div className="grid grid-cols-12 items-end gap-0 md:gap-2">
         <label
-          className="md:col-span-3 col-span-3  font-medium"
+          className="col-span-3 font-medium md:col-span-3"
           htmlFor="userResume"
         >
           Resume link
         </label>
         <input
           id="userResume"
-          className={`md:col-span-6 truncate dark:bg-darkColor col-span-6 inputStyle ${
-            edit === "resume" ? "" : "border-none cursor-auto"
+          className={`inputStyle col-span-6 truncate md:col-span-6 dark:bg-darkColor ${
+            edit === "resume" ? "" : "cursor-auto border-none"
           }`}
           type="text"
           name="userResume"
           onChange={handleChange}
           value={formData.userResume}
-          
           readOnly={edit === "resume" ? false : true}
         />
         <div className="col-span-1">
@@ -162,7 +164,7 @@ const ProfileForm = ({ userProfile }) => {
             <input
               type="submit"
               value="Update"
-              className="cursor-pointer text-white hover:bg-brandColor-dark text-xs px-1.5 p-1 rounded-sm bg-brandColor active:scale-95"
+              className="cursor-pointer rounded-sm bg-brandColor p-1 px-1.5 text-xs text-white hover:bg-brandColor-dark active:scale-95"
             />
           </div>
         )}

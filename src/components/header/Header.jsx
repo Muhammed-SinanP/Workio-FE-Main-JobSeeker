@@ -8,6 +8,8 @@ import SignBtn from "../buttons/SignBtn";
 import Logo from "../Logo";
 import BasePages from "../BasePages";
 import EmployerBtn from "../buttons/EmployerBtn";
+import PersonIcon from "@mui/icons-material/Person";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 const Header = () => {
   const userLoggedIn = useSelector((state) => state.user.userLoggedIn);
@@ -28,45 +30,62 @@ const Header = () => {
 
   return (
     <header
-      className={`outerDiv sm:pt-0.5 bg-white dark:bg-darkColor-input sticky top-0 z-20 rounded-b-md border-b-0.5 border-brandColor-dark dark:border-darkColor ${
+      className={`outerDiv sticky top-0 z-20 rounded-b-lg border-b-0.5 border-brandColor-dark bg-white pt-2.5 dark:border-darkColor-text dark:bg-darkColor-input ${
         headShadow
-          ? "shadow-sm shadow-brandColor-dark dark:shadow-darkColor-input"
+          ? "shadow-sm shadow-brandColor-dark dark:shadow-black border-none"
           : "shadow-none"
       }`}
     >
-      <div className=" bg-white dark:bg-darkColor-input  flex justify-between items-end px-2 sm:px-4 py-1 pb-0 rounded-b-md">
-        <div className=" flex gap-2 sm:items-end items-center">
-          <div className="sm:hidden ">
+      <div className="flex items-center justify-between rounded-b-lg bg-white px-2  sm:px-4 dark:bg-darkColor-input">
+        <div className="flex items-center gap-2 sm:items-end">
+          <div className="sm:hidden">
             <MenuIcon
               onClick={() => setSideBarOpen(true)}
-              className="cursor-pointer dark:text-darkColor-text dark:hover:text-gray-400 text-gray-900 mb-1 hover:text-gray-800"
+              className="mb-1 cursor-pointer text-gray-900 hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
             />
           </div>
 
-          <Logo />
+          <div className="sm:mb-2"><Logo /></div>
 
           <BasePages />
         </div>
 
-        <div className="flex justify-evenly gap-2 items-center ">
+        <div className="flex items-center justify-evenly gap-2">
           {userLoggedIn ? (
             <UserOptions />
           ) : (
-            <div className="hidden sm:flex gap-2 mb-2">
-              <SignBtn login={true} />
-              <SignBtn login={false} />
+            <div className="mb-2 mr-2 hidden gap-2 sm:flex">
+              <SignBtn
+                action={"login"}
+                text={"Login"}
+                icon={<PersonIcon fontSize="small" className="p-1" />}
+              />
+              <SignBtn
+                action={"register"}
+                text={"Register"}
+                icon={<AppRegistrationIcon fontSize="small" className="p-1" />}
+              />
             </div>
           )}
 
-          <div className="pb-2">
-            <DarkModeBtn />
-          </div>
+          <div className="flex items-center justify-evenly gap-2">
+            {!userLoggedIn &&<div className="mb-2 mr-2 block sm:hidden">
+              <SignBtn
+                action={"login"}
+                text={"Sign in"}
+                icon={<PersonIcon fontSize="small" className="p-1" />}
+              />
+            </div>}
+            <div className="pb-2">
+              <DarkModeBtn />
+            </div>
 
-          <div>
-            <div className="border-r-0.5 border-gray-600 h-6 mb-2.5"></div>
-          </div>
+            <div>
+              <div className="mb-2.5 h-6 border-r-0.5 border-darkColor-text"></div>
+            </div>
 
-          <EmployerBtn />
+            <EmployerBtn />
+          </div>
         </div>
       </div>
 
@@ -76,8 +95,8 @@ const Header = () => {
         setSideBarOpen={setSideBarOpen}
       />
       <div
-        className={`sm:hidden fixed top-0 left-0 w-full h-screen bg-black bg-opacity-30 transition-opacity duration-500 ${
-          sideBarOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed left-0 top-0 h-screen w-full bg-black bg-opacity-30 transition-opacity duration-500 sm:hidden ${
+          sideBarOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         onClick={() => setSideBarOpen(false)}
       ></div>

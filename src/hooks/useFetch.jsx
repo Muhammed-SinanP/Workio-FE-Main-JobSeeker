@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 
-const useFetch = (url) => {
+const useFetch = (url,dependency=[]) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
   useEffect(() => {
     if (!url) {
-       
-        setError("URL not provided");
-        setIsLoading(false);
-        return;
-      }
-    let isMounted = true; 
+      setError("URL not provided");
+      setIsLoading(false);
+      return;
+    }
+    let isMounted = true;
 
     async function fetchData() {
       try {
         const response = await axiosInstance({
           method: "GET",
           url: url,
+          params:{
+            userRole:"job_seeker"
+          }
         });
         if (isMounted) {
-          setData(response?.data?.data); 
+          setData(response?.data?.data);
           setError(null);
         }
       } catch (err) {
         if (isMounted) {
-          setError(err); 
+          setError(err);
         }
       } finally {
         if (isMounted) {
-          setIsLoading(false); 
+          setIsLoading(false);
         }
       }
     }
@@ -39,9 +41,9 @@ const useFetch = (url) => {
     fetchData();
 
     return () => {
-      isMounted = false; 
+      isMounted = false;
     };
-  }, [url]);
+  }, [url,...dependency]);
 
   return [data, error, isLoading];
 };

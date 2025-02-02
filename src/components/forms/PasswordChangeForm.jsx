@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
 import EditIcon from "@mui/icons-material/Edit";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const PasswordChangeForm = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     currentPassword: "",
@@ -36,11 +36,14 @@ const PasswordChangeForm = () => {
         method: "POST",
         url: "/user/changePassword",
         data: formData,
+        params:{
+          userRole:"job_seeker"
+        }
       });
 
       if (response.status === 200) {
         console.log("password change success fe");
-        setShowForm(false)
+        setShowForm(false);
       }
     } catch (err) {
       console.log("password change failed", err);
@@ -49,14 +52,17 @@ const PasswordChangeForm = () => {
   return (
     <div className="text-xs md:text-sm">
       <div className="flex justify-start">
-        <span onClick={()=>setShowForm(!showForm)} className="flex items-center font-medium  cursor-pointer hover:text-brandColor">
+        <span
+          onClick={() => setShowForm(!showForm)}
+          className="flex cursor-pointer items-center font-medium hover:text-brandColor"
+        >
           Change password <EditIcon fontSize="small" />
         </span>
       </div>
 
       {showForm && (
         <form
-          className="border rounded-md p-4 flex flex-col gap-2 mt-2 w-64 text-sm "
+          className="mt-2 flex w-64 flex-col gap-2 rounded-md border p-4 text-sm"
           onSubmit={handleSubmit}
         >
           <div>
@@ -71,7 +77,10 @@ const PasswordChangeForm = () => {
             />
           </div>
           <div className="text-end">
-            <span onClick={()=>navigate("/forgotPassword")} className="text-xs cursor-pointer font-medium text-blue-500 hover:text-blue-700">
+            <span
+              onClick={() => navigate("/forgotPassword")}
+              className="cursor-pointer text-xs font-medium text-blue-500 hover:text-blue-700"
+            >
               Forgot password?
             </span>
           </div>
@@ -102,9 +111,9 @@ const PasswordChangeForm = () => {
             value="Submit"
             className={`${
               formValid
-                ? "cursor-pointer active:scale-95  hover:bg-brandColor-dark"
+                ? "cursor-pointer hover:bg-brandColor-dark active:scale-95"
                 : "cursor-not-allowed opacity-50"
-            } text-white text-xs  p-1.5 font-medium rounded-sm bg-brandColor `}
+            } rounded-sm bg-brandColor p-1.5 text-xs font-medium text-white`}
             disabled={!formValid}
           />
         </form>

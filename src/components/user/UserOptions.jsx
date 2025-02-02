@@ -14,6 +14,9 @@ const UserOptions = () => {
         const response = await axiosInstance({
           method: "POST",
           url: "/auth/logout",
+          params:{
+            userRole:"job_seeker"
+          }
         });
         if (response.status === 200) {
           navigate("/sign/login");
@@ -37,18 +40,18 @@ const UserOptions = () => {
       });
   }
   return (
-    <div className="flex items-center mr-4">
-      <div className="hidden sm:flex justify-evenly gap-2 items-center mt-2">
+    <div className="mr-2 mt-3 flex items-center">
+      <div className="mt-2 hidden items-center justify-evenly gap-2 sm:flex">
         {userNavbarData &&
           userNavbarData.map((element, index) => (
             <NavLink
               key={index}
               to={element.path}
               className={({ isActive }) =>
-                `flex items-center pb-1 justify-center h-full text-sm font-medium border-b-2 border-white  ${
+                `flex h-full items-center justify-center border-b-2 border-white pb-1 text-sm font-medium ${
                   isActive
-                    ? "text-brandColor  border-b-brandColor"
-                    : "text-gray-900 dark:border-darkColor-input dark:text-darkColor-text  dark:hover:border-b-darkColor-text  hover:border-b-gray-900"
+                    ? "border-b-brandColor text-brandColor"
+                    : " hover:border-b-brandColor-text dark:border-darkColor-input dark:text-darkColor-text dark:hover:border-b-darkColor-text"
                 }`
               }
             >
@@ -56,13 +59,13 @@ const UserOptions = () => {
             </NavLink>
           ))}
         <div
-          className="flex items-center cursor-pointer hover:text-gray-500"
+          className="flex cursor-pointer items-center bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 hover:bg-gray-400 pt-1 mb-1 rounded-sm"
           title="Logout"
           onClick={handleLogout}
         >
           <LogoutIcon
             fontSize="small"
-            className="pb-1  dark:hover:text-gray-300"
+            className=" pb-1 dark:text-darkColor-text"
           />
         </div>
       </div>

@@ -4,12 +4,11 @@ import DataTable from "react-data-table-component";
 
 const ApplicationsTable = () => {
   const [applications, error, isLoading] = useFetch("/user/myApplications");
-  const [filteredApplications, setFilteredApplications] =
-    useState([]);
+  const [filteredApplications, setFilteredApplications] = useState([]);
   useEffect(() => {
-    setFilteredApplications(applications)
+    setFilteredApplications(applications);
   }, [applications]);
-  
+
   const columns = [
     {
       name: "Status",
@@ -25,14 +24,7 @@ const ApplicationsTable = () => {
     },
   ];
 
-
-
- 
-
   const customThemeStyles = {
-    
-   
-   
     headCells: {
       style: {
         backgroundColor: "#00A264",
@@ -40,12 +32,11 @@ const ApplicationsTable = () => {
         fontWeight: "semibold",
         textAlign: "center",
         fontSize: "20px",
-       
       },
     },
     rows: {
       style: {
-        backgroundColor: "#f0f2f0", 
+        backgroundColor: "#f0f2f0",
       },
     },
     cells: {
@@ -54,29 +45,28 @@ const ApplicationsTable = () => {
       },
     },
   };
-  
+
   const conditionalRowStyles = [
     {
       when: (row) => row.status === "Approved",
       style: {
         backgroundColor: "green",
-       
-        fontWeight:"semibold"
+
+        fontWeight: "semibold",
       },
     },
     {
       when: (row) => row.status === "In-review",
       style: {
-        
-        backgroundColor:"yellow",
-        fontWeight:"semibold"
+        backgroundColor: "yellow",
+        fontWeight: "semibold",
       },
     },
     {
       when: (row) => row.status === "Rejected",
       style: {
-        backgroundColor: "red", 
-        fontWeight:"semibold"
+        backgroundColor: "red",
+        fontWeight: "semibold",
       },
     },
   ];
@@ -97,7 +87,7 @@ const ApplicationsTable = () => {
     <div>Loading...</div>
   ) : (
     <div className="">
-      <div className="text-end mb-4">
+      <div className="mb-4 text-end">
         <label htmlFor="filterApplications" className="mr-2 font-medium">
           Filter
         </label>
@@ -114,16 +104,17 @@ const ApplicationsTable = () => {
           <option value="Rejected">Rejected</option>
         </select>
       </div>
-      
-  <div className="shadow-md">
-      <DataTable
-        columns={columns}
-        data={filteredApplications?filteredApplications:applications}
-        pagination
-        customStyles={customThemeStyles}
-        conditionalRowStyles={conditionalRowStyles}
-        progressPending={isLoading}
-      /></div>
+
+      <div className="shadow-md">
+        <DataTable
+          columns={columns}
+          data={filteredApplications ? filteredApplications : applications}
+          pagination
+          customStyles={customThemeStyles}
+          conditionalRowStyles={conditionalRowStyles}
+          progressPending={isLoading}
+        />
+      </div>
     </div>
   );
 };

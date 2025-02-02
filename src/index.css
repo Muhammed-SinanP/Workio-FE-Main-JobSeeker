@@ -3,35 +3,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html,body{
+  color: #202124
+}
 @layer components {
   .outerDiv {
     @apply w-full;
   }
   .innerDiv {
-    @apply max-w-[1536px] m-auto;
+    @apply m-auto  max-w-[1536px];
   }
   .inputStyle {
-    @apply border border-brandColor rounded-sm cursor-pointer px-1 py-0.5;
+    @apply cursor-pointer rounded-sm border border-borderColor px-1.5 py-1 w-full;
   }
   .inputStyle:focus {
-    @apply outline-none border-brandColor;
+    @apply border-brandColor outline-none;
   }
-  .inputStyle:hover {
-    @apply border-brandColor;
-  }
+  
 
   .signBtn {
-    @apply flex text-xs font-medium items-center justify-center  cursor-pointer   pr-2 pl-1 py-1  rounded-sm transition-all duration-100 ease-in-out ;
+    @apply flex cursor-pointer items-center justify-center rounded-sm py-1 pl-1 pr-2  text-xs font-medium transition-all duration-100 ease-in-out;
   }
   .signBtn:hover {
-    @apply shadow  bg-brandColor-dark text-white;
+    @apply bg-brandColor-dark text-white shadow;
   }
   .signBtn:active {
-    @apply scale-95 shadow-none bg-brandColor-dark;
+    @apply scale-95 bg-brandColor-dark shadow-none;
   }
 
   .searchInput {
-    @apply md:border-r bg-white w-full  h-10  px-1;
+    @apply h-10 w-full border-darkColor-text bg-white px-1 md:border-r-0.5;
   }
   .searchInput:focus {
     @apply outline-none;

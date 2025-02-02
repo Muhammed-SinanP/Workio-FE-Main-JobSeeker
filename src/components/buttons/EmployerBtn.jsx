@@ -9,12 +9,14 @@ const EmployerBtn = () => {
   return (
     <div
       onClick={openEmployerSite}
-      className="text-gray-900 hover:text-gray-700 tracking-wide dark:text-darkColor-text cursor-pointer text-xs font-light  dark:hover:text-gray-400 mb-2.5"
+      className="mb-2.5 cursor-pointer text-xs font-extralight text-gray-950 hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
     >
-      <span className="hidden sm:block">Employer/Post Job</span>
+      <span className="hidden sm:block">
+        Employers<span className="mx-0.5">/</span>Post Job
+      </span>
       <span className="flex items-center sm:hidden">
         Employer
-        <CallMadeIcon fontSize="small" className="p-1 pl-0 " />
+        <CallMadeIcon fontSize="small" className="p-1 pl-0" />
       </span>
     </div>
   );

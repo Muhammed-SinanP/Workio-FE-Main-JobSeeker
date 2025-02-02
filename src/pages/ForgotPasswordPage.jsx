@@ -41,7 +41,7 @@ const ForgotPasswordPage = () => {
     }
   }
   return (
-    <div className="flex flex-col gap-4 h-full pt-20 justify-center items-center p-10">
+    <div className="flex h-full flex-col items-center justify-center gap-4 p-10 pt-20">
       <div>
         We will send you a password reset link to your email to reset your
         password. Click on that link within 15 minutes.{" "}
@@ -62,11 +62,11 @@ const ForgotPasswordPage = () => {
             required
           />
         </div>
-        <div className="text-center mt-2">
+        <div className="mt-2 text-center">
           <input
             type="submit"
             value="Send reset url"
-            className="bg-brandColor p-1.5 px-2 rounded-md text-white cursor-pointer hover:bg-brandColor-dark active:scale-95"
+            className="cursor-pointer rounded-md bg-brandColor p-1.5 px-2 text-white hover:bg-brandColor-dark active:scale-95"
           />
         </div>
       </form>

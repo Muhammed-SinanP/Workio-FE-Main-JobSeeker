@@ -11,7 +11,6 @@ import { axiosInstance } from "../config/axiosInstance";
 
 import SignBtn from "./buttons/SignBtn";
 
-
 const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
   const confirm = useConfirm();
   const navigate = useNavigate();
@@ -21,6 +20,9 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
         const response = await axiosInstance({
           method: "POST",
           url: "/auth/logout",
+          params:{
+            userRole:"job_seeker"
+          }
         });
         if (response.status === 200) {
           navigate("/sign/login");
@@ -45,60 +47,42 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
   return (
     <div
       id="sideBar"
-      className={`fixed sm:hidden overflow-auto flex w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/6  bg-gray-50 dark:bg-darkColor  z-10 left-0 top-0 h-screen transform transition-transform duration-400 ease-in-out ${
+      className={`duration-400 fixed left-0 top-0 z-10 flex h-screen w-1/2 transform overflow-auto bg-gray-50 transition-transform ease-in-out sm:hidden sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/6 dark:bg-darkColor ${
         sideBarOpen
           ? "translate-x-0 shadow-md shadow-black"
           : "-translate-x-full"
       }`}
       onClick={() => setSideBarOpen(false)}
     >
-      <div className="h-full w-full flex flex-col  py-2">
+      <div className="flex h-full w-full flex-col py-2 pt-0">
         <CloseIcon
-          className="absolute right-1 top-1 hover:text-gray-700 dark:text-darkColor-text cursor-pointer text-gray-800 dark:hover:text-gray-400 p-0.5"
+          className="absolute right-1 top-1 cursor-pointer text-gray-800 hover:text-gray-700 dark:text-darkColor-text dark:hover:text-gray-400"
           fontSize="small"
         />
-        {userLoggedIn ? (
-          <div className="flex items-start gap-3 justify-start px-2 border-b dark:border-darkColor-text">
-            <div
-              onClick={() => navigate("/")}
-              className="cursor-pointer flex pb-1 "
-            >
-              <img src={brandLogo} alt="brand logo" className="h-6" />
-              <div>
-                <span className="text-xl font-bold text-brandColor font-brandFont">
-                  Workio
-                </span>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-wrap items-center justify-start px-2 sm:justify-center gap-2 py-2 sm:hidden border-b dark:border-darkColor-text">
-            <SignBtn login={true} />
-            <SignBtn login={false} />
-          </div>
-        )}
-        
-        <div className=" flex flex-col gap-1 mt-2 h-full">
+
+        <div className="bg-gray-400 py-1 pl-2 text-lg text-gray-800 dark:bg-darkColor-input dark:text-darkColor-text">
+          Pages
+        </div>
+
+        <div className="mt-2 flex h-full flex-col gap-2">
           {NavbarData &&
             NavbarData.map((element, index) => (
               <NavLink
                 key={index}
                 to={element.path}
                 className={({ isActive }) =>
-                  ` px-4 py-1 tracking-wide ${
+                  `px-4 py-1 tracking-wide ${
                     element.title == "Home" ? "font-medium" : "font-normal"
-                  } mx-2 rounded-md flex items-center gap-2 ${
+                  } mx-2 flex items-center gap-2 rounded-md ${
                     isActive
-                      ? "bg-brandColor-dark dark:bg-brandColor text-white"
-                      : "bg-gray-200 dark:bg-darkColor-text text-black hover:bg-gray-300 dark:hover:bg-gray-400"
+                      ? "bg-brandColor-dark text-white dark:bg-brandColor"
+                      : "bg-gray-200  hover:bg-gray-300 dark:bg-darkColor-text dark:hover:bg-gray-400"
                   }`
                 }
               >
                 {element.icon} {element.title}
               </NavLink>
             ))}
-
-            
 
           {userLoggedIn &&
             userNavbarData &&
@@ -107,10 +91,10 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
                 key={index}
                 to={element.path}
                 className={({ isActive }) =>
-                  ` px-4 py-1 tracking-wide mx-2 rounded-md flex gap-2 items-center  ${
+                  `mx-2 flex items-center gap-2 rounded-md px-4 py-1 tracking-wide ${
                     isActive
-                      ? "bg-brandColor-dark dark:bg-brandColor text-white"
-                      : "bg-gray-200 dark:bg-darkColor-text text-black hover:bg-gray-300 dark:hover:bg-gray-400"
+                      ? "bg-brandColor-dark text-white dark:bg-brandColor"
+                      : "bg-gray-200 text-black hover:bg-gray-300 dark:bg-darkColor-text dark:hover:bg-gray-400"
                   }`
                 }
               >
@@ -118,11 +102,11 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
               </NavLink>
             ))}
 
-          <div className=" h-full w-full  flex flex-col justify-end py-4 mt-4">
+          <div className="mt-4 flex h-full w-full flex-col justify-end py-4">
             {userLoggedIn && (
-              <div className=" flex justify-center w-full">
+              <div className="flex w-full justify-center">
                 <button
-                  className="px-2 py-1.5 rounded-md  flex items-center  bg-gray-900 shadow-md hover:bg-gray-700 text-white dark:bg-darkColor-text dark:text-darkColor-input dark:hover:bg-gray-400 active:shadow-none"
+                  className="flex items-center rounded-md bg-gray-900 px-2 py-1.5 text-white shadow-md hover:bg-gray-700 active:shadow-none dark:bg-darkColor-text dark:text-darkColor-input dark:hover:bg-gray-400"
                   onClick={handleLogout}
                 >
                   <LogoutIcon fontSize="small" className="p-1" />
