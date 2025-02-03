@@ -10,10 +10,10 @@ const SignHeader = () => {
   return (
     <header className="outerDiv z-20 rounded-b-lg border-b-0.5 border-brandColor-dark bg-white pt-2.5 dark:border-darkColor-text dark:bg-darkColor-input">
       <div className="flex items-center justify-between rounded-b-lg bg-white px-2  sm:px-4 dark:bg-darkColor-input">
-        <div className="sm:mb-2"><Logo /></div>
+        <div className="sm:mb-2 mb-1"><Logo /></div>
 
         <div className=" flex items-center justify-evenly gap-2">
-          <div className="pb-2">
+          <div className="pb-2.5">
             <DarkModeBtn />
           </div>
 

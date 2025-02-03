@@ -5,8 +5,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 
 
-const JobSearchForm = ({ setFilteredJobs, setSelectedJob }) => {
-  
+const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
+
   const [formData, setFormData] = useState({
     jobTitle: "",
     jobLocation: "",
@@ -16,8 +16,13 @@ const JobSearchForm = ({ setFilteredJobs, setSelectedJob }) => {
   const [isJobsLoading, setIsJobsLoading] = useState(false);
 
   function handleChange(e) {
+
     const { name, value } = e.target;
-    setFilteredJobs([])
+
+    if (!filteredJobs) {
+      setFilteredJobs([])
+    }
+
     setFormData((prev) => {
       return {
         ...prev,
@@ -38,15 +43,15 @@ const JobSearchForm = ({ setFilteredJobs, setSelectedJob }) => {
         setFilteredJobs(response?.data?.data.length > 0 ? response?.data?.data : null);
         const firstSelectedJob = response?.data?.data[0] || null;
         setSelectedJob(firstSelectedJob);
-        
+
       } else {
         console.log("status not 200 for job search");
-        
+
       }
     } catch (err) {
       console.log("err in filtereing", err);
-      
-    }finally{
+
+    } finally {
       setIsJobsLoading(false)
     }
   }
@@ -63,7 +68,7 @@ const JobSearchForm = ({ setFilteredJobs, setSelectedJob }) => {
           type="text"
           minLength={2}
           placeholder="Job title"
-          className="searchInput dark:bg-darkColor-input"
+          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input"
           onChange={handleChange}
           value={formData.jobTitle}
           required
@@ -78,7 +83,7 @@ const JobSearchForm = ({ setFilteredJobs, setSelectedJob }) => {
           type="text"
           placeholder="Location"
           minLength={2}
-          className="searchInput dark:bg-darkColor-input"
+          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input"
           onChange={handleChange}
           value={formData.jobLocation}
         />
@@ -90,8 +95,8 @@ const JobSearchForm = ({ setFilteredJobs, setSelectedJob }) => {
           id="jobExperience"
           name="jobExperience"
           className={`searchInput cursor-pointer border-none text-xs dark:bg-darkColor-input ${formData.jobExperience === ""
-              ? "text-[#9CA3AF]"
-              : "text-black dark:text-darkColor-text"
+            ? "text-[#9CA3AF]"
+            : "text-black dark:text-darkColor-text"
             }`}
           onChange={handleChange}
           value={formData.jobExperience}

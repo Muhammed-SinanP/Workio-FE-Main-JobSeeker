@@ -30,7 +30,7 @@ const JobCardSm = ({ element, cardClick }) => {
     <>
       <div
         onClick={() => cardClick(element)}
-        className={`relative border border-white  w-full h-full group flex cursor-pointer flex-col items-start gap-1 rounded-md  bg-white p-3  dark:border-darkColor-input dark:bg-darkColor-input `}
+        className={`relative border border-white  w-full h-full group flex cursor-pointer flex-col items-start gap-1 rounded-md  bg-white p-3  dark:border-darkColor-input dark:bg-darkColor-input dark:text-darkColor-text `}
       >
         <div className="flex w-full justify-between gap-2.5">
           <div className="text-lg group-hover:underline font-semibold capitalize text-brandColor-dark dark:text-brandColor">

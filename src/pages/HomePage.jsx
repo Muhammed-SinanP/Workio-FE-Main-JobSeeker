@@ -39,6 +39,7 @@ const HomePage = () => {
             }`}
         >
           <JobSearchForm
+          filteredJobs={filteredJobs}
             setFilteredJobs={setFilteredJobs}
             setSelectedJob={setSelectedJob}
           />

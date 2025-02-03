@@ -41,11 +41,11 @@ const Header = () => {
           <div className="sm:hidden">
             <MenuIcon
               onClick={() => setSideBarOpen(true)}
-              className="mb-1 cursor-pointer text-gray-900 hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
+              className="mb-2 cursor-pointer text-gray-900 hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
             />
           </div>
 
-          <div className="sm:mb-2"><Logo /></div>
+          <div className="sm:mb-2 mb-1"><Logo /></div>
 
           <BasePages />
         </div>
@@ -69,14 +69,14 @@ const Header = () => {
           )}
 
           <div className="flex items-center justify-evenly gap-2">
-            {!userLoggedIn &&<div className="mb-2 mr-2 block sm:hidden">
+            {!userLoggedIn &&<div className="mb-2 mr-0.5 block sm:hidden">
               <SignBtn
                 action={"login"}
                 text={"Sign in"}
                 icon={<PersonIcon fontSize="small" className="p-1" />}
               />
             </div>}
-            <div className="pb-2">
+            <div className="pb-2.5 hidden sm:block">
               <DarkModeBtn />
             </div>
 

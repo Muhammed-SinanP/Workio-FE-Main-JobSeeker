@@ -66,7 +66,7 @@ const AuthForm = ({ isRegister, formData, setFormData }) => {
     }
   }
   return (
-    <div className="w-80 lg:w-96 racking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor-input px-8 py-4">
+    <div className="w-11/12 sm:w-80 lg:w-96 racking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor-input px-8 py-4">
       <div className="mb-4  text-center text-xl font-semibold  dark:text-darkColor-text">
         {isRegister ? "Register" : "Login"}
       </div>

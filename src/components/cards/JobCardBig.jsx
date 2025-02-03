@@ -78,13 +78,13 @@ const JobCardBig = ({ job }) => {
         console.log("application sent err", err.message);
       }
     } else {
-      toast.error("Login first");
+      toast.error("Login required");
       navigate("/sign/login");
     }
   }
   return (
     <div className="flex h-full flex-col rounded-md border border-brandColor-dark  dark:border-gray-200 ">
-      <div className="flex flex-col gap-2 rounded-t-md border-b border-brandColor-dark bg-white p-4 dark:bg-darkColor-input dark:border-gray-200">
+      <div className="flex flex-col gap-2 rounded-t-md border-b dark:text-darkColor-text border-brandColor-dark bg-white p-4 dark:bg-darkColor-input dark:border-gray-200">
         <div className="flex items-center justify-between ">
           <div className="text-2xl font-semibold tracking-wide text-brandColor-dark dark:text-brandColor">{job?.title}</div>
           <div className="flex items-center gap-4">
@@ -103,7 +103,7 @@ const JobCardBig = ({ job }) => {
         </div>
         <div className="flex items-center gap-2">
           <div className="text-sm">{job?.employer?.name}</div>
-          <div className="h-full border-r-0.5 border-darkColor-text"></div>
+          <div className="h-6 w-1  border-r border-darkColor-text"></div>
           <div className="flex items-center text-sm">
             <LocationOnIcon fontSize="small" className="p-1 px-0" />
             {job?.location?.city}
@@ -127,7 +127,7 @@ const JobCardBig = ({ job }) => {
           </div>
         )}
       </div>
-      <div className="jobDetails h-full overflow-auto rounded-b-md bg-white pb-1 text-gray-800 shadow-inner  shadow-gray-400 dark:shadow-black dark:bg-darkColor-text">
+      <div className="jobDetails h-full overflow-auto rounded-b-md bg-white pb-1  shadow-inner  shadow-gray-400 dark:shadow-black dark:bg-darkColor-text">
         <div className="mt-2 px-4 text-sm font-medium italic">
           Greetings from {job?.employer?.name} !!
         </div>
