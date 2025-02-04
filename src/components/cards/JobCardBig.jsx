@@ -71,14 +71,16 @@ const JobCardBig = ({ job }) => {
         console.log(err);
         if (err.status === 403) {
 
-          toast("Already applied!", {
+          toast("Already applied", {
             icon: "❗",
           });
         }
         console.log("application sent err", err.message);
       }
     } else {
-      toast.error("Login required");
+      toast("Login to continue", {
+        icon: "❗",
+      });
       navigate("/sign/login");
     }
   }

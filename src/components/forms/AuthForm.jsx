@@ -66,42 +66,42 @@ const AuthForm = ({ isRegister, formData, setFormData }) => {
     }
   }
   return (
-    <div className="w-11/12 sm:w-80 lg:w-96 racking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor-input px-8 py-4">
-      <div className="mb-4  text-center text-xl font-semibold  dark:text-darkColor-text">
+    <div className="w-11/12 sm:w-80 lg:w-96 racking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor px-8 py-4">
+      <div className="mb-4  text-center text-xl sm:text-2xl font-semibold  dark:text-darkColor-text">
         {isRegister ? "Register" : "Login"}
       </div>
       {isRegister ? (
-        <div className="text-center text-xs font-medium dark:text-darkColor-text">
+        <div className="text-center  text-sm font-medium dark:text-darkColor-text">
           Already have an account?
-          <NavLink to="/sign/login" className="text-blue-500 hover:underline  ml-1 font-semibold">
+          <NavLink to="/sign/login" className="text-blue-500 hover:underline tracking-wide  ml-1 font-semibold">
             Login
           </NavLink>
         </div>
       ) : (
-        <div className="text-center text-xs font-medium dark:text-darkColor-text">
+        <div className="text-center text-sm font-medium dark:text-darkColor-text">
           New to Workio?
           <NavLink
             to="/sign/register"
-            className="text-blue-500 hover:underline ml-1 font-semibold"
+            className="text-blue-500 hover:underline ml-1 tracking-wide font-semibold"
           >
             Register
           </NavLink>
         </div>
       )}
-      <div className="my-3 w-full border-b border-borderColor"></div>
+      <div className="my-3 w-full border-b-0.5 border-borderColor"></div>
       <div className="flex w-full items-center justify-center text-center">
         <button
           onClick={googleSignIn}
-          className="btn btn-outline my-1 btn-md flex w-full items-center justify-center gap-2 border-brandColor text-brandColor hover:border-brandColor hover:bg-brandColor"
+          className="btn btn-outline my-1 btn-md flex w-full items-center justify-center gap-2 border-brandColor text-brandColor hover:border-brandColor hover:text-white hover:bg-brandColor"
         >
           <img src={googleIcon} alt="google icon" className="h-4" />
           <span className="text-base">Continue with Google</span>
         </button>
       </div>
       <div className="mt-2 flex w-full items-center justify-center">
-        <div className="w-full border-b border-borderColor"></div>
+        <div className="w-full border-b-0.5 border-borderColor"></div>
         <div className="px-2 text-xs text-gray-400">or</div>
-        <div className="w-full border-b border-borderColor"></div>
+        <div className="w-full border-b-0.5 border-borderColor"></div>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
         {isRegister && (
@@ -155,7 +155,7 @@ const AuthForm = ({ isRegister, formData, setFormData }) => {
           <div className="-mt-1.5 text-end">
             <span
               onClick={() => navigate("/forgotPassword")}
-              className="cursor-pointer text-xs font-medium text-blue-500 hover:text-blue-600"
+              className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600"
             >
               forgot password ?
             </span>

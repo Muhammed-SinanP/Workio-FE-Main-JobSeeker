@@ -45,7 +45,7 @@ const HomePage = () => {
           />
 
           <div
-            className={`${!filteredJobs ? "visible" : "invisible"} ${filteredJobs && filteredJobs.length > 0 && "hidden"} pt-2 text-center text-sm font-medium tracking-wide text-red-500`}
+            className={`${!filteredJobs ? "visible" : "invisible"} ${filteredJobs && filteredJobs.length > 0 && "hidden"} px-6 pt-2 text-center text-sm font-medium tracking-wide text-red-500`}
           >
             No jobs found for the given search criteria. Please try another
             query !
@@ -105,17 +105,17 @@ const HomePage = () => {
         </div>
       </div>
 
-
-      <div className="innerDiv pb-10 pt-4 dark:bg-darkColor-text rounded-t-lg bg-brandColor-lightest -mt-2">
+      <div className="outerDiv rounded-t-xl bg-brandColor-lightest -mt-2">
+        <div className="innerDiv rounded-t-xl pb-10 pt-4 dark:bg-darkColor-text ">
         <div className="p-4 px-8 text-center text-xl font-bold tracking-wide text-brandColor md:px-10 lg:text-2xl xl:px-20 dark:text-darkColor">
           Find the perfect job for <span className="uppercase text-brandColor-dark dark:text-brandColor">you</span>
         </div>
-        <div className="grid grid-cols-12 gap-4 p-4 px-8 pb-10 md:gap-3 md:px-10 lg:gap-4 xl:gap-5 xl:px-20">
+        <div className="grid grid-cols-12 p-4 px-6 md:px-8 lg:px-10 xl:px-20 gap-2 gap-x-1 sm:gap-4 sm:gap-x-0   pb-10 md:gap-3  lg:gap-4 xl:gap-5 ">
           {userSuggestions.map((element, index) => (
             <div
               onClick={() => window.open(element.link)}
               key={index}
-              className="col-start-4 hover:scale-95 active:scale-90 scale-90 transition-all ease-in-out duration-500 px-2 py-6 col-end-10 flex cursor-pointer flex-col items-center gap-1 rounded-md bg-white  shadow-md  sm:col-span-6 md:col-span-3 dark:bg-darkColor dark:shadow-darkColor-input"
+              className=" hover:scale-95 active:scale-90 scale-90 transition-all ease-in-out duration-500 px-2 py-6  flex cursor-pointer flex-col items-center gap-2 rounded-md bg-white  shadow-md  col-span-6 md:col-span-3 dark:bg-darkColor dark:shadow-darkColor-input"
             >
               <div>
                 <img
@@ -124,13 +124,14 @@ const HomePage = () => {
                   className="h-8"
                 />
               </div>
-              <div className="font-medium text-brandColor">
+              <div className="font-medium text-brandColor text-lg">
                 {element.title}
               </div>
-              <div className="text-center text-xs dark:text-darkColor-text">{element.subtitle}</div>
+              <div className="text-center text-sm dark:text-darkColor-text tracking-wide">{element.subtitle}</div>
             </div>
           ))}
         </div>
+      </div>
       </div>
 
     </div>

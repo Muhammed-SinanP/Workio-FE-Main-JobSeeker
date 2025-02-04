@@ -13,9 +13,11 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
     <div className="bg-brandColor text-gray-200 dark:bg-darkColor">
-      <div className="innerDiv grid grid-cols-12 gap-4 p-4 py-10 sm:gap-0">
+      <div className="innerDiv grid grid-cols-12 gap-y-4 p-4 py-10 sm:gap-0">
+
+
         <div className="col-span-6 flex justify-center p-2 sm:col-span-3">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-36 ml-4">
             <div className="font-semibold text-gray-50 dark:text-gray-200">
               Workio
             </div>
@@ -31,7 +33,7 @@ const Footer = () => {
         </div>
 
         <div className="col-span-6 flex justify-center p-2 sm:col-span-3">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-36 ml-4">
             <div className="font-semibold text-gray-50 dark:text-gray-200">
               For Job Seekers
             </div>
@@ -47,8 +49,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="col-span-6 flex justify-center p-2 sm:col-span-3">
-          <div className="flex flex-col gap-2">
+        <div className="col-span-6 flex  justify-center p-2 sm:col-span-3">
+          <div className="flex w-36 ml-4 flex-col gap-2">
             <div className="font-semibold text-gray-50 dark:text-gray-200">
               For Employers
             </div>
@@ -65,7 +67,7 @@ const Footer = () => {
         </div>
 
         <div className="col-span-6 flex justify-center p-2 sm:col-span-3">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-36 ml-4">
             <div className="font-semibold text-gray-50 dark:text-gray-200">
               Contact Us
             </div>

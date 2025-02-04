@@ -18,12 +18,12 @@ const RegisterPage = () => {
   return (
     <div className="outerDiv w-full px-4 py-10 sm:p-10  -mt-4 p min-h-screen">
 
-      <div className="innerDiv  flex flex-col sm:flex-row sm:mt-6 gap-8  sm:items-start sm:justify-between px-0 sm:px-10 ">
+      <div className="innerDiv  flex flex-col sm:flex-row sm:mt-6 gap-2 sm:gap-10 sm:items-start sm:justify-between px-0 sm:px-10 ">
         <div className="">
 
           <div className="text-center sm:text-start flex flex-col justify-between items-center gap-10">
-            <div><h1 className="text-brandColor text-4xl font-brandFont mb-2 ">Welcome to Workio!</h1>
-              <p className="text-brandColor-dark  text-sm tracking-wider dark:text-darkColor-text">Enter your details and start your journey with us. If you do have an existing account, <span className="cursor-pointer text-blue-500 underline font-medium" onClick={() => navigate("/sign/login")}>login</span> instead.</p>
+            <div><h1 className="text-brandColor text-2xl sm:text-4xl font-brandFont mb-2 ">Welcome to Workio!</h1>
+              <p className="text-brandColor-dark  text-sm lg:text-base tracking-wider dark:text-darkColor-text">Enter your details and start your journey and explore the opportunities with us. If you do have a job seeker's account, <span className="cursor-pointer text-blue-500 underline font-medium" onClick={() => navigate("/sign/login")}>login</span> to your existing account instead.</p>
             </div> 
             <div>
             <img src={registerImg} className="h-80 brightness-90 hidden sm:block object-contain" />

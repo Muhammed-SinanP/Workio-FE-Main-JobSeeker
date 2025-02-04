@@ -55,10 +55,10 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
       
     >
       <div className="flex h-full w-full flex-col ">
-        <div className="bg-gray-300 flex justify-between items-center  py-2 px-2 text-xl  dark:bg-darkColor-input dark:text-darkColor-text">
+        <div className="bg-gray-300 flex justify-between items-center font-medium  py-2 px-2 text-xl  dark:bg-darkColor-input dark:text-darkColor-text">
           <p>Pages</p> <CloseIcon className="cursor-pointer" onClick={()=>setSideBarOpen(false)}/>
         </div>
-        <div className=" h-full flex flex-col justify-between gap-6 overflow-auto scrollbar-hide">
+        <div className="h-4/5  flex flex-col justify-between gap-6 overflow-auto scrollbar-hide">
 
           <div className="mt-2 flex flex-col gap-2">
             {NavbarData &&
@@ -87,7 +87,7 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
                   key={index}
                   to={element.path}
                   className={({ isActive }) =>
-                    `mx-2 flex items-center gap-2 rounded-md px-4 py-1 text-lg  font-normal tracking-wide ${isActive
+                    `mx-2 flex items-center gap-2 rounded-md px-4 py-1 text-lg   tracking-wide ${isActive
                       ? "bg-brandColor-dark text-white dark:bg-brandColor"
                       : "bg-gray-300  hover:bg-gray-300 dark:bg-darkColor-text dark:hover:bg-gray-400"
                     }`
@@ -99,7 +99,7 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
 
 
           </div>
-          <div className="flex flex-col items-center mb-10 gap-10">
+          <div className="flex flex-col items-center gap-5 mb-4">
             <DarkModeBtn text={true}/>
             {userLoggedIn && <button onClick={handleLogout} className="btn  btn-sm"><LogoutIcon fontSize="small" />Logout</button>
             }</div>

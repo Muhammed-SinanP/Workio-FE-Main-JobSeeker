@@ -7,13 +7,13 @@ const Logo = () => {
   return (
     <div
       onClick={() => navigate("/")}
-      className="mb-2 mt-1 flex cursor-pointer items-center"
+      className="flex cursor-pointer items-end"
     >
-      <img src={brandLogo} alt="brand logo" className="h-6 sm:h-7" />
-      <div>
-        <span className="font-brandFont text-xl font-bold text-brandColor sm:text-xl">
-          Workio
-        </span>
+      <img src={brandLogo} alt="brand logo" className="h-8" />
+      <div className="-mb-1 hidden sm:block">
+        <h1 className="font-brandFont text-2xl text-brandColor">
+          <span className="text-3xl">W</span><span className="-ml-1 ">orkio</span>
+        </h1>
       </div>
     </div>
   );

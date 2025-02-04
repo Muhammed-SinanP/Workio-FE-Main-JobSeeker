@@ -40,8 +40,8 @@ const UserOptions = () => {
       });
   }
   return (
-    <div className="mr-2 mt-3 flex items-center">
-      <div className="mt-2 hidden items-center justify-evenly gap-2 sm:flex">
+    <div className=" flex items-center">
+      <div className="mt-2 hidden items-end justify-evenly gap-2 sm:flex">
         {userNavbarData &&
           userNavbarData.map((element, index) => (
             <NavLink

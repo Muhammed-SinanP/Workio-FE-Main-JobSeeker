@@ -58,9 +58,9 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center rounded-md bg-white p-2 shadow-md  shadow-brandColor-dark md:flex-row dark:bg-darkColor-input dark:shadow-black"
+      className="flex flex-col items-center tracking-wide rounded-md text-lg sm:text-sm bg-white p-2 shadow-md  shadow-brandColor md:flex-row dark:bg-darkColor-input dark:shadow-black"
     >
-      <div className="flex w-full items-center pl-1 text-xs dark:bg-darkColor-input">
+      <div className="flex w-full items-center pl-1  dark:bg-darkColor-input">
         <SearchIcon className="dark:text-darkColor-text" />
         <input
           id="jobTitle"
@@ -68,14 +68,14 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           type="text"
           minLength={2}
           placeholder="Job title"
-          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input"
+          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input pl-2 md:pl-1"
           onChange={handleChange}
           value={formData.jobTitle}
           required
         />
       </div>
 
-      <div className="flex w-full items-center pl-1 text-xs dark:bg-darkColor-input">
+      <div className="flex w-full items-center pl-1   dark:bg-darkColor-input">
         <LocationOnIcon className="dark:text-darkColor-text" />
         <input
           id="jobLocation"
@@ -83,18 +83,18 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           type="text"
           placeholder="Location"
           minLength={2}
-          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input"
+          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input pl-2 md:pl-1"
           onChange={handleChange}
           value={formData.jobLocation}
         />
       </div>
-      <div className="flex w-full items-center pl-1.5 dark:bg-darkColor-input">
+      <div className="flex w-full items-center pl-1 md:pl-1.5 dark:bg-darkColor-input">
         <WorkIcon className="dark:text-darkColor-text" />
 
         <select
           id="jobExperience"
           name="jobExperience"
-          className={`searchInput cursor-pointer border-none text-xs dark:bg-darkColor-input ${formData.jobExperience === ""
+          className={`searchInput cursor-pointer border-none  dark:bg-darkColor-input ${formData.jobExperience === ""
             ? "text-[#9CA3AF]"
             : "text-black dark:text-darkColor-text"
             }`}
@@ -105,7 +105,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           <option value="" disabled className="hidden">
             Min experience
           </option>
-          <option value={0} className="xs">
+          <option value={0} className="text-xs">
             Fresher / &lt; 1 year
           </option>
           <option value={1} className="text-xs">
@@ -121,17 +121,17 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
       </div>
       <div>
         <button
-          className="btn btn-square ml-2 hidden border-none bg-brandColor text-white hover:bg-brandColor-dark active:bg-brandColor-dark md:block"
+          className="btn btn-wide mt-2.5 md:mt-0 text-lg md:text-base md:btn-square md:ml-2  border-none bg-brandColor text-white hover:bg-brandColor-dark active:bg-brandColor-dark "
           type="submit"
         >
           {isJobsLoading ? (
             <span className="loading loading-spinner"></span>
           ) : (
-            <span>Find</span>
+            <span className="tracking-wide">Find <span className="md:hidden">jobs</span></span>
           )}
         </button>
-        <button
-          className="btn btn-sm btn-wide mt-2 bg-brandColor text-white hover:bg-brandColor-dark active:bg-brandColor-dark md:hidden"
+        {/* <button
+          className="btn text-base btn-wide mt-2.5 bg-brandColor text-white hover:bg-brandColor-dark active:bg-brandColor-dark md:hidden"
           type="submit"
         >
           {isJobsLoading ? (
@@ -141,7 +141,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           ) : (
             <span className="">Find jobs</span>
           )}
-        </button>
+        </button> */}
       </div>
     </form>
   );
