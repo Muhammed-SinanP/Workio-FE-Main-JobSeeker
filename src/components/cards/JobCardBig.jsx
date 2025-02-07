@@ -32,6 +32,7 @@ const JobCardBig = ({ job }) => {
         console.log("scrolled");
       }
     }
+    console.log(job?.requirements)
 
     detailsSection.forEach((section) => {
       section.addEventListener("scroll", handleScroll);
@@ -88,7 +89,7 @@ const JobCardBig = ({ job }) => {
     <div className="flex h-full flex-col rounded-md border border-brandColor-dark  dark:border-gray-200 ">
       <div className="flex flex-col gap-2 rounded-t-md border-b dark:text-darkColor-text border-brandColor-dark bg-white p-4 dark:bg-darkColor-input dark:border-gray-200">
         <div className="flex items-center justify-between ">
-          <div className="text-2xl font-semibold tracking-wide text-brandColor-dark dark:text-brandColor">{job?.title}</div>
+          <div className="text-2xl font-semibold tracking-wide capitalize text-brandColor-dark dark:text-brandColor">{job?.title}</div>
           <div className="flex items-center gap-4">
             {smallHead && (
               <button
@@ -103,18 +104,18 @@ const JobCardBig = ({ job }) => {
             </button>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 capitalize">
           <div className="text-sm">{job?.employer?.name}</div>
           <div className="h-6 w-1  border-r border-darkColor-text"></div>
           <div className="flex items-center text-sm">
             <LocationOnIcon fontSize="small" className="p-1 px-0" />
-            {job?.location?.city}
+            {job?.location?.city}, {job?.location?.state}, {job?.location?.country}
           </div>
         </div>
         {!smallHead && (
           <div className="flex items-center">
             <CurrencyRupeeIcon fontSize="small" />
-            {job?.sallaryRange?.min} - {job?.sallaryRange?.max}{" "}
+            {job?.salaryRange?.min} - {job?.salaryRange?.max}{" "}
             <span className="ml-2 font-light">LPA</span>
           </div>
         )}
@@ -151,7 +152,14 @@ const JobCardBig = ({ job }) => {
             Requirements
           </span>
           <div className="mt-1 pl-6 font-paraFont text-sm">
-            {job?.requirements}
+            {job?.requirements?.map((element, index) => {
+              if(element.length>0){
+                return <li>{element}.</li>
+              }
+             
+            }
+              
+            )}
           </div>
         </div>
         <div className="border-b border-gray-300 px-4 py-4">
@@ -172,11 +180,11 @@ const JobCardBig = ({ job }) => {
             Pay
           </span>
           <div className="mt-1 pl-6 text-sm">
-            {job?.sallaryRange?.min} - {job?.sallaryRange?.max}{" "}
+            {job?.salaryRange?.min} - {job?.salaryRange?.max}{" "}
             <span className="font-light italic">Lakhs Per Annum</span>
           </div>
         </div>
-        <div className="border-b border-gray-300 p-4">
+        <div className="border-b capitalize border-gray-300 p-4">
           <span className="flex items-center gap-1 font-medium">
             <LocationOnIcon fontSize="small" />
             Location
@@ -194,25 +202,25 @@ const JobCardBig = ({ job }) => {
             </div>
           </div>
         </div>
-        <div className="border-b border-gray-300 p-4">
+        <div className="border-b  border-gray-300 p-4">
           <span className="flex items-center gap-1 font-medium">
             <WorkHistoryIcon fontSize="small" />
             Job type
           </span>
-          <div className="mt-1 pl-6 font-paraFont text-sm"> {job?.jobType}</div>
+          <div className="mt-1 pl-6 font-paraFont text-sm capitalize"> {job?.jobType}</div>
         </div>
         <div className="border-b border-gray-300 p-4">
           <span className="flex items-center gap-1 font-medium">
             <HomeWorkIcon fontSize="small" />
             Work model
-          </span>{" "}
-          <div className="mt-1 pl-6 font-paraFont text-sm">
+          </span>
+          <div className="mt-1 pl-6 font-paraFont text-sm capitalize">
             {job?.workModel}
           </div>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 border-gray-300 px-4 py-6 pb-2 sm:pb-6">
           <div className="text-gray-600 font-light">
-            Date posted:
+            Date Posted:
             <span className="text-sm font-extralight ml-1">
               {findDate(job?.createdAt)}
             </span>

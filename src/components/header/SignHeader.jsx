@@ -32,7 +32,7 @@ const SignHeader = () => {
         <div className="flex items-end justify-start gap-2">
           
 
-          <div className="mb-2.5"><Logo /></div>
+          <div className="mb-2.5 ml-1 sm:ml-0"><Logo /></div>
 
           
         </div>
@@ -42,7 +42,7 @@ const SignHeader = () => {
 
           <div className="flex items-center gap-2 mb-2.5 ml-2.5">
 
-            <div className=" hidden sm:block">
+            <div className="">
               <DarkModeBtn />
             </div>
 

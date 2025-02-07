@@ -14,13 +14,15 @@ html,body{
     @apply m-auto  max-w-[1536px];
   }
   .inputStyle {
-    @apply cursor-pointer rounded-sm border border-borderColor px-1.5 py-1 w-full;
+    @apply cursor-pointer outline-none rounded-sm border border-borderColor px-1.5 py-1 w-full;
   }
-  .inputStyle:focus {
+  /* .inputStyle:focus {
     @apply border-brandColor outline-none;
-  }
+  } */
+  /* .filterInput{
+    @apply w-full p-1 outline-none border-0.5 border-borderColor rounded-sm
+  } */
   
-
   .signBtn {
     @apply flex cursor-pointer items-center justify-center rounded-sm py-1 pl-1 pr-2  text-xs font-medium transition-all duration-100 ease-in-out;
   }

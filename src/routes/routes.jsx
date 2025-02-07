@@ -4,7 +4,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 
 import RegisterPage from "../pages/RegisterPage";
-import JobPage from "../pages/JobPage";
+import JobsPage from "../pages/JobsPage";
 import MyProfile from "../pages/MyProfilePage";
 import MyApplications from "../pages/MyApplications";
 import JobDetails from "../pages/JobDetails";
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "jobs",
-        element: <JobPage />,
+        element: <JobsPage />,
       },
       {
         path: "jobDetails/:jobId",

@@ -6,7 +6,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const JobCardSm = ({ element, cardClick }) => {
-  
+
   function calculateDays(date) {
     const createdDate = new Date(date);
     const currentDate = new Date();
@@ -24,7 +24,7 @@ const JobCardSm = ({ element, cardClick }) => {
     return `${dateDiffernce} days ago`;
   }
 
-  
+
 
   return (
     <>
@@ -41,25 +41,27 @@ const JobCardSm = ({ element, cardClick }) => {
           </div>
         </div>
         <div className="text-sm capitalize">{element.employer?.name}</div>
-        <div className="flex items-center text-xs">
+        <div className="flex items-center text-xs capitalize">
           <LocationOnIcon fontSize="small" className="-ml-1 px-0 py-1" />
-          {element.location?.city}, {element.location?.state},{" "}
-          {element.location?.country}
+          {element.location?.city}, {element.location?.state}, {element.location?.country}
         </div>
         <div className="flex items-center gap-2 text-xs">
-          <div className="flex items-center">
+          <div className="flex items-center capitalize">
             <WorkIcon fontSize="small" className="-ml-1 px-0 py-1" />
-            {element.minExperience}+ years
+            {element.minExperience > 0 ?
+              `${element.minExperience} ${element.minExperience > 1 ? "years" : "year"} `
+              :
+              "fresher"}
           </div>
           <div className="h-3/5 border-r-0.5 border-darkColor-text"></div>
           <div className="-ml-1 flex items-center rounded-sm pr-1">
             <CurrencyRupeeIcon fontSize="small" className="-mr-1 px-0 py-1" />
-            {element.sallaryRange?.min}-{element.sallaryRange?.max}{" "}
+            {element.salaryRange?.min}-{element.salaryRange?.max}{" "}
             <span className="ml-1 font-light">LPA</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 text-xs font-medium mb-4">
+        <div className="flex items-center gap-1 text-xs font-medium mb-4 capitalize">
           <div className="rounded-sm bg-gray-200 px-1 py-0.5 dark:bg-darkColor-light">
             {element.jobType}
           </div>

@@ -16,6 +16,7 @@ const useFetch = (url,dependency=[]) => {
 
     async function fetchData() {
       try {
+        setIsLoading(true)
         const response = await axiosInstance({
           method: "GET",
           url: url,
@@ -26,6 +27,7 @@ const useFetch = (url,dependency=[]) => {
         if (isMounted) {
           setData(response?.data?.data);
           setError(null);
+          setIsLoading(false)
         }
       } catch (err) {
         if (isMounted) {

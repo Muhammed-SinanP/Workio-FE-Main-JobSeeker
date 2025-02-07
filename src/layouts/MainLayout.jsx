@@ -12,8 +12,9 @@ import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 
 const MainLayout = () => {
+  
   const dispatch = useDispatch();
-
+  
   const location = useLocation();
   async function checkUser() {
     try {
@@ -31,14 +32,19 @@ const MainLayout = () => {
         dispatch(clearUserData());
       }
     } catch (err) {
-      // navigate("/")
       dispatch(clearUserData());
+      
     }
   }
 
   useEffect(() => {
     checkUser();
   }, [location.pathname]);
+  useEffect(()=>{
+    const theme = localStorage.getItem("theme")
+    document.documentElement.setAttribute("data-theme", theme)
+    
+  },[])
   return (
     <div className="flex min-h-screen flex-col bg-brandColor-lightest  dark:bg-darkColor-light">
       {location.pathname == "/sign/login" ||

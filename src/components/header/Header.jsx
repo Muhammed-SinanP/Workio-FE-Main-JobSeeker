@@ -110,11 +110,11 @@ const Header = () => {
     >
       <div className="pt-2.5 flex items-end justify-between rounded-b-xl bg-white dark:bg-darkColor-input px-2 sm:px-4">
         <div className="flex items-end justify-start gap-2">
-          <div className="sm:hidden mb-1.5">
+          <div className="sm:hidden mb-2.5">
             <MenuIcon
-              fontSize="large"
+              
               onClick={() => setSideBarOpen(true)}
-              className="  cursor-pointer text-gray-900 hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
+              className="mb-1 cursor-pointer text-gray-900 hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
             />
           </div>
 

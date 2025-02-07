@@ -58,7 +58,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center tracking-wide rounded-md text-lg sm:text-sm bg-white p-2 shadow-md  shadow-brandColor md:flex-row dark:bg-darkColor-input dark:shadow-black"
+      className="flex flex-col items-center tracking-wide rounded-md text-lg sm:text-sm bg-white p-2 shadow-md  shadow-brandColor md:flex-row dark:bg-darkColor-input dark:shadow-darkColor"
     >
       <div className="flex w-full items-center pl-1  dark:bg-darkColor-input">
         <SearchIcon className="dark:text-darkColor-text" />
@@ -94,7 +94,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
         <select
           id="jobExperience"
           name="jobExperience"
-          className={`searchInput cursor-pointer border-none  dark:bg-darkColor-input ${formData.jobExperience === ""
+          className={`searchInput  cursor-pointer border-none  dark:bg-darkColor-input ${formData.jobExperience === ""
             ? "text-[#9CA3AF]"
             : "text-black dark:text-darkColor-text"
             }`}
@@ -108,15 +108,22 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           <option value={0} className="text-xs">
             Fresher / &lt; 1 year
           </option>
+          
           <option value={1} className="text-xs">
-            1+ years
+            1 year
           </option>
-          <option value={2} className="text-xs">
+
+          {[...Array(49)].map((_, id)=>
+            <option key={id} value={id+2} className="text-xs">
+              {id+2} years
+            </option>
+          )}
+          {/* <option value={2} className="text-xs">
             2+ years
           </option>
           <option value={3} className="text-xs">
             3+ years
-          </option>
+          </option> */}
         </select>
       </div>
       <div>
