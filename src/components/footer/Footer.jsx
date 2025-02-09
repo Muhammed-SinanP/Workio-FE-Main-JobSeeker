@@ -40,7 +40,12 @@ const Footer = () => {
             {footerSeekerData.map((element, index) => (
               <div
                 key={index}
-                onClick={() => navigate(element.path)}
+                onClick={() => {navigate(element.path)
+                  window.scrollTo({
+                    top:0,
+                    behavior:"smooth"
+                  })
+                }}
                 className="cursor-pointer text-xs hover:text-gray-50 hover:underline dark:text-darkColor-text dark:hover:text-gray-100"
               >
                 {element.title}

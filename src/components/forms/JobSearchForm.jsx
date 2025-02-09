@@ -103,7 +103,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           required
         >
           <option value="" disabled className="hidden">
-            Min experience
+            Experience
           </option>
           <option value={0} className="text-xs">
             Fresher / &lt; 1 year

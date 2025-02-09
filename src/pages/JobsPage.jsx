@@ -5,58 +5,88 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import JobCardSm from "../components/cards/JobCardSm";
 
+
+
+import SkeletonJobCardSm from "../components/skeletons/SkeletonJobCardSm";
+import PaginationBtn from "../components/PaginationBtn";
+
 const JobsPage = () => {
   const navigate = useNavigate();
-  const [showDiv,setShowDiv] = useState([])
-  
-  const [filterData,setFilterData] = useState({
-    experience:100,
-    salary:100,
-    jobType:"",
-    workModel:""
+  const [showDiv, setShowDiv] = useState([])
+  const [filteredJobs, setFilteredJobs] = useState([])
+  const [jobsPerPage, setJobsPerPage] = useState(8)
+  const [pageNo, setPageNo] = useState(0)
+  const [pageCount, setpageCount] = useState(0)
+  const [filterData, setFilterData] = useState({
+    experience: 100,
+    salary: 100,
+    jobType: "",
+    workModel: ""
   })
   const [sortData, setSortData] = useState({
     sortCriteria: "name",
     sortOrder: "asc"
   })
-  const [filteredJobs, error, isLoading] = useFetch(`/job/allOpen?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}`);
-  
+  const [data, error, isLoading] = useFetch(`/job/allOpen?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    setFilteredJobs(data?.jobs)
+    setpageCount(data?.totalPages)
+  }, [data])
 
 
-function handleFitlerChange(e){
-  const {name,value} = e.target
-  setFilterData(prev => {
-    return{
-      ...prev,
-      [name]:value
-    }
-  })
-}
-
-function handleSortChange(e){
-
-  const {name,value} = e.target
-  setSortData(prev=>{
-    return{
-      ...prev,
-      [name]:value,
-    }
-  })
-}
- function handleVisibilty(element){
-  if(showDiv.includes(element)){
-    setShowDiv(showDiv.filter(item => item !== element))
+  function handleFitlerChange(e) {
+    const { name, value } = e.target
+    setFilterData(prev => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+    setPageNo(null)
+    console.log(jobsPerPage)
   }
-  else{
-    setShowDiv([...showDiv,element])
+
+  function handleSortChange(e) {
+
+    const { name, value } = e.target
+    setSortData(prev => {
+      return {
+        ...prev,
+        [name]: value,
+      }
+    })
+    setPageNo(0)
   }
- }
+  function handleJobsPerPage(e) {
+    const value = e.target.value;
+    setJobsPerPage(value)
+    setPageNo(0)
+    
+  }
+  function handleVisibilty(element) {
+    if (showDiv.includes(element)) {
+      setShowDiv(showDiv.filter(item => item !== element))
+    }
+    else {
+      setShowDiv([...showDiv, element])
+    }
+  }
   function cardClick(job) {
     navigate(`/jobDetails/${job?._id}`);
+  }
+
+  function handlePageClick(e) {
+    console.log(e.selected)
+    setPageNo(e.selected)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   if (error) {
@@ -69,33 +99,33 @@ function handleSortChange(e){
   }
 
   return (
-    <div className="outerDiv">
-      <div className="innerDiv text-sm dark:text-darkColor-text p-6 sm:px-16">
+    <div className="outerDiv min-h-screen relative">
+      <div className="innerDiv text-sm capitalize dark:text-darkColor-text p-6 pb-0 px-4 sm:px-16">
 
 
-        <div className="grid grid-cols-12 tracking-wide">
+        <div className="grid grid-cols-12  tracking-wide">
 
-          <div className="col-span-2 font-medium text-end "><span className="cursor-pointer" onClick={()=>handleVisibilty("filter")}>Filter{showDiv.includes("filter")?<ArrowDropUpIcon/>:<ArrowDropDownIcon />}</span></div>
-          {showDiv.includes("filter")&&<div className="col-span-10 grid grid-cols-12 gap-4 gap-y-2 sm:gap-6  sm:ml-4">
+          <div className="col-span-2 font-medium text-start sm:text-end "><span className="cursor-pointer" onClick={() => handleVisibilty("filter")}>Filter{showDiv.includes("filter") ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}</span></div>
+          {showDiv.includes("filter") && <div className="ml-1 col-span-10 grid grid-cols-12 gap-4 gap-y-2 sm:gap-6  sm:ml-2">
             <div className="col-span-6 sm:col-span-3 flex flex-col gap-1">
               <div>Experience</div>
-              <select name="experience" id="experience" className="inputStyle" onChange={handleFitlerChange}>
+              <select name="experience" id="experience" className="inputStyle" defaultValue={filterData.experience} onChange={handleFitlerChange}>
                 <option value={100} className="text-xs">All</option>
-                <option value={0} className="text-xs"> Fresher / &lt; 1 year</option>
+                <option value={0} className="text-xs"> Fresher / &lt; 1 Year</option>
                 <option value={1} className="text-xs">
                   1 year
                 </option>
 
                 {[...Array(49)].map((_, id) =>
                   <option key={id} value={id + 2} className="text-xs">
-                    {id + 2} years
+                    {id + 2} Years
                   </option>
                 )}
-                </select>
+              </select>
             </div>
             <div className="col-span-6 sm:col-span-3 flex flex-col gap-1">
               <div>Salary</div>
-              <select name="salary" id="salary" className="inputStyle" onChange={handleFitlerChange}>
+              <select name="salary" id="salary" className="inputStyle" defaultValue={filterData.salary} onChange={handleFitlerChange}>
                 <option value={100} className="text-xs">All</option>
                 <option value={1} className="text-xs">&le; 1 LPA</option>
                 <option value={2} className="text-xs">&le; 2 LPA</option>
@@ -108,7 +138,7 @@ function handleSortChange(e){
             </div>
             <div className="col-span-6 sm:col-span-3 flex flex-col gap-1">
               <div>Job Type</div>
-              <select name="jobType" id="jobType" className="inputStyle" onChange={handleFitlerChange} >
+              <select name="jobType" id="jobType" className="inputStyle" defaultValue={filterData.jobType} onChange={handleFitlerChange} >
                 <option value="" className="text-xs">All</option>
                 <option value="full-time" className="text-xs">Full-time</option>
                 <option value="part-time" className="text-xs">Part-time</option>
@@ -120,66 +150,99 @@ function handleSortChange(e){
             </div>
             <div className="col-span-6 sm:col-span-3 flex flex-col gap-1">
               <div>Work Model</div>
-              <select name="workModel" id="workModel" className="inputStyle" onChange={handleFitlerChange}>
+              <select name="workModel" id="workModel" className="inputStyle" defaultValue={filterData.workModel} onChange={handleFitlerChange}>
                 <option value="" className="text-xs">All</option>
                 <option value="office" className="text-xs">Office</option>
                 <option value="remote" className="text-xs">Remote</option>
                 <option value="hybrid" className="text-xs">Hybrid</option>
-                <option value="office,remote" className="text-xs">Both Office & Remote</option> 
+                <option value="office,remote" className="text-xs">Both Office & Remote</option>
                 <option value="office,hybrid" className="text-xs">Both Office & Hybrid</option>
-                <option value="hybrid,remote" className="text-xs">Both Office & Hybrid</option>
+                <option value="hybrid,remote" className="text-xs">Both Hybrid & Remote</option>
               </select>
             </div>
           </div>}
 
         </div>
-        
-        <div className="grid grid-cols-12 tracking-wide mt-4">
 
-          <div className="font-medium col-span-2  text-end"><span className="cursor-pointer" onClick={() => handleVisibilty("sort")}>Sort{showDiv.includes("sort") ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</span></div>
-          {showDiv.includes("sort")&&<div className="col-span-10 grid grid-cols-12 gap-4 sm:gap-6  sm:ml-4">
+        <div className="grid grid-cols-12  tracking-wide mt-4">
+
+          <div className="font-medium col-span-2 text-start sm:text-end"><span className="cursor-pointer" onClick={() => handleVisibilty("sort")}>Sort{showDiv.includes("sort") ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}</span></div>
+          {showDiv.includes("sort") && <div className="ml-1 col-span-10 grid grid-cols-12 gap-4 sm:gap-6  sm:ml-2">
             <div className="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 flex flex-col gap-1">
-              <select name="sortCriteria" id="sortCriteria" className="inputStyle" onChange={handleSortChange}>
+              <select name="sortCriteria" id="sortCriteria" className="inputStyle" defaultValue={sortData.sortCriteria} onChange={handleSortChange}>
                 <option value="name" className="text-xs">Name</option>
                 <option value="date" className="text-xs">Date Posted</option>
               </select>
             </div>
 
             <div className="col-span-6 sm:col-span-8 md:col-span-6 lg:col-span-4 flex flex-col gap-1">
-              <select name="sortOrder" id="sortOrder" className="inputStyle" onChange={handleSortChange}>
-                <option value="asc" className="text-xs">Ascending {sortData.sortCriteria==="name"?"(A-Z)":"(Oldest to Newest)"}</option>
-                <option value="desc" className="text-xs">Descending {sortData.sortCriteria === "name"?"(Z-A)":"(Newest to Oldest)"}</option>
+              <select name="sortOrder" id="sortOrder" className="inputStyle" defaultValue={sortData.sortOrder} onChange={handleSortChange}>
+                <option value="asc" className="text-xs">Ascending {sortData.sortCriteria === "name" ? "(A-Z)" : "(Oldest to Newest)"}</option>
+                <option value="desc" className="text-xs">Descending {sortData.sortCriteria === "name" ? "(Z-A)" : "(Newest to Oldest)"}</option>
               </select>
             </div>
 
-            
+
 
           </div>}
 
         </div>
 
+        {filteredJobs ? filteredJobs.length >= 0 && <div className="text-sm  flex items-center mt-4">
+          <div className="font-medium text-start">Jobs per page:</div>
+          <select name="jobsPerPage" id="jobsPerPage" defaultValue={jobsPerPage} className="w-14 inputStyle ml-1 sm:ml-2" onChange={handleJobsPerPage}>
+            <option value={6}>6</option>
+            <option value={8}>8</option>
+            <option value={12}>12</option>
+            <option value={24}>24</option>
+          </select>
+        </div>:
+          <div className="flex items-center gap-2 mt-5">
+            <div className="skeleton w-24 h-6 "></div>
+          <div className="skeleton w-14 h-6"></div>
+        </div>
+        }
 
       </div>
-      <div className="innerDiv min-h-screen">
-        {isLoading ? (
-          <div className="p-6 md:px-28 lg:px-6 text-center">Loading...</div>
-        ) : (
-          <div className=" grid min-h-44 grid-cols-12 gap-4 p-6 px-16">
-              {filteredJobs &&filteredJobs.length > 0 ? (
-               filteredJobs.map((element, index) => (
-                <div key={index} className="bg-white dark:bg-darkColor-input  col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 shadow-sm hover:shadow-md border border-borderColor rounded-md hover:border-brandColor-dark dark:hover:border-gray-200"> 
-                
-                <JobCardSm
-                  element={element}
-                  cardClick={cardClick}
-                /></div>
 
-              ))
-            ) : (
-              <div className="col-span-12 text-center">No jobs found, try another filtering</div>
+      <div className="innerDiv ">
+        {isLoading ? (
+          <div className=" grid min-h-44 grid-cols-12 gap-4 p-6 pt-0 px-16 mb-32 mt-4">
+            {Array.from({ length: jobsPerPage },(_,i) =>
+            
+              <div key={i} className=" relative  col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 ">
+
+                <SkeletonJobCardSm/>
+              </div>
+
+            
             )}
+            
+            </div>
+        ) : (
+          <div>
+            <div className=" grid min-h-44 grid-cols-12 gap-4 p-6 pt-0 px-16 mb-32 mt-4">
+
+               {filteredJobs && filteredJobs.length > 0 ? (
+                filteredJobs.map((element, index) => (
+                  <div key={index} className="bg-white dark:bg-darkColor-input  col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 shadow-sm hover:shadow-md border border-borderColor rounded-md hover:border-brandColor-dark dark:hover:border-gray-200">
+
+                    <JobCardSm
+                      element={element}
+                      cardClick={cardClick}
+                    /></div>
+
+                ))
+              ) : (
+                <div className="col-span-12 text-center ">No jobs found, try another filtering</div>
+              )}
+            </div>
           </div>
         )}
+      </div>
+
+      <div className="my-10 w-full flex justify-center absolute bottom-10">
+       <PaginationBtn handlePageClick={handlePageClick} pageNo={pageNo} pageCount={pageCount}/>
       </div>
     </div>
   );
