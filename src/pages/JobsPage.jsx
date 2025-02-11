@@ -4,15 +4,12 @@ import useFetch from "../hooks/useFetch";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import JobCardSm from "../components/cards/JobCardSm";
-
-
-
 import SkeletonJobCardSm from "../components/skeletons/SkeletonJobCardSm";
 import PaginationBtn from "../components/PaginationBtn";
 
 const JobsPage = () => {
   const navigate = useNavigate();
-  const [showDiv, setShowDiv] = useState([])
+  const [showDiv, setShowDiv] = useState(["filter", "sort"])
   const [filteredJobs, setFilteredJobs] = useState([])
   const [jobsPerPage, setJobsPerPage] = useState(8)
   const [pageNo, setPageNo] = useState(0)
@@ -66,8 +63,8 @@ const JobsPage = () => {
     const value = e.target.value;
     setJobsPerPage(value)
     setPageNo(0)
-    
   }
+
   function handleVisibilty(element) {
     if (showDiv.includes(element)) {
       setShowDiv(showDiv.filter(item => item !== element))
@@ -99,14 +96,14 @@ const JobsPage = () => {
   }
 
   return (
-    <div className="outerDiv min-h-screen relative">
-      <div className="innerDiv text-sm capitalize dark:text-darkColor-text p-6 pb-0 px-4 sm:px-16">
+    <div className="outerDiv min-h-screen relative pb-32">
+      <div className="innerDiv text-sm capitalize tracking-wide dark:text-darkColor-text pb-0">
 
 
-        <div className="grid grid-cols-12  tracking-wide">
+        <div className="flex  ">
 
-          <div className="col-span-2 font-medium text-start sm:text-end "><span className="cursor-pointer" onClick={() => handleVisibilty("filter")}>Filter{showDiv.includes("filter") ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}</span></div>
-          {showDiv.includes("filter") && <div className="ml-1 col-span-10 grid grid-cols-12 gap-4 gap-y-2 sm:gap-6  sm:ml-2">
+          <div className="font-medium "><span className="cursor-pointer flex" onClick={() => handleVisibilty("filter")}>Filter{showDiv.includes("filter") ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}</span></div>
+          {showDiv.includes("filter") && <div className="ml-1 grid grid-cols-12 gap-4 gap-y-2 sm:gap-6  sm:ml-2">
             <div className="col-span-6 sm:col-span-3 flex flex-col gap-1">
               <div>Experience</div>
               <select name="experience" id="experience" className="inputStyle" defaultValue={filterData.experience} onChange={handleFitlerChange}>
@@ -164,10 +161,10 @@ const JobsPage = () => {
 
         </div>
 
-        <div className="grid grid-cols-12  tracking-wide mt-4">
+        <div className="flex  mt-4">
 
-          <div className="font-medium col-span-2 text-start sm:text-end"><span className="cursor-pointer" onClick={() => handleVisibilty("sort")}>Sort{showDiv.includes("sort") ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}</span></div>
-          {showDiv.includes("sort") && <div className="ml-1 col-span-10 grid grid-cols-12 gap-4 sm:gap-6  sm:ml-2">
+          <div className="font-medium "><span className="cursor-pointer flex" onClick={() => handleVisibilty("sort")}>Sort{showDiv.includes("sort") ? <ArrowDropUpIcon fontSize="small" /> : <ArrowDropDownIcon fontSize="small" />}</span></div>
+          {showDiv.includes("sort") && <div className="ml-1 grid grid-cols-12 gap-4 sm:gap-6  sm:ml-2">
             <div className="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 flex flex-col gap-1">
               <select name="sortCriteria" id="sortCriteria" className="inputStyle" defaultValue={sortData.sortCriteria} onChange={handleSortChange}>
                 <option value="name" className="text-xs">Name</option>
@@ -188,7 +185,7 @@ const JobsPage = () => {
 
         </div>
 
-        {filteredJobs ? filteredJobs.length >= 0 && <div className="text-sm  flex items-center mt-4">
+        <div className="flex items-center mt-4">
           <div className="font-medium text-start">Jobs per page:</div>
           <select name="jobsPerPage" id="jobsPerPage" defaultValue={jobsPerPage} className="w-14 inputStyle ml-1 sm:ml-2" onChange={handleJobsPerPage}>
             <option value={6}>6</option>
@@ -196,36 +193,33 @@ const JobsPage = () => {
             <option value={12}>12</option>
             <option value={24}>24</option>
           </select>
-        </div>:
-          <div className="flex items-center gap-2 mt-5">
-            <div className="skeleton w-24 h-6 "></div>
-          <div className="skeleton w-14 h-6"></div>
-        </div>
-        }
+        </div> 
+        
+
 
       </div>
 
-      <div className="innerDiv ">
+      <div className="innerDiv pt-0">
         {isLoading ? (
-          <div className=" grid min-h-44 grid-cols-12 gap-4 p-6 pt-0 px-16 mb-32 mt-4">
-            {Array.from({ length: jobsPerPage },(_,i) =>
-            
+          <div className=" grid min-h-44 grid-cols-12 gap-4 px-10   mt-4">
+            {Array.from({ length: jobsPerPage }, (_, i) =>
+
               <div key={i} className=" relative  col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 ">
 
-                <SkeletonJobCardSm/>
+                <SkeletonJobCardSm />
               </div>
 
-            
+
             )}
-            
-            </div>
+
+          </div>
         ) : (
           <div>
-            <div className=" grid min-h-44 grid-cols-12 gap-4 p-6 pt-0 px-16 mb-32 mt-4">
+            <div className=" grid min-h-44 grid-cols-12 gap-4 px-10  mt-4">
 
-               {filteredJobs && filteredJobs.length > 0 ? (
+              {filteredJobs && filteredJobs.length > 0 ? (
                 filteredJobs.map((element, index) => (
-                  <div key={index} className="bg-white dark:bg-darkColor-input  col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 shadow-sm hover:shadow-md border border-borderColor rounded-md hover:border-brandColor-dark dark:hover:border-gray-200">
+                  <div key={index} className="bg-white dark:bg-darkColor-input  col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 shadow-sm hover:shadow-md border border-borderColor rounded-md hover:border-brandColor-dark dark:hover:border-gray-200">
 
                     <JobCardSm
                       element={element}
@@ -241,8 +235,8 @@ const JobsPage = () => {
         )}
       </div>
 
-      <div className="my-10 w-full flex justify-center absolute bottom-10">
-       <PaginationBtn handlePageClick={handlePageClick} pageNo={pageNo} pageCount={pageCount}/>
+      <div className=" w-full flex justify-center absolute bottom-8">
+        <PaginationBtn handlePageClick={handlePageClick} pageNo={pageNo} pageCount={pageCount} />
       </div>
     </div>
   );

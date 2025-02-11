@@ -11,7 +11,7 @@ html,body{
     @apply w-full;
   }
   .innerDiv {
-    @apply m-auto  max-w-[1536px];
+    @apply m-auto p-6 sm:px-10 max-w-[1536px];
   }
   .inputStyle {
     @apply cursor-pointer outline-none rounded-sm border border-borderColor px-1.5 py-1 w-full;
@@ -38,5 +38,9 @@ html,body{
   }
   .searchInput:focus {
     @apply outline-none;
+  }
+
+  .skeleton-custom-color{
+    @apply skeleton bg-gray-300 dark:bg-darkColor-text
   }
 }

@@ -14,7 +14,7 @@ import { axiosInstance } from "../../config/axiosInstance";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-const JobCardBig = ({ job }) => {
+const JobCardLg = ({ job }) => {
   const userLoggedIn = useSelector((state) => state.user.userLoggedIn);
   const [smallHead, setSmallHead] = useState(false);
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ const JobCardBig = ({ job }) => {
               </button>
             )}
             <button className="flex items-center text-brandColor-dark dark:text-brandColor">
-              <BookmarkBorderIcon />
+              <BookmarkBorderIcon  fontSize="large"/>
             </button>
           </div>
         </div>
@@ -236,4 +236,4 @@ const JobCardBig = ({ job }) => {
   );
 };
 
-export default JobCardBig;
+export default JobCardLg;

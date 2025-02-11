@@ -35,7 +35,7 @@ const useFetch = (url,dependency=[]) => {
         }
       } finally {
         if (isMounted) {
-          setIsLoading(false);
+           setIsLoading(false);
         }
       }
     }

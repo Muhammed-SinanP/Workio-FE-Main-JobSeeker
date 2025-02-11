@@ -37,7 +37,7 @@ const JobCardSm = ({ element, cardClick }) => {
             {element.title}
           </div>
           <div className="text-brandColor-dark dark:text-brandColor">
-            <BookmarkBorderIcon fontSize="small" />
+            <BookmarkBorderIcon />
           </div>
         </div>
         <div className="text-sm capitalize">{element.employer?.name}</div>

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import JobSearchForm from "../components/forms/JobSearchForm";
 
 import JobCardSm from "../components/cards/JobCardSm";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { userSuggestions } from "../components/Data";
-import JobCardBig from "../components/cards/JobCardBig";
+import JobCardLg from "../components/cards/JobCardLg";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import SkeletonJobCardLg from "../components/skeletons/SkeletonJobCardLg";
 
 const HomePage = () => {
   const location = useLocation();
@@ -15,15 +17,22 @@ const HomePage = () => {
   const [bottomCard, setBottomCard] = useState(false);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
+  const timeoutRef = useRef(null)
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   function cardClick(job) {
     setSelectedJob(null)
-    setTimeout(() => setSelectedJob(job),200)
-    
-    setBottomCard(true);
+    if(timeoutRef.current){
+      clearTimeout(timeoutRef.current)
+    }
+
+    timeoutRef.current = setTimeout(()=>{
+      setSelectedJob(job)
+      timeoutRef.current = null
+    },200)
   }
 
   function closeBottomCard() {
@@ -39,7 +48,7 @@ const HomePage = () => {
             }`}
         >
           <JobSearchForm
-          filteredJobs={filteredJobs}
+            filteredJobs={filteredJobs}
             setFilteredJobs={setFilteredJobs}
             setSelectedJob={setSelectedJob}
           />
@@ -58,23 +67,28 @@ const HomePage = () => {
               <div className="text-center text-xs text-gray-600 dark:text-darkColor-text pb-1 tracking-wide">
                 Scroll here to see all the results.
               </div>
+             <InfiniteScroll
+             dataLength={10}
+
+             >
               {filteredJobs &&
                 filteredJobs.length > 0 &&
                 filteredJobs.map((element, index) => (
-                  <div className={`border duration-800 rounded-md bg-white dark:bg-darkColor-input shadow-sm ${selectedJob === element ? "scale-95 shadow-sm border md:border-brandColor-dark shadow-brandColor-dark dark:shadow-darkColor-text dark:border-gray-200" : "scale-90 border-borderColor"} hover:border-brandColor-dark dark:hover:border-gray-200 `}>
+                  <div className={`border duration-800 rounded-md bg-white dark:bg-darkColor-input shadow-sm ${selectedJob === element ? "sm:scale-95 scale-90 shadow-sm border md:border-brandColor-dark shadow-brandColor-dark dark:shadow-darkColor-text dark:border-gray-200" : "scale-90 border-borderColor"} hover:border-brandColor-dark dark:hover:border-gray-200 `}>
                     <JobCardSm
                       key={index}
                       element={element}
                       cardClick={cardClick}
                     /></div>
                 ))}
-              <div className="text-center text-xs text-gray-600 dark:text-darkColor-text tracking-wide">
+              </InfiniteScroll>
+              <div className="text-center text-xs mt-2 text-gray-600 dark:text-darkColor-text tracking-wide">
                 You have reached the end of the results.
               </div>
             </div>
             <div className="2xl: hidden h-5/6 w-2/3 px-2 md:block">
               
-              {selectedJob ? <JobCardBig job={selectedJob}/>: <div>Loading...</div>}
+              {selectedJob ? <JobCardLg job={selectedJob}/>: <SkeletonJobCardLg/>}
             </div>
           </div>
         )}
@@ -100,7 +114,7 @@ const HomePage = () => {
             <CloseIcon />
           </div>
           <div className="h-full px-8 pb-6 pt-10">
-            {selectedJob&&<JobCardBig job={selectedJob}/>}
+            {selectedJob&&<JobCardLg job={selectedJob}/>}
           </div>
         </div>
       </div>
