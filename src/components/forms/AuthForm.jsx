@@ -66,7 +66,7 @@ const AuthForm = ({ isRegister, formData, setFormData }) => {
     }
   }
   return (
-    <div className="w-11/12 sm:w-80 lg:w-96 racking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor px-8 py-4">
+    <div className="w-11/12 sm:w-80  tracking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor px-8 py-4">
       <div className="mb-4  text-center text-xl sm:text-2xl font-semibold  dark:text-darkColor-text">
         {isRegister ? "Register" : "Login"}
       </div>
@@ -157,7 +157,7 @@ const AuthForm = ({ isRegister, formData, setFormData }) => {
               onClick={() => navigate("/forgotPassword")}
               className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600"
             >
-              forgot password ?
+              forgot password?
             </span>
           </div>
         )}

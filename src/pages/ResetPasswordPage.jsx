@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { axiosInstance } from "../config/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const ResetPasswordPage = () => {
         data: formData,
       });
       if (response.status === 200) {
-        console.log("password reset sucess");
+        toast.success("Password Updated Successfully")
         navigate("/");
       }
     } catch (err) {
@@ -46,18 +47,16 @@ const ResetPasswordPage = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center p-10 pt-20">
-      <div>
-        Enter new password and submit to change the password of your Workio
-        account
-      </div>
-      <div>
+    <div className="min-h-screen outerDiv">
+      <div className="innerDiv w-full flex justify-center items-center mt-8">
+      
+        <div className="w-11/12 sm:w-80  tracking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor px-8 py-4">
         <form
           onSubmit={handleSubmit}
-          className="mt-4 flex flex-col gap-2 rounded-sm border border-brandColor p-4"
+            className=" flex flex-col gap-2.5"
         >
           <div className="flex flex-col gap-1">
-            <label htmlFor="newPassword" className="text-sm">
+            <label htmlFor="newPassword" >
               Enter new password
             </label>
             <input
@@ -68,10 +67,12 @@ const ResetPasswordPage = () => {
               value={formData.newPassword}
               className="inputStyle"
               required
+              placeholder="****"
+              minLength={4}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="ConfirmNewPassword" className="text-sm">
+            <label htmlFor="ConfirmNewPassword" >
               Confirm new password
             </label>
             <input
@@ -82,16 +83,18 @@ const ResetPasswordPage = () => {
               value={formData.ConfirmNewPassword}
               className="inputStyle"
               required
+              placeholder="****"
             />
           </div>
           <div className="mt-2 text-center">
             <input
               type="submit"
-              className={`rounded-md bg-brandColor p-1.5 px-2 text-white ${formValid ? "cursor-pointer hover:bg-brandColor-dark active:scale-95" : "cursor-not-allowed opacity-50"} `}
+              className="btn btn-wide bg-brandColor hover:bg-brandColor-dark text-white text-base"
               disabled={!formValid}
             />
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

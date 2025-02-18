@@ -5,7 +5,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PaginationBtn from "../components/PaginationBtn";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useConfirm } from "material-ui-confirm";
-import axios from "axios";
+
 import { axiosInstance } from "../config/axiosInstance";
 
 const MyApplications = () => {
@@ -169,7 +169,7 @@ const MyApplications = () => {
       <div className="innerDiv pt-0 mt-4">
 
 
-        <table className="tracking-wide w-full  dark:text-darkColor-text">
+        <table className="tracking-wide w-full dark:text-darkColor-text">
           <thead><tr className="bg-brandColor rounded-t-md text-white text-lg grid grid-cols-12  gap-2   py-2">
             <th className="col-span-4">Status</th>
             <th className="col-span-4">Job</th>
@@ -177,9 +177,9 @@ const MyApplications = () => {
           </tr></thead>
           <tbody>
             {isLoading ? Array.from({ length: rowsPerPage }, (_, i) => <tr key={i} className={` grid grid-cols-12 items-center  gap-2 border-b border-darkColor-input py-2`}>
-              <td className="col-span-4 text-center" ><div className="h-6 w-28 mx-auto skeleton"></div></td>
-              <td className="col-span-4 text-center" ><div className="h-6 w-56 mx-auto skeleton"></div></td>
-              <td className="col-span-4 text-center" ><div className="h-6 w-56 mx-auto skeleton"></div></td>
+              <td className="col-span-4 text-center" ><div className="h-6 w-1/2 mx-auto skeleton"></div></td>
+              <td className="col-span-4 text-center" ><div className="h-6 w-4/5 mx-auto skeleton"></div></td>
+              <td className="col-span-4 text-center" ><div className="h-6 w-4/5 mx-auto skeleton"></div></td>
             </tr>) :
               filteredApplications && filteredApplications.length > 0 && filteredApplications.map((application, index) =>
 

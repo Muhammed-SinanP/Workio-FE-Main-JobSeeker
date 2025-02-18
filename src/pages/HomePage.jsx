@@ -33,6 +33,8 @@ const HomePage = () => {
       setSelectedJob(job)
       timeoutRef.current = null
     },200)
+
+    setBottomCard(true);
   }
 
   function closeBottomCard() {
@@ -42,7 +44,7 @@ const HomePage = () => {
 
   return (
     <div className="outerDiv">
-      <div className="bg-brandColor-lighter dark:bg-darkColor-light">
+      <div className="bg-gradient-to-t from-green-50 to-brandColor-lighter dark:from-darkColor-text dark:to-bg-darkColor-light">
         <div
           className={`innerDiv -mt-4 flex flex-col items-center justify-center gap-4 py-10 transition-all duration-500 ease-in-out ${filteredJobs && filteredJobs.length > 0 ? "md:py-10" : "md:py-32"
             }`}
@@ -67,10 +69,8 @@ const HomePage = () => {
               <div className="text-center text-xs text-gray-600 dark:text-darkColor-text pb-1 tracking-wide">
                 Scroll here to see all the results.
               </div>
-             <InfiniteScroll
-             dataLength={10}
-
-             >
+            
+             
               {filteredJobs &&
                 filteredJobs.length > 0 &&
                 filteredJobs.map((element, index) => (
@@ -81,7 +81,7 @@ const HomePage = () => {
                       cardClick={cardClick}
                     /></div>
                 ))}
-              </InfiniteScroll>
+              
               <div className="text-center text-xs mt-2 text-gray-600 dark:text-darkColor-text tracking-wide">
                 You have reached the end of the results.
               </div>
@@ -124,7 +124,7 @@ const HomePage = () => {
         <div className="p-4 px-8 text-center text-xl font-bold tracking-wide text-brandColor md:px-10 lg:text-2xl xl:px-20 dark:text-darkColor">
           Find the perfect job for <span className="uppercase text-brandColor-dark dark:text-brandColor">you</span>
         </div>
-        <div className="grid grid-cols-12 p-4 px-6 md:px-8 lg:px-10 xl:px-20 gap-2 gap-x-1 sm:gap-4 sm:gap-x-0   pb-10 md:gap-3  lg:gap-4 xl:gap-5 ">
+        <div className="grid sm:mt-6 mt-0 grid-cols-12  md:px-8 lg:px-10 xl:px-20 gap-2 gap-x-1 sm:gap-4 sm:gap-x-0   pb-10 md:gap-3  lg:gap-4 xl:gap-5 ">
           {userSuggestions.map((element, index) => (
             <div
               onClick={() => window.open(element.link)}

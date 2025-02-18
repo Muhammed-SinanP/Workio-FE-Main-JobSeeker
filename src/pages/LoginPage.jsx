@@ -16,7 +16,7 @@ const LoginPage = () => {
   return (
     <div className="outerDiv w-full px-4 py-10 sm:p-10  -mt-4 p min-h-screen">
 
-      <div className="innerDiv  flex flex-col sm:flex-row sm:mt-6 gap-2 sm:gap-10  sm:items-start sm:justify-between sm:px-10 ">
+      <div className="innerDiv p-1 flex flex-col sm:flex-row sm:mt-6 gap-2 sm:gap-10  sm:items-start sm:justify-between sm:px-10">
         <div className="">
 
           <div className="text-center sm:text-start flex flex-col justify-between items-center gap-6 sm:gap-10">

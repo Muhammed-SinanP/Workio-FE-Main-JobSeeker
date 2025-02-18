@@ -3,10 +3,13 @@ import { useState } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import toast from "react-hot-toast";
 
 const PasswordChangeForm = () => {
   const navigate = useNavigate();
-  const [showForm, setShowForm] = useState(false);
+  
   const [formData, setFormData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -43,29 +46,23 @@ const PasswordChangeForm = () => {
 
       if (response.status === 200) {
         console.log("password change success fe");
-        setShowForm(false);
+        toast.success("Password Updated Successfully")
       }
+      
     } catch (err) {
       console.log("password change failed", err);
+      if(err.response.status === 401){
+        toast.error("Incorrect Password")
+      }
     }
   }
   return (
-    <div className="text-xs md:text-sm">
-      <div className="flex justify-start">
-        <span
-          onClick={() => setShowForm(!showForm)}
-          className="flex cursor-pointer items-center font-medium hover:text-brandColor"
-        >
-          Change password <EditIcon fontSize="small" />
-        </span>
-      </div>
-
-      {showForm && (
+    <div className="w-11/12 sm:w-80  tracking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor px-8 py-4">
         <form
-          className="mt-2 flex w-64 flex-col gap-2 rounded-md border p-4 text-sm"
+        className=" flex flex-col gap-2.5"
           onSubmit={handleSubmit}
         >
-          <div>
+        <div className="flex flex-col gap-1">
             <label htmlFor="currentPassword">Current password</label>
             <input
               id="currentPassword"
@@ -73,18 +70,19 @@ const PasswordChangeForm = () => {
               name="currentPassword"
               value={formData.currentPassword}
               onChange={handleChange}
-              className="inputStyle w-full"
+              className="inputStyle "
+              placeholder="****"
             />
           </div>
-          <div className="text-end">
+          <div className="text-end -mt-1.5 ">
             <span
               onClick={() => navigate("/forgotPassword")}
-              className="cursor-pointer text-xs font-medium text-blue-500 hover:text-blue-700"
+            className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600"
             >
               Forgot password?
             </span>
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="newPassword">New password</label>
             <input
               id="newPassword"
@@ -92,10 +90,12 @@ const PasswordChangeForm = () => {
               name="newPassword"
               value={formData.newPassword}
               onChange={handleChange}
-              className="inputStyle w-full"
+              className="inputStyle "
+              placeholder="****"
+              minLength={4}
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="ConfirmNewPassword">Confirm new password</label>
             <input
               id="ConfirmNewPassword"
@@ -103,21 +103,19 @@ const PasswordChangeForm = () => {
               name="ConfirmNewPassword"
               value={formData.ConfirmNewPassword}
               onChange={handleChange}
-              className="inputStyle w-full"
+              className="inputStyle "
+              placeholder="****"
             />
           </div>
           <input
             type="submit"
             value="Submit"
-            className={`${
-              formValid
-                ? "cursor-pointer hover:bg-brandColor-dark active:scale-95"
-                : "cursor-not-allowed opacity-50"
-            } rounded-sm bg-brandColor p-1.5 text-xs font-medium text-white`}
+          className="btn btn-wide text-base  
+            border-none bg-brandColor text-white hover:bg-brandColor-dark"
             disabled={!formValid}
           />
         </form>
-      )}
+      
     </div>
   );
 };

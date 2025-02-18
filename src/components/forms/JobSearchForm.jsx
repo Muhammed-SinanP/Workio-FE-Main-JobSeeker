@@ -58,7 +58,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center tracking-wide rounded-md text-lg sm:text-sm bg-white p-2 shadow-md  shadow-brandColor md:flex-row dark:bg-darkColor-input dark:shadow-darkColor"
+      className="flex flex-col items-center tracking-wide rounded-md text-base sm:text-sm bg-white p-2 shadow-md  shadow-brandColor md:flex-row dark:bg-darkColor-input dark:shadow-darkColor"
     >
       <div className="flex w-full items-center pl-1  dark:bg-darkColor-input">
         <SearchIcon className="dark:text-darkColor-text" />

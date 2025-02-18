@@ -5,7 +5,7 @@ import LoginPage from "../pages/LoginPage";
 
 import RegisterPage from "../pages/RegisterPage";
 import JobsPage from "../pages/JobsPage";
-import MyProfile from "../pages/MyProfilePage";
+import MyProfilePage from "../pages/MyProfilePage";
 import MyApplications from "../pages/MyApplications";
 import JobDetails from "../pages/JobDetails";
 
@@ -13,6 +13,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import ErrorPage from "../pages/ErrorPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,8 @@ export const router = createBrowserRouter([
       {
         path: "/forgotPassword",
         element: <ForgotPasswordPage />,
+      },
+      {
       },
       {
         path: "/resetPassword/:resetToken",
@@ -45,8 +48,14 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "myProfile",
-            element: <MyProfile />,
+            element: <MyProfilePage />,
+
           },
+          {
+            path: "changePassword",
+            element: <ChangePasswordPage />
+          },
+
           {
             path: "myApplications",
             element: <MyApplications />,

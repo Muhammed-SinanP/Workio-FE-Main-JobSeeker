@@ -204,7 +204,7 @@ const JobsPage = () => {
           <div className=" grid min-h-44 grid-cols-12 gap-4 px-10   mt-4">
             {Array.from({ length: jobsPerPage }, (_, i) =>
 
-              <div key={i} className=" relative  col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 ">
+              <div key={i} className=" relative  col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 ">
 
                 <SkeletonJobCardSm />
               </div>

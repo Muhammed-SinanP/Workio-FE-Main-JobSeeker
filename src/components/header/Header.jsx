@@ -16,6 +16,8 @@ const Header = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [headShadow, setHeadShadow] = useState(false);
 
+  
+
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 0) {
@@ -128,7 +130,7 @@ const Header = () => {
             <div><UserOptions /></div>
           ) : (
 
-            <div className="flex gap-2 mb-2.5">
+            <div className="flex gap-2 mb-3">
               <div className="sm:hidden"> <SignBtn
                 action={"login"}
                 text={"Sign in"}
@@ -149,7 +151,7 @@ const Header = () => {
             </div>
           )}
 
-          <div className="flex items-center gap-2 mb-2.5 ml-2.5">
+          <div className="flex items-center gap-2 mb-2.5 sm:ml-2.5 ml-0">
            
             <div className=" hidden sm:block">
               <DarkModeBtn />
