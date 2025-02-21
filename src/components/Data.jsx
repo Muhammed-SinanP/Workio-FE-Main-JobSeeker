@@ -4,6 +4,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 import HomeIcon from "@mui/icons-material/Home";
 import WorkIcon from "@mui/icons-material/Work";
 import PersonIcon from "@mui/icons-material/Person";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BoostImg from "../assets/Boost.png";
 import PrepImg from "../assets/Prep.png";
 import LearnImg from "../assets/Learn.png";
@@ -29,9 +30,14 @@ export const userNavbarData = [
     icon: <FeedIcon fontSize="small" />,
   },
   {
+    title: "My Saved List",
+    path:"/mySaveList",
+    icon: <BookmarkIcon fontSize="small"/>
+  },
+  {
     title: "My Profile",
     path: "/myProfile",
-    icon: <PersonIcon fontSize="small" />,
+    icon: <PersonIcon fontSize="small"/>,
   },
 ];
 

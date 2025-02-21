@@ -100,7 +100,7 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
             }`}
           onChange={handleChange}
           value={formData.jobExperience}
-          required
+          
         >
           <option value="" disabled className="hidden">
             Experience

@@ -23,7 +23,7 @@ const RegisterPage = () => {
 
           <div className="text-center sm:text-start flex flex-col justify-between items-center gap-10">
             <div><h1 className="text-brandColor text-2xl sm:text-4xl font-brandFont mb-2 ">Welcome to Workio!</h1>
-              <p className="text-brandColor-dark  text-sm lg:text-base tracking-wider dark:text-darkColor-text">Enter your details and start your journey and explore the opportunities with us. If you do have a job seeker's account, <span className="cursor-pointer text-blue-500 underline font-medium" onClick={() => navigate("/sign/login")}>login</span> to your existing account instead.</p>
+              <p className="text-brandColor-dark px-2  text-sm lg:text-base tracking-wider dark:text-darkColor-text">Enter your details and start your journey and explore the opportunities with us. If you do have a job seeker's account, <span className="cursor-pointer text-blue-500 underline font-medium" onClick={() => navigate("/sign/login")}>login</span> to your existing account instead.</p>
             </div> 
             <div>
             <img src={registerImg} className="h-80 brightness-90 hidden sm:block object-contain" />

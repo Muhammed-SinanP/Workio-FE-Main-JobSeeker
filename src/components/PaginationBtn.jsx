@@ -10,11 +10,11 @@ const PaginationBtn = ({ handlePageClick,pageNo,pageCount}) => {
       <ReactPaginate
           containerClassName="my-10 flex gap-2 items-center justify-center "
 
-          pageLinkClassName="w-8 h-8 bg-white dark:bg-gray-300 dark:hover:bg-gray-200 flex justify-center items-center border-0.5 border-borderColor rounded-md shadow-sm"
+          pageLinkClassName="w-8 font-medium h-8 bg-white dark:bg-gray-300 dark:hover:bg-gray-200 flex justify-center items-center border-0.5 border-borderColor rounded-md shadow-sm"
 
-      previousLinkClassName="w-8 h-8 bg-white dark:bg-gray-300 dark:hover:bg-gray-200 flex justify-center items-center border-0.5  border-borderColor rounded-md shadow-sm"
+          previousLinkClassName="w-8 h-8 bg-white dark:bg-gray-300 dark:hover:bg-gray-200 flex justify-center items-center border-0.5  border-borderColor rounded-md shadow-sm"
 
-      nextLinkClassName="w-8 h-8 bg-white dark:bg-gray-300 dark:hover:bg-gray-200 flex justify-center items-center border-0.5  border-borderColor rounded-md shadow-sm"
+          nextLinkClassName="w-8 h-8 bg-white dark:bg-gray-300 dark:hover:bg-gray-200 flex justify-center items-center border-0.5 border-borderColor rounded-md shadow-sm"
 
           activeLinkClassName="!bg-brandColor scale-110 text-white "
 

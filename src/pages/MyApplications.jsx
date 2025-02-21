@@ -106,7 +106,7 @@ const MyApplications = () => {
     });
   }
   return (
-    <div className="outerDiv relative min-h-screen pb-32">
+    <div className="outerDiv min-h-screen ">
       <div className="innerDiv pb-0 text-sm capitalize tracking-wide dark:text-darkColor-text">
 
 
@@ -181,15 +181,21 @@ const MyApplications = () => {
               <td className="col-span-4 text-center" ><div className="h-6 w-4/5 mx-auto skeleton"></div></td>
               <td className="col-span-4 text-center" ><div className="h-6 w-4/5 mx-auto skeleton"></div></td>
             </tr>) :
-              filteredApplications && filteredApplications.length > 0 && filteredApplications.map((application, index) =>
+              filteredApplications && filteredApplications.length > 0 ? filteredApplications.map((application, index) =>
 
                 <tr className={`capitalize ${application.status === "approved" && "text-brandColor bg-white dark:bg-gray-100"} ${application.status === "in-review" && "text-yellow-500  bg-white dark:bg-gray-100"} ${application.status === "rejected" && "text-red-500 bg-white dark:bg-gray-100"} font-medium col-span-12 grid grid-cols-12 items-center w-full gap-2 border-b border-darkColor-input  py-2`}>
                   <td className="col-span-4 text-center" >{application?.status}</td>
                   <td className="col-span-4 text-center" >{application?.job?.title}</td>
                   <td className="col-span-4 text-center" >{application?.job?.employer?.name}</td>
                 </tr>
+                
+               
 
-              )
+              ):
+              <div className="text-center mt-4">
+                No data available to display. 
+              </div>
+
 
             }
 
@@ -206,7 +212,7 @@ const MyApplications = () => {
 
 
 
-      <div className=" w-full flex justify-center absolute bottom-8">
+    <div className=" w-full flex justify-center ">
         <PaginationBtn handlePageClick={handlePageClick} pageNo={pageNo} pageCount={pageCount} />
       </div>
 

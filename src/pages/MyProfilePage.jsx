@@ -11,6 +11,7 @@ import { useConfirm } from "material-ui-confirm";
 import { axiosInstance } from "../config/axiosInstance";
 import ProfileForm from "../components/forms/ProfileForm";
 import PasswordChangeForm from "../components/forms/PasswordChangeForm";
+import SkeletonProfilePage from "../components/skeletons/SkeletonProfilePage";
 
 
 const MyProfilePage = () => {
@@ -86,9 +87,9 @@ const MyProfilePage = () => {
     <div className="outerDiv">
       <div className="innerDiv min-h-screen ">
         {isLoading ? (
-          <div>Loading...</div>
+         <SkeletonProfilePage/>
         ) : (
-          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 pb-32">
             <div className="flex justify-between gap-2 rounded-md bg-white p-6 shadow-md dark:bg-darkColor-text">
               <div className="flex flex-col gap-2 pb-2  ">
                 <div className="text-2xl lg:text-3xl font-bold text-brandColor ">
@@ -105,11 +106,11 @@ const MyProfilePage = () => {
             <div className="rounded-md bg-white p-4 shadow-md dark:text-darkColor-text  dark:bg-darkColor">
               <div className="rounded-md border p-2 sm:p-4 relative">
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-end ">
-                    <div className="bg-homeColor-light rounded-md p-0.5 px-1">
-                      <PersonIcon className="text-brandColor-dark dark:text-darkColor-text" />
+                  <div className="flex items-end mt-2">
+                    <div className="bg-homeColor-light rounded-md  px-1">
+                      <PersonIcon className=" dark:text-darkColor-text" />
                     </div>
-                    <div className="text-lg font-semibold">Personal info</div>
+                    <div className="text-lg font-semibold -mb-0.5">Personal info</div>
                   </div>
                   {/* <div className="mb-4 text-xs text-gray-600 dark:text-darkColor-text">
                     Your name is visible to employers and admin
@@ -121,13 +122,13 @@ const MyProfilePage = () => {
 
                   <div className="">
                     {/* <PasswordChangeForm /> */}
-                      <span onClick={()=>navigate("/changePassword")} className="font-semibold text-sm cursor-pointer hover:underline">Change password</span> 
+                      <span onClick={()=>navigate("/changePassword")} className="font-semibold  cursor-pointer hover:underline active:underline">Change password</span> 
                   </div>
                 </div>
 
-                <div className="mt-20 text-end">
-                  <span
-                    className="cursor-pointer text-xs font-medium text-red-800 hover:text-red-700 md:text-sm"
+                <div className="mt-20  text-end">
+                  <span 
+                      className="cursor-pointer p-2 pr-0 text-xs font-medium text-red-800 hover:text-red-700 md:text-sm"
                     onClick={handleDeleteAccount}
                   >
                     Delete account
@@ -140,7 +141,7 @@ const MyProfilePage = () => {
               <div><button onClick={handleLogout} className="btn btn-sm  bg-slate-300 hover:bg-slate-400 dark:bg-slate-400 dark:hover:bg-slate-300 text-brandColor-text border-none  tracking-wide"><LogoutIcon className="p-1 pl-0 -mr-2.5"/>Logout</button>
               </div>
 
-            <div className="h-60 "></div>
+            
           </div>
         )}
       </div>

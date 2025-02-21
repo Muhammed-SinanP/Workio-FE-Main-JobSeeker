@@ -8,9 +8,11 @@ import SkeletonJobCardSm from "../components/skeletons/SkeletonJobCardSm";
 import PaginationBtn from "../components/PaginationBtn";
 
 const JobsPage = () => {
+  const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate();
   const [showDiv, setShowDiv] = useState(["filter", "sort"])
   const [filteredJobs, setFilteredJobs] = useState([])
+  const [savedJobs,setSavedJobs] = useState([])
   const [jobsPerPage, setJobsPerPage] = useState(8)
   const [pageNo, setPageNo] = useState(0)
   const [pageCount, setpageCount] = useState(0)
@@ -25,15 +27,21 @@ const JobsPage = () => {
     sortOrder: "asc"
   })
   const [data, error, isLoading] = useFetch(`/job/allOpen?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`);
+  const [savedData, savedError, savedLoading] = useFetch("/user/saveList", [refresh]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  function refreshPage() {
+    setRefresh(!refresh)
+  }
+
   useEffect(() => {
     setFilteredJobs(data?.jobs)
+    setSavedJobs(savedData?.savedJobs)
     setpageCount(data?.totalPages)
-  }, [data])
+  }, [data,savedData])
 
 
   function handleFitlerChange(e) {
@@ -78,7 +86,7 @@ const JobsPage = () => {
   }
 
   function handlePageClick(e) {
-    console.log(e.selected)
+
     setPageNo(e.selected)
     window.scrollTo({
       top: 0,
@@ -96,7 +104,7 @@ const JobsPage = () => {
   }
 
   return (
-    <div className="outerDiv min-h-screen relative pb-32">
+    <div className="outerDiv min-h-screen">
       <div className="innerDiv text-sm capitalize tracking-wide dark:text-darkColor-text pb-0">
 
 
@@ -193,49 +201,52 @@ const JobsPage = () => {
             <option value={12}>12</option>
             <option value={24}>24</option>
           </select>
-        </div> 
-        
+        </div>
+
 
 
       </div>
 
       <div className="innerDiv pt-0">
-        {isLoading ? (
-          <div className=" grid min-h-44 grid-cols-12 gap-4 px-10   mt-4">
-            {Array.from({ length: jobsPerPage }, (_, i) =>
-
-              <div key={i} className=" relative  col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 ">
-
-                <SkeletonJobCardSm />
-              </div>
 
 
-            )}
+        <div className=" grid min-h-44 grid-cols-12 gap-4 px-10  mt-4">
+          {isLoading ?
+            (
+              Array.from({ length: jobsPerPage }, (_, i) =>
 
-          </div>
-        ) : (
-          <div>
-            <div className=" grid min-h-44 grid-cols-12 gap-4 px-10  mt-4">
+                <div key={i} className=" relative  col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 ">
 
-              {filteredJobs && filteredJobs.length > 0 ? (
+                  <SkeletonJobCardSm />
+                </div>)
+            )
+            :
+            (
+              filteredJobs && filteredJobs.length > 0 ? (
                 filteredJobs.map((element, index) => (
                   <div key={index} className="bg-white dark:bg-darkColor-input  col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 shadow-sm hover:shadow-md border border-borderColor rounded-md hover:border-brandColor-dark dark:hover:border-gray-200">
 
                     <JobCardSm
-                      element={element}
+                      job={element}
                       cardClick={cardClick}
+                      savedJobs={savedJobs}
+                      refreshPage={refreshPage}
                     /></div>
 
                 ))
-              ) : (
-                <div className="col-span-12 text-center ">No jobs found, try another filtering</div>
-              )}
-            </div>
-          </div>
-        )}
+              )
+                : (
+                  <div className="col-span-12 text-center tracking-wide">No jobs found, try another filtering.</div>
+                )
+
+            )
+          }
+        </div>
+
+
       </div>
 
-      <div className=" w-full flex justify-center absolute bottom-8">
+      <div className="w-full flex justify-center">
         <PaginationBtn handlePageClick={handlePageClick} pageNo={pageNo} pageCount={pageCount} />
       </div>
     </div>

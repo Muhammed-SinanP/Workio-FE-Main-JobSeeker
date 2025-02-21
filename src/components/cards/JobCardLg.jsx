@@ -13,12 +13,19 @@ import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import useFetch from "../../hooks/useFetch";
+import SkeletonJobCardLg from "../skeletons/SkeletonJobCardLg";
 
-const JobCardLg = ({ job }) => {
+const JobCardLg = ({ jobId,handleSave,refresh }) => {
   const userLoggedIn = useSelector((state) => state.user.userLoggedIn);
   const [smallHead, setSmallHead] = useState(false);
   const navigate = useNavigate();
-
+  const [job, jobError, jobLoading] = useFetch(`/job/${jobId}`);
+  const [savedData, error, isSavedLoading] = useFetch("/user/saveList", [refresh])
+  const [savedJobs, setSavedJobs] = useState([])
+  useEffect(()=>{
+   savedData && setSavedJobs(savedData?.savedJobs)
+  },[job,savedData])
   useEffect(() => {
     const detailsSection = document.querySelectorAll(".jobDetails");
     function handleScroll(event) {
@@ -32,7 +39,7 @@ const JobCardLg = ({ job }) => {
         console.log("scrolled");
       }
     }
-    console.log(job?.requirements)
+    
 
     detailsSection.forEach((section) => {
       section.addEventListener("scroll", handleScroll);
@@ -52,6 +59,8 @@ const JobCardLg = ({ job }) => {
 
     return `${date < 10 ? "0" + date : date}-${month < 10 ? "0" + month : month}-${year}`;
   }
+
+ 
 
   async function sendApplication(jobId) {
     if (userLoggedIn) {
@@ -86,7 +95,10 @@ const JobCardLg = ({ job }) => {
     }
   }
   return (
-    <div className="flex h-full flex-col rounded-md border border-brandColor-dark  dark:border-gray-200 ">
+    <>
+   {jobLoading?
+      <SkeletonJobCardLg />
+    :<div className="flex h-full flex-col rounded-md border border-brandColor-dark  dark:border-gray-200 ">
       <div className="flex flex-col gap-2 rounded-t-md border-b dark:text-darkColor-text border-brandColor-dark bg-white p-4 dark:bg-darkColor-input dark:border-gray-200">
         <div className="flex items-center justify-between ">
           <div className="text-2xl font-semibold tracking-wide capitalize text-brandColor-dark dark:text-brandColor">{job?.title}</div>
@@ -99,9 +111,11 @@ const JobCardLg = ({ job }) => {
                 Apply
               </button>
             )}
-            <button className="flex items-center text-brandColor-dark dark:text-brandColor">
-              <BookmarkBorderIcon  fontSize="large"/>
-            </button>
+             {!isSavedLoading ? <button onClick={(e) => handleSave(e, job)} title={savedJobs?.some(savedJobs => savedJobs?.job._id === job?._id) ? "Unsave" : "Save"} className="flex justify-center h-8 w-8 items-center text-brandColor-dark dark:text-brandColor">
+              {savedJobs?.some(savedJobs => savedJobs?.job._id === job?._id) ? <BookmarkIcon fontSize="large"/>:<BookmarkBorderIcon fontSize="large" /> } 
+            </button>:
+                <div className="flex h-8 w-8 justify-center  items-center"><span className="loading loading-spinner loading-md"></span></div>
+            }
           </div>
         </div>
         <div className="flex items-center gap-2 capitalize">
@@ -154,7 +168,7 @@ const JobCardLg = ({ job }) => {
           <div className="mt-1 pl-6 font-paraFont text-sm">
             {job?.requirements?.map((element, index) => {
               if(element.length>0){
-                return <li>{element}.</li>
+                return <li key={index}>{element}.</li>
               }
              
             }
@@ -233,6 +247,8 @@ const JobCardLg = ({ job }) => {
         </div>
       </div>
     </div>
+}
+    </>
   );
 };
 

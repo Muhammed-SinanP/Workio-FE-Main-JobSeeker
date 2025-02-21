@@ -5,7 +5,7 @@ const SkeletonJobCardLg = () => {
 
         <div className='w-full max-h-full overflow-hidden flex-col rounded-md  skeleton'>
             <div className='flex flex-col gap-2.5 p-4 pt-5 skeleton dark:bg-darkColor-input  rounded-t-md rounded-b-none'>
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-between gap-2 items-center'>
                     <div className='h-10 w-80 skeleton-custom-color '></div>
                     <div className='h-8 w-6  skeleton-custom-color'></div>
                     </div>

@@ -14,6 +14,7 @@ import ErrorPage from "../pages/ErrorPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
+import SaveListPage from "../pages/SaveListPage";
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +56,10 @@ export const router = createBrowserRouter([
             path: "changePassword",
             element: <ChangePasswordPage />
           },
-
+             {
+              path:"mySaveList",
+              element:<SaveListPage/>
+             },
           {
             path: "myApplications",
             element: <MyApplications />,

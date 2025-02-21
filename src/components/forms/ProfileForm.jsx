@@ -67,9 +67,9 @@ const ProfileForm = ({ userProfile }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="my-4 flex flex-col gap-4 text-sm"
+      className="my-4 flex flex-col gap-4 "
     >
-      <div className=" flex flex-col gap-0.5">
+      <div className=" flex flex-col ">
 
         <label
           className="font-medium"
@@ -95,7 +95,7 @@ const ProfileForm = ({ userProfile }) => {
         
         
       </div>
-      <div className=" flex flex-col gap-1">
+      <div className=" flex flex-col ">
         <label
           className="col-span-3 font-medium md:col-span-3"
           htmlFor="userEmail"
@@ -117,7 +117,7 @@ const ProfileForm = ({ userProfile }) => {
         />
        
       </div>
-      <div className=" flex flex-col gap-1">
+      <div className=" flex flex-col ">
         <label
           className="font-medium "
           htmlFor="userResume"
@@ -127,7 +127,7 @@ const ProfileForm = ({ userProfile }) => {
         <input
         
           id="userResume"
-          className={`inputStyle   truncate  dark:bg-darkColor ${
+          className={`inputStyle  truncate  dark:bg-darkColor ${
             edit ? "" : "cursor-pointer border-none underline text-blue-500"
           }`}
           type="text"
@@ -142,9 +142,9 @@ const ProfileForm = ({ userProfile }) => {
         <div className="absolute top-4 right-4 font-semibold tracking-wide ">
             {edit?<input
               type="submit"
-              value="Update profile"
-              className="  bg-brandColor  text-white btn btn-xs sm:btn-sm border-none hover:bg-brandColor-dark"
-            />: <button className=" text-blue-500 flex items-end" onClick={handleEdit}><EditIcon  className="md:mb-0.5 p-0.5 pb-0 pr-0" fontSize="small"/>Edit profile</button>}
+              value="Update"
+              className="  bg-brandColor  text-white btn btn-sm  border-none hover:bg-brandColor-dark"
+            />: <button className=" text-blue-500 flex items-end" onClick={handleEdit}><EditIcon  className="mb-0.5 p-0.5 pb-0 pr-0" fontSize="small"/>Edit<span className="hidden sm:block ml-1">profile</span></button>}
           </div>
         
       </div>

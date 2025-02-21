@@ -47,6 +47,7 @@ const PasswordChangeForm = () => {
       if (response.status === 200) {
         console.log("password change success fe");
         toast.success("Password Updated Successfully")
+        navigate("/")
       }
       
     } catch (err) {
@@ -109,7 +110,7 @@ const PasswordChangeForm = () => {
           </div>
           <input
             type="submit"
-            value="Submit"
+            value="Update"
           className="btn btn-wide text-base  
             border-none bg-brandColor text-white hover:bg-brandColor-dark"
             disabled={!formValid}

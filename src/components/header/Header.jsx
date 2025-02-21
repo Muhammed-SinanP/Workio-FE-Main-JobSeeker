@@ -112,7 +112,7 @@ const Header = () => {
     >
       <div className="pt-2.5 flex items-end justify-between rounded-b-xl bg-white dark:bg-darkColor-input px-2 sm:px-4">
         <div className="flex items-end justify-start gap-2">
-          <div className="sm:hidden mb-2.5">
+          <div className="sm:hidden scale-125 mb-2.5">
             <MenuIcon
               
               onClick={() => setSideBarOpen(true)}

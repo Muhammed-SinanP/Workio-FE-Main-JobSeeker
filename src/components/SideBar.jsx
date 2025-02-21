@@ -55,7 +55,7 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
       
     >
       <div className="flex h-full w-full flex-col ">
-        <div className="bg-gray-300 flex justify-between items-center font-medium  py-2 px-2 text-xl  dark:bg-darkColor-input dark:text-darkColor-text">
+        <div className="bg-gray-300 flex justify-between items-center font-medium  py-2.5 px-2 text-xl  dark:bg-darkColor-text ">
           <p>Pages</p> <CloseIcon className="cursor-pointer" onClick={()=>setSideBarOpen(false)}/>
         </div>
         <div className="h-4/5  flex flex-col justify-between gap-6 overflow-auto scrollbar-hide">
@@ -68,9 +68,9 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
                   key={index}
                   to={element.path}
                   className={({ isActive }) =>
-                    `px-4 py-1 tracking-wide text-lg ${element.title == "Home" ? "font-medium" : "font-normal"
-                    } mx-2 flex items-center gap-2 rounded-md ${isActive
-                      ? "bg-brandColor-dark text-white dark:bg-brandColor"
+                    `px-4 py-1.5 tracking-wide text-lg ${element.title == "Home" ? "font-medium" : "font-normal"
+                    } mx-2 flex items-center gap-1.5 rounded-md ${isActive
+                      ? "bg-brandColor text-white "
                       : "bg-gray-300  hover:bg-gray-300 dark:bg-darkColor-text dark:hover:bg-gray-400"
                     }`
                   }
@@ -87,8 +87,8 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
                   key={index}
                   to={element.path}
                   className={({ isActive }) =>
-                    `mx-2 flex items-center gap-2 rounded-md px-4 py-1 text-lg   tracking-wide ${isActive
-                      ? "bg-brandColor-dark text-white dark:bg-brandColor"
+                    `mx-2 flex items-center gap-1.5 rounded-md px-4 py-1.5 text-lg tracking-wide ${isActive
+                      ? "bg-brandColor text-white "
                       : "bg-gray-300  hover:bg-gray-300 dark:bg-darkColor-text dark:hover:bg-gray-400"
                     }`
                   }
@@ -99,10 +99,9 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
 
 
           </div>
-          <div className="flex flex-col items-center gap-5 mb-4">
+          <div className="flex justify-center  mb-4">
             <DarkModeBtn text={true}/>
-            {userLoggedIn && <button onClick={handleLogout} className="btn  btn-sm"><LogoutIcon fontSize="small" />Logout</button>
-            }</div>
+          </div>
         </div>
       </div>
     </div>

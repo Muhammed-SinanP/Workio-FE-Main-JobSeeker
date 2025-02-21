@@ -9,36 +9,100 @@ import { userSuggestions } from "../components/Data";
 import JobCardLg from "../components/cards/JobCardLg";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import SkeletonJobCardLg from "../components/skeletons/SkeletonJobCardLg";
+import useFetch from "../hooks/useFetch";
+import { axiosInstance } from "../config/axiosInstance";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [refresh, setRefresh] = useState(false)
+  const [refreshCardLg,setRefreshCardLg] = useState(false)
+  const [savedData, error, loading] = useFetch("/user/saveList",[refresh])
+  const [savedJobs,setSavedJobs] = useState([])
   const [bottomCard, setBottomCard] = useState(false);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const timeoutRef = useRef(null)
 
+  
+  useEffect(()=>{
+   savedData && setSavedJobs(savedData?.savedJobs)
+  },[savedData])
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
+  function refreshPage(job) {
+    if(selectedJob === job){
+      setRefresh(!refresh)
+      setRefreshCardLg(!refreshCardLg)
+    }
+    else{
+      setRefresh(!refresh)
+      
+    }
+    
+    // // setSelectedJob(null)
+    // if (timeoutRef.current) {
+    //   clearTimeout(timeoutRef.current)
+    // }
+
+    // timeoutRef.current = setTimeout(() => {
+    //   setSelectedJob(job)
+    //   timeoutRef.current = null
+    // }, 1)
+    
+    
+  }
 
   function cardClick(job) {
-    setSelectedJob(null)
-    if(timeoutRef.current){
-      clearTimeout(timeoutRef.current)
-    }
-
-    timeoutRef.current = setTimeout(()=>{
-      setSelectedJob(job)
-      timeoutRef.current = null
-    },200)
-
+    setRefreshCardLg(!refreshCardLg)
+    setSelectedJob(job)
     setBottomCard(true);
   }
 
   function closeBottomCard() {
     setBottomCard(false);
+
+  }
+
+  async function handleSave(e, job) {
+    toast.dismiss()
+    e.stopPropagation()
+    const toastLoading = toast.loading('Loading...');
+    if (timeoutRef.current) {
+
+      clearTimeout(timeoutRef.current)
+    }
+    const jobId = job?._id;
+    try {
+      const response = await axiosInstance({
+        url: "/job/handleSave",
+        method: "POST",
+        data: { jobId }
+      })
+      if (response.status === 201) {
+        setRefresh(!refresh)
+        setRefreshCardLg(!refreshCardLg)
+        timeoutRef.current = setTimeout(() => {
+          toast.dismiss(toastLoading);
+          toast.success("Saved")
+        }, 1000);
+
+      } else if (response.status === 200) {
+        
+        setRefresh(!refresh)
+        setRefreshCardLg(!refreshCardLg)
+        timeoutRef.current = setTimeout(() => {
+          toast.dismiss(toastLoading);
+          toast.success("Unsaved")
+        }, 1000);
+      }
+    } catch (err) {
+      console.log(err);
+
+    }
 
   }
 
@@ -74,11 +138,13 @@ const HomePage = () => {
               {filteredJobs &&
                 filteredJobs.length > 0 &&
                 filteredJobs.map((element, index) => (
-                  <div className={`border duration-800 rounded-md bg-white dark:bg-darkColor-input shadow-sm ${selectedJob === element ? "sm:scale-95 scale-90 shadow-sm border md:border-brandColor-dark shadow-brandColor-dark dark:shadow-darkColor-text dark:border-gray-200" : "scale-90 border-borderColor"} hover:border-brandColor-dark dark:hover:border-gray-200 `}>
+                  <div key={index} className={`border duration-800 rounded-md bg-white dark:bg-darkColor-input shadow-sm ${selectedJob === element ? "sm:scale-95 scale-90 shadow-sm border md:border-brandColor-dark shadow-brandColor-dark dark:shadow-darkColor-text dark:border-gray-200" : "scale-90 border-borderColor"} hover:border-brandColor-dark dark:hover:border-gray-200 `}>
                     <JobCardSm
-                      key={index}
-                      element={element}
+                      
+                      job={element}
                       cardClick={cardClick}
+                      savedJobs={savedJobs}
+                      refreshPage={refreshPage}
                     /></div>
                 ))}
               
@@ -88,7 +154,7 @@ const HomePage = () => {
             </div>
             <div className="2xl: hidden h-5/6 w-2/3 px-2 md:block">
               
-              {selectedJob ? <JobCardLg job={selectedJob}/>: <SkeletonJobCardLg/>}
+              {selectedJob ? <JobCardLg jobId={selectedJob?._id} refresh={refreshCardLg} handleSave={handleSave}/> : <div className="w-full h-full flex justify-center items-center"><span className="loading bg-brandColor-dark  loading-bars w-32 h-32"></span></div>}
             </div>
           </div>
         )}
@@ -114,13 +180,13 @@ const HomePage = () => {
             <CloseIcon />
           </div>
           <div className="h-full px-8 pb-6 pt-10">
-            {selectedJob&&<JobCardLg job={selectedJob}/>}
+            {selectedJob && <JobCardLg jobId={selectedJob?._id} refresh={refreshCardLg} handleSave={handleSave} />}
           </div>
         </div>
       </div>
 
-      <div className="outerDiv rounded-t-xl bg-brandColor-lightest -mt-2">
-        <div className="innerDiv rounded-t-xl pb-10 pt-4 dark:bg-darkColor-text ">
+      <div className="outerDiv dark:bg-darkColor-text  bg-brandColor-lightest ">
+        <div className="innerDiv pb-10 pt-4  ">
         <div className="p-4 px-8 text-center text-xl font-bold tracking-wide text-brandColor md:px-10 lg:text-2xl xl:px-20 dark:text-darkColor">
           Find the perfect job for <span className="uppercase text-brandColor-dark dark:text-brandColor">you</span>
         </div>
