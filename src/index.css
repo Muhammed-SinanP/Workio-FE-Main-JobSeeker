@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Noto+Sans&display=swap");
 
 @tailwind base;
@@ -5,6 +6,7 @@
 @tailwind utilities;
 html,
 body {
+  scrollbar-width: thin;
   color: #202124;
 }
 @layer components {
@@ -67,5 +69,8 @@ body {
   .sign-btn-submit{
     @apply w-full border-none bg-brand text-base text-white hover:bg-brand-dark
   }
-  
+  .custom-scrollbar{
+    @apply scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-brand-dark scrollbar-track-transparent
+  }
 }
+

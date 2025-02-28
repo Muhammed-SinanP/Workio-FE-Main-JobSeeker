@@ -6,6 +6,7 @@ const ProtectedRoutes = ({ signInRequired }) => {
   const { userLoggedIn, initialized } = useSelector((state) => state.user);
 
   if (initialized) {
+    
     if (signInRequired && !userLoggedIn) {
       return <Navigate to="/auth/login" replace />;
     }

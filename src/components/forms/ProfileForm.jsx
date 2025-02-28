@@ -38,6 +38,8 @@ const ProfileForm = ({ userProfile }) => {
   }
 
   async function handleSubmit(e) {
+    console.log("aa");
+    
     e.preventDefault();
     try {
       const response = await axiosInstance({
@@ -99,27 +101,28 @@ const ProfileForm = ({ userProfile }) => {
             readOnly={edit ? false : true}
           />
         </div>
+        <div className="absolute right-4 top-4 font-semibold tracking-wide">
+          {edit ? (
+            <input
+              type="submit"
+              value="Update"
+              className="btn btn-sm border-none bg-brand text-white hover:bg-brand-dark"
+            />
+          ) : (
+            <button
+              className="flex items-center text-blue-500"
+              onClick={handleEdit}
+            >
+              <EditIcon className="" fontSize="small" />
+              <span className="-mb-0.5 flex">
+                Edit<span className="ml-1 hidden sm:block">profile</span>
+              </span>
+            </button>
+          )}
+        </div>
       </form>
 
-      <div className="absolute right-4 top-4 font-semibold tracking-wide">
-        {edit ? (
-          <input
-            type="submit"
-            value="Update"
-            className="btn btn-sm border-none bg-brand text-white hover:bg-brand-dark"
-          />
-        ) : (
-          <button
-            className="flex items-center text-blue-500"
-            onClick={handleEdit}
-          >
-            <EditIcon className="" fontSize="small" />
-            <span className="-mb-0.5 flex">
-              Edit<span className="ml-1 hidden sm:block">profile</span>
-            </span>
-          </button>
-        )}
-      </div>
+      
     </>
   );
 };

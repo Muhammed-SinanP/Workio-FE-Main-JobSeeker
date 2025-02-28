@@ -68,16 +68,7 @@ const HomePage = () => {
 
         {filteredJobs && filteredJobs.length > 0 && (
           <div className="inner-div flex h-screen justify-center p-4 pt-0">
-            <div className="flex h-full w-4/5 flex-col gap-0 overflow-auto pb-2 scrollbar-hide sm:w-3/5 md:h-5/6 md:w-1/3">
-              <div className="flex justify-center pb-1 text-xs tracking-wide text-gray-600 dark:text-dark-text">
-                <span className="flex">
-                  Scroll
-                  <span className="mx-1 hidden md:block">this side</span>
-                  <span className="mx-1 md:hidden">here</span>
-                  to see all the results.
-                </span>
-              </div>
-
+            <div className="flex h-full w-4/5 flex-col gap-0 overflow-y-scroll pb-2  sm:w-3/5 md:h-5/6 md:w-1/3 custom-scrollbar">
               {filteredJobs &&
                 filteredJobs.length > 0 &&
                 filteredJobs.map((element, index) => (
@@ -93,10 +84,6 @@ const HomePage = () => {
                     />
                   </div>
                 ))}
-
-              <div className="mt-2 text-center text-xs tracking-wide text-gray-600 dark:text-dark-text">
-                You have reached the end of the results.
-              </div>
             </div>
             <div className="2xl: hidden h-5/6 w-2/3 px-2 md:block">
               {selectedJob &&

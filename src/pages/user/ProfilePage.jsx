@@ -118,7 +118,7 @@ const ProfilePage = () => {
                     </div>
                   </div>
                   <div className="w-2/3 text-xxs text-gray-600 sm:text-xs dark:text-dark-text">
-                    Your name is visible to employers and admin
+                    Your name is visible to other users
                   </div>
                 </div>
 

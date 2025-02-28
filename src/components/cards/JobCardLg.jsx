@@ -208,7 +208,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
           </div>
           <div
             ref={detailsRef}
-            className="h-full overflow-auto rounded-b-md bg-white pb-1 shadow-inner shadow-gray-400 dark:bg-dark-text dark:shadow-black"
+            className="h-full overflow-y-scroll custom-scrollbar rounded-b-md bg-white pb-1 shadow-inner shadow-gray-400 dark:bg-dark-text dark:shadow-black"
           >
             <div className="mt-2 px-4 text-sm font-medium italic">
               Greetings from {job?.employer?.name} !!

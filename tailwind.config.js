@@ -22,9 +22,9 @@ export default {
         "custom-border-color": {
           DEFAULT: "#9CA3AF",
         },
-        placeholder:{
-          DEFAULT:"#9CA3AF"
-        }
+        placeholder: {
+          DEFAULT: "#9CA3AF",
+        },
       },
       backgroundImage: {
         card: "url('/backgroundCard.jpg')",
@@ -41,7 +41,11 @@ export default {
       },
     },
   },
-  plugins: [require("daisyui"), require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("daisyui"),
+    require("tailwind-scrollbar-hide"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
   daisyui: {
     themes: ["light", "dark"],
   },

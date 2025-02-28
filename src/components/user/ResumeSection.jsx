@@ -112,9 +112,9 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
             )}
           </p>
         </div>
-        {showUploadForm && (
+        
           <form
-            className="flex flex-col items-start justify-center gap-1.5"
+            className={`flex flex-col items-start justify-center gap-1.5 ${showUploadForm?"visible":"invisible"}`}
             onSubmit={handleSubmit(handleUploadResume)}
           >
             <input
@@ -140,7 +140,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
               {resume ? "Update" : "Upload"}
             </button>
           </form>
-        )}
+        
       </div>
     </>
   );

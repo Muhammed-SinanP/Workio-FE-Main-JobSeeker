@@ -17,9 +17,6 @@ const MainLayout = () => {
       const response = await axiosInstance({
         method: "GET",
         url: "/auth/checkUser",
-        params: {
-          userRole: "job_seeker",
-        },
       });
       if (response.status === 200) {
         dispatch(saveUserData());
