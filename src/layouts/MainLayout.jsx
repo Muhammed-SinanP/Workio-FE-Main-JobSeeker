@@ -40,8 +40,8 @@ const MainLayout = () => {
   }, []);
   return (
     <div className="flex min-h-screen flex-col bg-brand-extralight dark:bg-dark-light">
-      {location.pathname == "/sign/login" ||
-      location.pathname == "/sign/register" ? (
+      {location.pathname == "/auth/login" ||
+      location.pathname == "/auth/register" ? (
         <SignHeader />
       ) : (
         <Header />
@@ -50,8 +50,8 @@ const MainLayout = () => {
       <div className="relative flex grow flex-col">
         <Outlet />
       </div>
-      {location.pathname == "/sign/login" ||
-      location.pathname == "/sign/register" ? (
+      {location.pathname == "/auth/login" ||
+      location.pathname == "/auth/register" ? (
         <SignFooter />
       ) : (
         <Footer />
