@@ -6,13 +6,13 @@ import JobCardLg from "../../components/cards/JobCardLg";
 import useFetch from "../../hooks/useFetch";
 import ArticleSuggestions from "../../components/ArticleSuggestions";
 
-
 const HomePage = () => {
-
   const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
   const [refreshCardLg, setRefreshCardLg] = useState(false);
 
-  const [savedData, error, loading] = useFetch("/user/mySavedJobs", [refreshSavedJobs]);
+  const [savedData, error, loading] = useFetch("/user/mySavedJobs", [
+    refreshSavedJobs,
+  ]);
   const [savedJobs, setSavedJobs] = useState([]);
 
   const [bottomCard, setBottomCard] = useState(false);
@@ -47,13 +47,13 @@ const HomePage = () => {
 
   useEffect(() => {
     if (bottomCard) {
-      document.body.style.overflow = "hidden"; 
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     };
   }, [bottomCard]);
 
@@ -61,8 +61,9 @@ const HomePage = () => {
     <div className="outer-div">
       <div className="dark:to-bg-dark-light bg-gradient-to-t from-green-50 to-brand-light dark:from-dark-text">
         <div
-          className={`inner-div -mt-4 flex flex-col items-center justify-center gap-4 py-10 transition-all duration-500 ease-in-out ${filteredJobs && filteredJobs.length > 0 ? "md:py-10" : "md:py-32"
-            }`}
+          className={`inner-div -mt-4 flex flex-col items-center justify-center gap-4 py-10 transition-all duration-500 ease-in-out ${
+            filteredJobs && filteredJobs.length > 0 ? "md:py-10" : "md:py-32"
+          }`}
         >
           <JobSearchForm
             filteredJobs={filteredJobs}
@@ -80,7 +81,7 @@ const HomePage = () => {
 
         {filteredJobs && filteredJobs.length > 0 && (
           <div className="inner-div flex h-screen justify-center p-4 pt-0">
-            <div className="flex h-full w-4/5 flex-col gap-0 overflow-y-scroll pb-2  sm:w-3/5 md:h-5/6 md:w-1/3 custom-scrollbar">
+            <div className="custom-scrollbar flex h-full w-4/5 flex-col gap-0 overflow-y-scroll pb-2 sm:w-3/5 md:h-5/6 md:w-1/3">
               {filteredJobs &&
                 filteredJobs.length > 0 &&
                 filteredJobs.map((element, index) => (
@@ -98,12 +99,13 @@ const HomePage = () => {
                 ))}
             </div>
             <div className="2xl: hidden h-5/6 w-2/3 px-2 md:block">
-              {selectedJob &&
+              {selectedJob && (
                 <JobCardLg
                   jobId={selectedJob?._id}
                   refreshPage={refreshPage}
                   refreshCardLg={refreshCardLg}
-                />}
+                />
+              )}
             </div>
           </div>
         )}
@@ -140,7 +142,7 @@ const HomePage = () => {
       </div>
 
       <div className="outer-div bg-brand-extralight dark:bg-dark-text">
-       <ArticleSuggestions/>
+        <ArticleSuggestions />
       </div>
     </div>
   );

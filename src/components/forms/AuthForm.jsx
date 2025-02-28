@@ -39,8 +39,9 @@ const AuthForm = ({ isRegister }) => {
 
   function googleSignIn() {
     try {
-      window.location.href = `${import.meta.env.VITE_BACKEND_URL
-        }/api/auth/googleSign/job_seeker`;
+      window.location.href = `${
+        import.meta.env.VITE_BACKEND_URL
+      }/api/auth/googleSign/job_seeker`;
     } catch (err) {
       console.log(err);
       navigate("/");
@@ -48,8 +49,7 @@ const AuthForm = ({ isRegister }) => {
   }
 
   return (
-    <div className="mx-auto w-80 rounded-lg bg-white px-6 md:px-8 py-4 tracking-wide shadow-md sm:mx-1  dark:bg-dark">
-
+    <div className="mx-auto w-80 rounded-lg bg-white px-6 py-4 tracking-wide shadow-md sm:mx-1 md:px-8 dark:bg-dark">
       <div className="mb-4 text-center text-xl font-semibold sm:text-2xl dark:text-dark-text">
         {isRegister ? "Register" : "Login"}
       </div>
@@ -57,7 +57,9 @@ const AuthForm = ({ isRegister }) => {
       <div className="text-center text-sm font-medium dark:text-dark-text">
         {isRegister ? "Already have an account?" : "New to Workio?"}
         <span
-          onClick={() => navigate(`${isRegister ? "/auth/login" : "/auth/register"}`)}
+          onClick={() =>
+            navigate(`${isRegister ? "/auth/login" : "/auth/register"}`)
+          }
           className="ml-1 cursor-pointer font-semibold tracking-wide text-blue-500 hover:underline"
         >
           {isRegister ? "Login" : "Register"}

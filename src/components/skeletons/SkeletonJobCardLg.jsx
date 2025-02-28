@@ -46,14 +46,14 @@ const SkeletonJobCardLg = () => {
           <div className="skeleton-custom-color h-6 w-6"></div>
           <div>
             <div className="skeleton-custom-color h-6 w-36"></div>
-            <div className="skeleton-custom-color mt-2 h-4 w-64 lg:w-96 "></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-64 lg:w-96"></div>
           </div>
         </div>
         <div className="my-4 flex gap-2">
           <div className="skeleton-custom-color h-6 w-6"></div>
           <div>
             <div className="skeleton-custom-color h-6 w-36"></div>
-            <div className="skeleton-custom-color mt-2 h-4 w-32 "></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
             <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
             <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
           </div>

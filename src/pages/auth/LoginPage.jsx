@@ -10,7 +10,7 @@ const LoginPage = () => {
   }, []);
   return (
     <div className="outer-div -mt-4 min-h-screen py-4">
-      <div className="inner-div flex flex-col gap-2 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10 ">
+      <div className="inner-div flex flex-col gap-2 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
         <div className="">
           <div className="flex flex-col items-center justify-between gap-6 text-center sm:gap-10 sm:text-start">
             <div>
@@ -22,7 +22,7 @@ const LoginPage = () => {
                 account with you credentials. If you do not have an existing
                 account,
                 <span
-                  className="cursor-pointer font-semibold mx-1 text-blue-500 underline"
+                  className="mx-1 cursor-pointer font-semibold text-blue-500 underline"
                   onClick={() => navigate("/auth/register")}
                 >
                   create
@@ -39,9 +39,7 @@ const LoginPage = () => {
           </div>
         </div>
         <div className="">
-          <AuthForm
-            isRegister={false}
-          />
+          <AuthForm isRegister={false} />
         </div>
       </div>
     </div>

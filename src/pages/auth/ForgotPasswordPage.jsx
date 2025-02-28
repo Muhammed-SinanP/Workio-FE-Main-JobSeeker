@@ -50,7 +50,9 @@ const ForgotPasswordPage = () => {
           A password reset link will be send to your registered email once you
           click 'Send Reset URL'. Click on that link to create a new password.
         </div>
-        <div className="text-center font-medium">NB: Reset URL will be expired after the time limit.</div>
+        <div className="text-center font-medium">
+          NB: Reset URL will be expired after the time limit.
+        </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-1">
           <div className="flex w-80 flex-col gap-1">
             <label htmlFor="userEmail" className="text-base">

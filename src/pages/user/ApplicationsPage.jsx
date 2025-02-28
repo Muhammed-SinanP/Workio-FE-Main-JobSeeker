@@ -29,8 +29,9 @@ const ApplicationsPage = () => {
   );
 
   useEffect(() => {
-   applicationsData && setFilteredApplications(applicationsData.filteredApplications);
-   applicationsData && setpageCount(applicationsData.totalPages);
+    applicationsData &&
+      setFilteredApplications(applicationsData.filteredApplications);
+    applicationsData && setpageCount(applicationsData.totalPages);
   }, [applicationsData]);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,8 +70,8 @@ const ApplicationsPage = () => {
         });
         if (response.status === 200) {
           setRefreshApplications(!refreshApplications);
-          toast.success("Rejected applications removed successfully")
-        } 
+          toast.success("Rejected applications removed successfully");
+        }
       } catch (err) {
         console.log(err, "error occured while removal");
       }
@@ -229,7 +230,11 @@ const ApplicationsPage = () => {
       </div>
 
       <div className="inner-div mt-4 pt-0">
-        <ApplicationsTable isLoading={applicationsLoading} rowsPerPage={rowsPerPage} applications={filteredApplications}/>
+        <ApplicationsTable
+          isLoading={applicationsLoading}
+          rowsPerPage={rowsPerPage}
+          applications={filteredApplications}
+        />
       </div>
 
       <div className="flex w-full justify-center">

@@ -54,13 +54,9 @@ const LoginForm = ({ submitAuthForm }) => {
             className="absolute right-1.5 top-1 rounded-full"
           >
             {showPassword ? (
-              <VisibilityIcon
-                className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900"
-              />
+              <VisibilityIcon className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900" />
             ) : (
-              <VisibilityOffIcon
-                className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900"
-              />
+              <VisibilityOffIcon className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900" />
             )}
           </span>
         </div>
@@ -76,11 +72,7 @@ const LoginForm = ({ submitAuthForm }) => {
       </div>
 
       <div className="mt-2.5">
-        <input
-          type="submit"
-          value="Login"
-          className={`btn sign-btn-submit`}
-        />
+        <input type="submit" value="Login" className={`sign-btn-submit btn`} />
       </div>
     </form>
   );

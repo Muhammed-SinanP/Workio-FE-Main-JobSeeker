@@ -8,17 +8,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { jobSearchSchema } from "../../schemas/searchSchema";
 
 const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
-
-  const { register, watch, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(jobSearchSchema) })
-  const jobExperience = watch("jobExperience", "")
-  const jobTitle = watch("jobTitle")
-  const jobLocation = watch("jobLocation")
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(jobSearchSchema) });
+  const jobExperience = watch("jobExperience", "");
+  const jobTitle = watch("jobTitle");
+  const jobLocation = watch("jobLocation");
 
   const [isJobsLoading, setIsJobsLoading] = useState(false);
 
   useEffect(() => {
-    !filteredJobs && setFilteredJobs([])
-  }, [jobTitle, jobExperience, jobLocation])
+    !filteredJobs && setFilteredJobs([]);
+  }, [jobTitle, jobExperience, jobLocation]);
 
   async function searchJobs(data) {
     setIsJobsLoading(true);
@@ -41,7 +45,6 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
     } finally {
       setIsJobsLoading(false);
     }
-
   }
 
   return (
@@ -49,15 +52,19 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
       onSubmit={handleSubmit(searchJobs)}
       className="job-search-form-container"
     >
-      <div className="relative job-search-form-column">
+      <div className="job-search-form-column relative">
         <SearchIcon className="dark:text-dark-text" />
         <input
           id="jobTitle"
           {...register("jobTitle")}
           placeholder="Job title"
-          className={`search-input ${errors?.jobTitle && "border-b text-red-500 dark:text-red-500 border-b-red-500"} pl-2 md:pl-1  dark:text-dark-text`}
+          className={`search-input ${errors?.jobTitle && "border-b border-b-red-500 text-red-500 dark:text-red-500"} pl-2 md:pl-1 dark:text-dark-text`}
         />
-        {errors.jobTitle && <p className="absolute -top-7 left-7 text-xxs shadow-md px-1.5 font-medium text-red-500 dark:bg-dark-light tracking-wide py-0.5 rounded-md bg-white">{errors.jobTitle?.message}</p>}
+        {errors.jobTitle && (
+          <p className="absolute -top-7 left-7 rounded-md bg-white px-1.5 py-0.5 text-xxs font-medium tracking-wide text-red-500 shadow-md dark:bg-dark-light">
+            {errors.jobTitle?.message}
+          </p>
+        )}
       </div>
 
       <div className="job-search-form-column">
@@ -66,18 +73,17 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
           id="jobLocation"
           {...register("jobLocation")}
           placeholder="Location"
-          className="search-input pl-2 md:pl-1  dark:text-dark-text"
+          className="search-input pl-2 md:pl-1 dark:text-dark-text"
         />
       </div>
 
-      <div className="job-search-form-column md:pl-1.5 ">
+      <div className="job-search-form-column md:pl-1.5">
         <WorkIcon className="dark:text-dark-text" />
         <select
           id="jobExperience"
           // name="jobExperience"
           {...register("jobExperience")}
-          className={`search-input cursor-pointer border-none 
-             ${jobExperience === "" ? "text-placeholder " : "text-black dark:text-dark-text"}`}
+          className={`search-input cursor-pointer border-none ${jobExperience === "" ? "text-placeholder" : "text-black dark:text-dark-text"}`}
         >
           <option value="" className="hidden">
             Experience

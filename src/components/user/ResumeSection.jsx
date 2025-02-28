@@ -4,10 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { resumeSchema } from "../../schemas/uploadSchema";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
 const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
-  const [showUploadForm, setShowUploadForm] = useState(true);
   const [uploading, setUploading] = useState(false);
 
   const {
@@ -22,7 +20,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
 
   async function handleUploadResume(data) {
     toast.dismiss();
-    const toastLoading = toast.loading("Uploading");
+    const toastLoading = toast.loading("Uploading...");
     const formData = new FormData();
     formData.append("resume", data.resume[0]);
 
@@ -38,11 +36,11 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
       if (response.status == 200) {
         toast.dismiss(toastLoading);
         setRefreshProfile(!refreshProfile);
-        toast.success("Resume uploaded successfully.");
+        toast.success("Resume uploaded successfully");
       }
     } catch (err) {
       toast.dismiss(toastLoading);
-      toast.error("Resume upload failed.");
+      toast.error("Resume upload failed");
       console.error(err);
     } finally {
       setUploading(false);
@@ -51,7 +49,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
 
   async function handleRemoveResume() {
     toast.dismiss();
-    const toastLoading = toast.loading("Removing");
+    const toastLoading = toast.loading("Removing...");
     try {
       const response = await axiosInstance({
         url: "/user/removeResume",
@@ -100,47 +98,38 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
       </div>
       <div className="my-1 flex flex-col gap-2 text-sm tracking-wide">
         <div className="flex">
-          <p
-            onClick={() => setShowUploadForm(!showUploadForm)}
-            className="cursor-pointer underline"
-          >
+          <p className="cursor-pointer underline">
             {resume ? "Update" : "Upload"} Resume
-            {showUploadForm ? (
-              <ArrowDropUpIcon fontSize="small" />
-            ) : (
-              <ArrowDropDownIcon fontSize="small" />
-            )}
           </p>
         </div>
-        
-          <form
-            className={`flex flex-col items-start justify-center gap-1.5 ${showUploadForm?"visible":"invisible"}`}
-            onSubmit={handleSubmit(handleUploadResume)}
+
+        <form
+          className={`flex flex-col items-start justify-center gap-1.5`}
+          onSubmit={handleSubmit(handleUploadResume)}
+        >
+          <input
+            type="file"
+            className="w-52 truncate"
+            {...register("resume")}
+          />
+          {errors.resume && (
+            <p className="text-xs text-red-500">{errors.resume.message}</p>
+          )}
+
+          {file?.length > 0 && !errors.resume && (
+            <p>
+              Selected File:{" "}
+              <span className="text-xs font-medium">{file[0].name}</span>
+            </p>
+          )}
+
+          <button
+            className={`btn btn-xs ${uploading && "btn-disabled"}`}
+            type="submit"
           >
-            <input
-              type="file"
-              className="w-52 truncate"
-              {...register("resume")}
-            />
-            {errors.resume && (
-              <p className="text-xs text-red-500">{errors.resume.message}</p>
-            )}
-
-            {file?.length > 0 && !errors.resume && (
-              <p>
-                Selected File:{" "}
-                <span className="text-xs font-medium">{file[0].name}</span>
-              </p>
-            )}
-
-            <button
-              className={`btn btn-xs ${uploading && "btn-disabled"}`}
-              type="submit"
-            >
-              {resume ? "Update" : "Upload"}
-            </button>
-          </form>
-        
+            {resume ? "Update" : "Upload"}
+          </button>
+        </form>
       </div>
     </>
   );

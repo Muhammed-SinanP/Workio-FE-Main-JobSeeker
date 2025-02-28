@@ -14,7 +14,7 @@ import PublicNavOptions from "../PublicNavOptions";
 import UserNavOptions from "../user/UserNavOptions";
 
 const Header = () => {
-  const userLoggedIn = useSelector((state) => state.user.userLoggedIn);
+  const { initialized, userLoggedIn } = useSelector((state) => state.user);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [headShadow, setHeadShadow] = useState(false);
 
@@ -55,33 +55,37 @@ const Header = () => {
         </div>
 
         <div className="flex items-end justify-end gap-2">
-          {userLoggedIn ? (
-            <UserNavOptions />
-          ) : (
-            <div className="mb-3 flex gap-2">
-              <div className="sm:hidden">
-                <SignBtn
-                  action={"login"}
-                  text={"Sign in"}
-                  icon={<PersonIcon fontSize="small" className="p-1" />}
-                />
-              </div>
-              <div className="hidden sm:block">
-                <SignBtn
-                  action={"login"}
-                  text={"Login"}
-                  icon={<PersonIcon fontSize="small" className="p-1" />}
-                />
-              </div>
-              <div className="hidden sm:block">
-                <SignBtn
-                  action={"register"}
-                  text={"Register"}
-                  icon={
-                    <AppRegistrationIcon fontSize="small" className="p-1" />
-                  }
-                />
-              </div>
+          {initialized && (
+            <div>
+              {userLoggedIn ? (
+                <UserNavOptions />
+              ) : (
+                <div className="mb-3 flex gap-2">
+                  <div className="sm:hidden">
+                    <SignBtn
+                      action={"login"}
+                      text={"Sign in"}
+                      icon={<PersonIcon fontSize="small" className="p-1" />}
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <SignBtn
+                      action={"login"}
+                      text={"Login"}
+                      icon={<PersonIcon fontSize="small" className="p-1" />}
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <SignBtn
+                      action={"register"}
+                      text={"Register"}
+                      icon={
+                        <AppRegistrationIcon fontSize="small" className="p-1" />
+                      }
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

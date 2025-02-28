@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch"
+import useFetch from "../../hooks/useFetch";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from "react-avatar";
 import PersonIcon from "@mui/icons-material/Person";

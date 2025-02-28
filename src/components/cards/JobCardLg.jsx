@@ -24,10 +24,10 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
   const [smallHead, setSmallHead] = useState(false);
   const navigate = useNavigate();
   const [job, jobError, jobLoading] = useFetch(`/job/${jobId}`);
-  const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [refreshCardLg]);
+  const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [
+    refreshCardLg,
+  ]);
   const [savedJobs, setSavedJobs] = useState([]);
-
-
 
   useEffect(() => {
     setSavedJobs(savedData?.savedJobs);
@@ -48,8 +48,9 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
     detailsSection && detailsSection.addEventListener("scroll", handleScroll);
 
     return () => {
-      detailsSection && detailsSection.removeEventListener("scroll", handleScroll);
-      setSmallHead(false)
+      detailsSection &&
+        detailsSection.removeEventListener("scroll", handleScroll);
+      setSmallHead(false);
     };
   }, [job]);
 
@@ -61,7 +62,6 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
 
     return `${date < 10 ? "0" + date : date}-${month < 10 ? "0" + month : month}-${year}`;
   }
-
 
   async function sendApplication(jobId) {
     toast.dismiss();
@@ -80,7 +80,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
             icon: "❗",
           });
         } else {
-          toast.error("Application send failed")
+          toast.error("Application send failed");
         }
       }
     } else {
@@ -125,7 +125,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
         });
       }
     } finally {
-      refreshPage && refreshPage(job)
+      refreshPage && refreshPage(job);
     }
   }
 
@@ -154,7 +154,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
                   </button>
                 )}
 
-                 <button
+                <button
                   onClick={(e) => handleSave(job?._id)}
                   title={
                     savedJobs?.some(
@@ -165,17 +165,15 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
                   }
                   className="flex h-9 w-8 items-center justify-center rounded-sm text-brand-dark hover:bg-slate-200 dark:text-brand"
                 >
-                  {savedLoading ?
+                  {savedLoading ? (
                     <span className="loading loading-spinner"></span>
-                    :
-                    savedJobs?.some(
+                  ) : savedJobs?.some(
                       (savedJobs) => savedJobs?.job._id === job?._id,
                     ) ? (
-                      <BookmarkIcon fontSize="large" />
-                    ) : (
-                      <BookmarkBorderIcon fontSize="large" />
-                    )
-                  }
+                    <BookmarkIcon fontSize="large" />
+                  ) : (
+                    <BookmarkBorderIcon fontSize="large" />
+                  )}
                 </button>
               </div>
             </div>
@@ -208,7 +206,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
           </div>
           <div
             ref={detailsRef}
-            className="h-full overflow-y-scroll custom-scrollbar rounded-b-md bg-white pb-1 shadow-inner shadow-gray-400 dark:bg-dark-text dark:shadow-black"
+            className="custom-scrollbar h-full overflow-y-scroll rounded-b-md bg-white pb-1 shadow-inner shadow-gray-400 dark:bg-dark-text dark:shadow-black"
           >
             <div className="mt-2 px-4 text-sm font-medium italic">
               Greetings from {job?.employer?.name} !!
@@ -246,8 +244,9 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
               <div className="font-paraFont mt-1 pl-6 text-sm">
                 {job?.minExperience === 0
                   ? "No experience required"
-                  : `Minimum ${job?.minExperience} ${job?.minExperience === 1 ? "year" : "years"
-                  } of experience required`}
+                  : `Minimum ${job?.minExperience} ${
+                      job?.minExperience === 1 ? "year" : "years"
+                    } of experience required`}
               </div>
             </div>
             <div className="border-b border-gray-300 p-4">

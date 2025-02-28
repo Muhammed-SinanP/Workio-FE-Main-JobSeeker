@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Noto+Sans&display=swap");
 
 @tailwind base;
@@ -60,17 +59,16 @@ body {
   .pagination-btn {
     @apply flex h-8 w-8 items-center justify-center rounded-md border-0.5 border-custom-border-color bg-white shadow-sm dark:bg-gray-300;
   }
-  .job-search-form-container{
-    @apply flex flex-col items-center rounded-md bg-white p-2 text-base tracking-wide shadow-md shadow-brand sm:text-sm md:flex-row dark:bg-dark-input dark:shadow-dark
+  .job-search-form-container {
+    @apply flex flex-col items-center rounded-md bg-white p-2 text-base tracking-wide shadow-md shadow-brand sm:text-sm md:flex-row dark:bg-dark-input dark:shadow-dark;
   }
   .job-search-form-column {
     @apply flex w-full items-center pl-1 dark:bg-dark-input;
   }
-  .sign-btn-submit{
-    @apply w-full border-none bg-brand text-base text-white hover:bg-brand-dark
+  .sign-btn-submit {
+    @apply w-full border-none bg-brand text-base text-white hover:bg-brand-dark;
   }
-  .custom-scrollbar{
-    @apply scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-brand-dark scrollbar-track-transparent
+  .custom-scrollbar {
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-brand-dark scrollbar-thumb-rounded-full;
   }
 }
-

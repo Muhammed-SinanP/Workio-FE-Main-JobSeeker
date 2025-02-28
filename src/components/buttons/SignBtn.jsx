@@ -8,10 +8,11 @@ const SignBtn = ({ action, text, icon }) => {
       onClick={() =>
         navigate(`${action === "login" ? "/auth/login" : "/auth/register"}`)
       }
-      className={`sign-btn ${action === "login"
-        ? "bg-brand"
-        : "bg-black dark:bg-dark-text dark:text-dark-input"
-        } `}
+      className={`sign-btn ${
+        action === "login"
+          ? "bg-brand"
+          : "bg-black dark:bg-dark-text dark:text-dark-input"
+      } `}
     >
       {icon}
       <span className="tracking-wide">{text}</span>

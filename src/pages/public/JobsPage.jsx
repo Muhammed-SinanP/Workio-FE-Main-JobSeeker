@@ -31,7 +31,7 @@ const JobsPage = () => {
   const [data, error, isLoading] = useFetch(
     `/job/allOpen?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`,
   );
-  
+
   const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [
     refreshSavedJobs,
   ]);
@@ -84,7 +84,7 @@ const JobsPage = () => {
       setShowDiv([...showDiv, element]);
     }
   }
-  
+
   function cardClick(job) {
     navigate(`/jobDetails/${job?._id}`);
   }
@@ -98,9 +98,7 @@ const JobsPage = () => {
   }
 
   if (error) {
-    return (
-      <ErrorDiv info={"Error occured while fetching jobs."}/>
-    );
+    return <ErrorDiv info={"Error occured while fetching jobs."} />;
   }
 
   return (
@@ -349,7 +347,7 @@ const JobsPage = () => {
               </div>
             ))
           ) : (
-            <div className="col-span-12 text-center dark:text-dark-text tracking-wide">
+            <div className="col-span-12 text-center tracking-wide dark:text-dark-text">
               No jobs found, try another filtering.
             </div>
           )}

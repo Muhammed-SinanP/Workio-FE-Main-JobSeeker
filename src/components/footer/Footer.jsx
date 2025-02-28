@@ -13,7 +13,6 @@ const Footer = () => {
   return (
     <div className="bg-brand text-gray-200 dark:bg-dark">
       <div className="inner-div grid grid-cols-12 gap-y-4 p-4 py-10 sm:gap-0">
-
         <div className="footer-column">
           <div className="footer-content-container">
             <div className="footer-content-title">Workio</div>
@@ -81,7 +80,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
       </div>
 
       <SignFooter />

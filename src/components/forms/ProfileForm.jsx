@@ -39,7 +39,7 @@ const ProfileForm = ({ userProfile }) => {
 
   async function handleSubmit(e) {
     console.log("aa");
-    
+
     e.preventDefault();
     try {
       const response = await axiosInstance({
@@ -121,8 +121,6 @@ const ProfileForm = ({ userProfile }) => {
           )}
         </div>
       </form>
-
-      
     </>
   );
 };
