@@ -48,7 +48,7 @@ const AuthForm = ({ isRegister }) => {
   }
 
   return (
-    <div className="mx-auto w-11/12 rounded-lg bg-white px-8 py-4 tracking-wide shadow-md sm:mx-1 sm:w-80 dark:bg-dark">
+    <div className="mx-auto w-80 rounded-lg bg-white px-6 md:px-8 py-4 tracking-wide shadow-md sm:mx-1  dark:bg-dark">
 
       <div className="mb-4 text-center text-xl font-semibold sm:text-2xl dark:text-dark-text">
         {isRegister ? "Register" : "Login"}

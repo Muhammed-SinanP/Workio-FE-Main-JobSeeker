@@ -9,8 +9,8 @@ const LoginPage = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="outer-div -mt-4 min-h-screen py-10 sm:p-10">
-      <div className="inner-div flex flex-col gap-2 p-1 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10 sm:px-10">
+    <div className="outer-div -mt-4 min-h-screen py-4">
+      <div className="inner-div flex flex-col gap-2 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10 ">
         <div className="">
           <div className="flex flex-col items-center justify-between gap-6 text-center sm:gap-10 sm:text-start">
             <div>

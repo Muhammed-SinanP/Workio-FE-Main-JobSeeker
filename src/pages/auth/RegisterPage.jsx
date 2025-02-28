@@ -9,10 +9,10 @@ const RegisterPage = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="outer-div p -mt-4 min-h-screen py-10 sm:p-10">
-      <div className="inner-div flex flex-col gap-2 p-1 px-0 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10 sm:px-10">
+    <div className="outer-div py-4 -mt-4 min-h-screen ">
+      <div className="inner-div flex flex-col gap-2  sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10 ">
         <div className="">
-          <div className="flex flex-col items-center justify-between gap-10 text-center sm:text-start">
+          <div className="flex flex-col items-center justify-between gap-6 text-center sm:gap-10 sm:text-start">
             <div>
               <h1 className="mb-2 font-brand-font text-2xl text-brand sm:text-4xl">
                 Welcome to Workio!
