@@ -45,6 +45,18 @@ const HomePage = () => {
     setBottomCard(false);
   }
 
+  useEffect(() => {
+    if (bottomCard) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = "auto"; 
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; 
+    };
+  }, [bottomCard]);
+
   return (
     <div className="outer-div">
       <div className="dark:to-bg-dark-light bg-gradient-to-t from-green-50 to-brand-light dark:from-dark-text">
