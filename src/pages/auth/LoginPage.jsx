@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import AuthForm from "../../components/forms/AuthForm";
-import loginImg from "../../assets/loginImg.png";
+const loginImg = "/loginImg.png";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {

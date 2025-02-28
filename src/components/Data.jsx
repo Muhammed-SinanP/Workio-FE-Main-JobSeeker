@@ -4,10 +4,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import WorkIcon from "@mui/icons-material/Work";
 import PersonIcon from "@mui/icons-material/Person";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import BoostImg from "/src/assets/boost.png";
-import PrepImg from "/src/assets/prep.png";
-import LearnImg from "/src/assets/learn.png";
-import NetworkImg from "/src/assets/network.png";
+const BoostImg = "/boost.png";
+const PrepImg = "/prep.png";
+const LearnImg = "/learn.png";
+const NetworkImg = "/network.png";
 
 export const NavbarData = [
   {

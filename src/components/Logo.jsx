@@ -1,5 +1,5 @@
 import React from "react";
-import brandLogo from "../assets/logo.png";
+const brandLogo = "/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Logo = () => {

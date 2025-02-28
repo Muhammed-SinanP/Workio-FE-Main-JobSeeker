@@ -1,4 +1,3 @@
-import { light } from "@mui/material/styles/createPalette";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -28,7 +27,7 @@ export default {
         }
       },
       backgroundImage: {
-        card: "url('./src/assets/backgroundCard.jpg')",
+        card: "url('./backgroundCard.jpg')",
       },
       fontSize: {
         xxs: "0.7rem",

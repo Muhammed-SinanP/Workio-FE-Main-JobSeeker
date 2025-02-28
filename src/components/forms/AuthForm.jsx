@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 import { useDispatch } from "react-redux";
 import { saveUserData } from "../../redux/features/userSlice";
-import googleIcon from "../../assets/googleIcon.png";
+const googleIcon = "/googleIcon.png";
 import toast from "react-hot-toast";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";

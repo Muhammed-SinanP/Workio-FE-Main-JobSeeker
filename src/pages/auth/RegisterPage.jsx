@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AuthForm from "../../components/forms/AuthForm";
 import { useNavigate } from "react-router-dom";
-import registerImg from "../../assets/registerImg.png";
+const registerImg = "/registerImg.png";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
