@@ -7,30 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        brandColor: {
+        brand: {
           DEFAULT: "#00A264",
           dark: "#004D2F",
-          light: "#05f59d",
-          lighter: "#7efcce",
-          lightest:"#f0fdf4",
-          text:"#202124"
+          light: "#7efcce",
+          extralight: "#f0fdf4",
+          text: "#202124",
         },
-        darkColor: {
+        dark: {
           DEFAULT: "#1D232A",
           light: "#39424d",
           text: "#A6ADBB",
           input: "#121212",
         },
-        borderColor: {
+        "custom-border-color": {
           DEFAULT: "#9CA3AF",
         },
+        placeholder:{
+          DEFAULT:"#9CA3AF"
+        }
+      },
+      backgroundImage: {
+        card: "url('./src/assets/backgroundCard.jpg')",
       },
       fontSize: {
-        xxs: "0.5rem",
+        xxs: "0.7rem",
       },
       fontFamily: {
-        brandFont: ["Lora", "sans-serif"],
-        paraFont: ["Noto Sans", "sans-serif"],
+        "brand-font": ["Lora", "sans-serif"],
+        "para-font": ["Noto Sans", "sans-serif"],
       },
       borderWidth: {
         0.5: "0.5px",

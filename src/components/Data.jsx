@@ -1,14 +1,13 @@
 import React from "react";
 import FeedIcon from "@mui/icons-material/Feed";
-
 import HomeIcon from "@mui/icons-material/Home";
 import WorkIcon from "@mui/icons-material/Work";
 import PersonIcon from "@mui/icons-material/Person";
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BoostImg from "../assets/Boost.png";
-import PrepImg from "../assets/Prep.png";
-import LearnImg from "../assets/Learn.png";
-import NetworkImg from "../assets/Network.png";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BoostImg from "../assets/boost.png";
+import PrepImg from "../assets/prep.png";
+import LearnImg from "../assets/learn.png";
+import NetworkImg from "../assets/network.png";
 
 export const NavbarData = [
   {
@@ -31,17 +30,17 @@ export const userNavbarData = [
   },
   {
     title: "My Saved List",
-    path:"/mySaveList",
-    icon: <BookmarkIcon fontSize="small"/>
+    path: "/mySavedList",
+    icon: <BookmarkIcon fontSize="small" />,
   },
   {
     title: "My Profile",
     path: "/myProfile",
-    icon: <PersonIcon fontSize="small"/>,
+    icon: <PersonIcon fontSize="small" />,
   },
 ];
 
-export const userSuggestions = [
+export const articleSuggestions = [
   {
     img: BoostImg,
     title: "Boost",

@@ -1,24 +1,24 @@
 import React from "react";
-import CallMadeIcon from "@mui/icons-material/CallMade";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const EmployerBtn = () => {
   function openEmployerSite() {
-    window.open("https://workioforemployer.netlify.app/");
+    window.open(import.meta.env.VITE_FRONTEND_EMPLOYER);
   }
 
   return (
-    <div
+    <button
       onClick={openEmployerSite}
-      className="cursor-pointer text-sm font-light hover:text-gray-800 dark:text-darkColor-text dark:hover:text-gray-400"
+      className="cursor-pointer text-sm font-light tracking-wide hover:text-gray-800 dark:text-dark-text dark:hover:text-gray-400"
     >
-      <span className="hidden sm:block tracking-wide">
-        Employers<span className="mx-0.5 text-base font-thin">/</span>Post Job
+      <span className="hidden sm:flex">
+        Employers<span className="mx-0.5 scale-110 font-thin">/</span>Post Job
       </span>
-      <span className="flex text-base items-center  tracking-wide sm:hidden">
+      <span className="flex items-center sm:hidden">
         Employer
-        <span className="ml-0.5 ">?</span>
+        <LaunchIcon fontSize="small" className="p-0.5" />
       </span>
-    </div>
+    </button>
   );
 };
 

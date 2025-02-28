@@ -1,154 +1,113 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
-
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { jobSearchSchema } from "../../schemas/searchSchema";
 
 const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
 
-  const [formData, setFormData] = useState({
-    jobTitle: "",
-    jobLocation: "",
-    jobExperience: "",
-  });
+  const { register, watch, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(jobSearchSchema) })
+  const jobExperience = watch("jobExperience", "")
+  const jobTitle = watch("jobTitle")
+  const jobLocation = watch("jobLocation")
 
   const [isJobsLoading, setIsJobsLoading] = useState(false);
 
-  function handleChange(e) {
+  useEffect(() => {
+    !filteredJobs && setFilteredJobs([])
+  }, [jobTitle, jobExperience, jobLocation])
 
-    const { name, value } = e.target;
-
-    if (!filteredJobs) {
-      setFilteredJobs([])
-    }
-
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  }
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function searchJobs(data) {
     setIsJobsLoading(true);
     try {
       const response = await axiosInstance({
         url: "/job/search",
         method: "POST",
-        data: formData,
+        data: data,
       });
+
       if (response.status === 200) {
-        setFilteredJobs(response?.data?.data.length > 0 ? response?.data?.data : null);
+        setFilteredJobs(
+          response?.data?.data.length > 0 ? response?.data?.data : null,
+        );
         const firstSelectedJob = response?.data?.data[0] || null;
         setSelectedJob(firstSelectedJob);
-
-      } else {
-        console.log("status not 200 for job search");
-
       }
     } catch (err) {
       console.log("err in filtereing", err);
-
     } finally {
-      setIsJobsLoading(false)
+      setIsJobsLoading(false);
     }
+
   }
+
   return (
     <form
-      onSubmit={handleSubmit}
-      className="flex flex-col items-center tracking-wide rounded-md text-base sm:text-sm bg-white p-2 shadow-md  shadow-brandColor md:flex-row dark:bg-darkColor-input dark:shadow-darkColor"
+      onSubmit={handleSubmit(searchJobs)}
+      className="job-search-form-container"
     >
-      <div className="flex w-full items-center pl-1  dark:bg-darkColor-input">
-        <SearchIcon className="dark:text-darkColor-text" />
+      <div className="relative job-search-form-column">
+        <SearchIcon className="dark:text-dark-text" />
         <input
           id="jobTitle"
-          name="jobTitle"
-          type="text"
-          minLength={2}
+          {...register("jobTitle")}
           placeholder="Job title"
-          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input pl-2 md:pl-1"
-          onChange={handleChange}
-          value={formData.jobTitle}
-          required
+          className={`search-input ${errors?.jobTitle && "border-b text-red-500 dark:text-red-500 border-b-red-500"} pl-2 md:pl-1  dark:text-dark-text`}
         />
+        {errors.jobTitle && <p className="absolute -top-7 left-7 text-xxs shadow-md px-1.5 font-medium text-red-500 dark:bg-dark-light tracking-wide py-0.5 rounded-md bg-white">{errors.jobTitle?.message}</p>}
       </div>
 
-      <div className="flex w-full items-center pl-1   dark:bg-darkColor-input">
-        <LocationOnIcon className="dark:text-darkColor-text" />
+      <div className="job-search-form-column">
+        <LocationOnIcon className="dark:text-dark-text" />
         <input
           id="jobLocation"
-          name="jobLocation"
-          type="text"
+          {...register("jobLocation")}
           placeholder="Location"
-          minLength={2}
-          className="searchInput dark:text-darkColor-text dark:bg-darkColor-input pl-2 md:pl-1"
-          onChange={handleChange}
-          value={formData.jobLocation}
+          className="search-input pl-2 md:pl-1  dark:text-dark-text"
         />
       </div>
-      <div className="flex w-full items-center pl-1 md:pl-1.5 dark:bg-darkColor-input">
-        <WorkIcon className="dark:text-darkColor-text" />
 
+      <div className="job-search-form-column md:pl-1.5 ">
+        <WorkIcon className="dark:text-dark-text" />
         <select
           id="jobExperience"
-          name="jobExperience"
-          className={`searchInput  cursor-pointer border-none  dark:bg-darkColor-input ${formData.jobExperience === ""
-            ? "text-[#9CA3AF]"
-            : "text-black dark:text-darkColor-text"
-            }`}
-          onChange={handleChange}
-          value={formData.jobExperience}
-          
+          // name="jobExperience"
+          {...register("jobExperience")}
+          className={`search-input cursor-pointer border-none 
+             ${jobExperience === "" ? "text-placeholder " : "text-black dark:text-dark-text"}`}
         >
-          <option value="" disabled className="hidden">
+          <option value="" className="hidden">
             Experience
           </option>
           <option value={0} className="text-xs">
             Fresher / &lt; 1 year
           </option>
-          
           <option value={1} className="text-xs">
             1 year
           </option>
-
-          {[...Array(49)].map((_, id)=>
-            <option key={id} value={id+2} className="text-xs">
-              {id+2} years
+          {[...Array(49)].map((_, id) => (
+            <option key={id} value={id + 2} className="text-xs">
+              {id + 2} years
             </option>
-          )}
-          {/* <option value={2} className="text-xs">
-            2+ years
-          </option>
-          <option value={3} className="text-xs">
-            3+ years
-          </option> */}
+          ))}
         </select>
       </div>
       <div>
         <button
-          className="btn btn-wide mt-2.5 md:mt-0 text-lg md:text-base md:btn-square md:ml-2  border-none bg-brandColor text-white hover:bg-brandColor-dark active:bg-brandColor-dark "
+          className="btn btn-wide mt-2.5 border-none bg-brand text-lg text-white md:btn-square hover:bg-brand-dark active:bg-brand-dark md:ml-2 md:mt-0 md:text-base"
           type="submit"
         >
           {isJobsLoading ? (
             <span className="loading loading-spinner"></span>
           ) : (
-            <span className="tracking-wide">Find <span className="md:hidden">jobs</span></span>
+            <span className="tracking-wide">
+              Find <span className="md:hidden">jobs</span>
+            </span>
           )}
         </button>
-        {/* <button
-          className="btn text-base btn-wide mt-2.5 bg-brandColor text-white hover:bg-brandColor-dark active:bg-brandColor-dark md:hidden"
-          type="submit"
-        >
-          {isJobsLoading ? (
-            <span className="flex items-center gap-1">
-              Finding jobs<span className="loading loading-spinner"></span>
-            </span>
-          ) : (
-            <span className="">Find jobs</span>
-          )}
-        </button> */}
       </div>
     </form>
   );

@@ -1,23 +1,23 @@
-import React from 'react'
+import React from "react";
 
 const SkeletonJobCardSm = () => {
-    return (
-        <div className="w-full h-full skeleton dark:bg-darkColor-input shadow-sm rounded-md flex flex-col gap-1.5 items-start p-3 pt-4 ">
-            <div className="flex justify-between gap-2 items-center w-full">
-                <div className="skeleton-custom-color h-8 w-56 "></div>
-                <div className="skeleton-custom-color h-6 w-4  mb-1 mr-1"></div>
-            </div>
-            <div className="skeleton-custom-color h-6 w-32 "></div>
-            <div className="skeleton-custom-color h-4 w-40 "></div>
-            <div className="skeleton-custom-color h-4 w-40 "></div>
-            <div className="flex gap-1 mb-3">
-                <div className="skeleton-custom-color h-4 w-12 "></div>
-                <div className="skeleton-custom-color h-4 w-12 "></div>
-            </div>
+  return (
+    <div className="dark:bg-darkColor-input skeleton flex h-full w-full flex-col items-start gap-1.5 rounded-md p-3 pt-4 shadow-sm">
+      <div className="flex w-full items-center justify-between gap-2">
+        <div className="skeleton-custom-color h-8 w-56"></div>
+        <div className="skeleton-custom-color mb-1 mr-1 h-6 w-4"></div>
+      </div>
+      <div className="skeleton-custom-color h-6 w-32"></div>
+      <div className="skeleton-custom-color h-4 w-40"></div>
+      <div className="skeleton-custom-color h-4 w-40"></div>
+      <div className="mb-3 flex gap-1">
+        <div className="skeleton-custom-color h-4 w-12"></div>
+        <div className="skeleton-custom-color h-4 w-12"></div>
+      </div>
 
-            <div className="skeleton-custom-color absolute right-2 bottom-2  h-2 w-24 "></div>
-        </div>
-    )
-}
+      <div className="skeleton-custom-color absolute bottom-2 right-2 h-2 w-24"></div>
+    </div>
+  );
+};
 
-export default SkeletonJobCardSm
+export default SkeletonJobCardSm;

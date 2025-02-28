@@ -3,44 +3,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,body{
-  color: #202124
+html,
+body {
+  color: #202124;
 }
 @layer components {
-  .outerDiv {
+  .outer-div {
     @apply w-full;
   }
-  .innerDiv {
-    @apply mx-auto p-6 sm:px-10 max-w-[1536px];
+  .inner-div {
+    @apply mx-auto max-w-[1536px] p-6 sm:px-10;
   }
-  .inputStyle {
-    @apply cursor-pointer outline-none rounded-sm border border-borderColor px-1.5 py-1 w-full;
+  .sign-btn {
+    @apply flex cursor-pointer items-center justify-center rounded-sm py-1 pl-1 pr-2 text-xs font-medium text-white transition-all duration-100 ease-in-out;
   }
-  /* .inputStyle:focus {
-    @apply border-brandColor outline-none;
+  .sign-btn:hover {
+    @apply bg-brand-dark text-white shadow;
+  }
+  .sign-btn:active {
+    @apply scale-95 bg-brand-dark text-white shadow-none;
+  }
+
+  .input-style {
+    @apply w-full cursor-pointer rounded-md border border-custom-border-color p-1.5 outline-none;
+  }
+  /* .input-style:focus {
+    @apply border-brand outline-none;
   } */
   /* .filterInput{
     @apply w-full p-1 outline-none border-0.5 border-borderColor rounded-sm
   } */
-  
-  .signBtn {
-    @apply flex cursor-pointer items-center justify-center rounded-sm py-1 pl-1 pr-2  text-xs font-medium transition-all duration-100 ease-in-out;
-  }
-  .signBtn:hover {
-    @apply bg-brandColor-dark text-white shadow;
-  }
-  .signBtn:active {
-    @apply scale-95 bg-brandColor-dark shadow-none;
-  }
 
-  .searchInput {
-    @apply h-10 w-full border-darkColor-text bg-white px-1 md:border-r-0.5;
+  .search-input {
+    @apply h-10 w-full border-dark-text bg-white px-1 md:border-r-0.5 dark:bg-dark-input;
   }
-  .searchInput:focus {
+  .search-input:focus {
     @apply outline-none;
   }
 
-  .skeleton-custom-color{
-    @apply skeleton bg-gray-300 dark:bg-darkColor-text
+  .skeleton-custom-color {
+    @apply skeleton bg-gray-300 dark:bg-dark-text;
   }
+
+  .footer-column {
+    @apply col-span-6 flex justify-center p-2 sm:col-span-3;
+  }
+  .footer-content-container {
+    @apply ml-4 flex w-36 flex-col gap-2;
+  }
+  .footer-content-title {
+    @apply font-semibold text-gray-50 dark:text-gray-200;
+  }
+
+  .pagination-btn {
+    @apply flex h-8 w-8 items-center justify-center rounded-md border-0.5 border-custom-border-color bg-white shadow-sm dark:bg-gray-300;
+  }
+  .job-search-form-container{
+    @apply flex flex-col items-center rounded-md bg-white p-2 text-base tracking-wide shadow-md shadow-brand sm:text-sm md:flex-row dark:bg-dark-input dark:shadow-dark
+  }
+  .job-search-form-column {
+    @apply flex w-full items-center pl-1 dark:bg-dark-input;
+  }
+  .sign-btn-submit{
+    @apply w-full border-none bg-brand text-base text-white hover:bg-brand-dark
+  }
+  
 }

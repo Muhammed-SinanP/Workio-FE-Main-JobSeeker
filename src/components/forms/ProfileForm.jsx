@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { axiosInstance } from "../../config/axiosInstance";
@@ -9,20 +7,17 @@ import toast from "react-hot-toast";
 
 const ProfileForm = ({ userProfile }) => {
   const [edit, setEdit] = useState(false);
-  const navigate = useNavigate();
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   const [formData, setFormData] = useState({
     userName: "N/A",
     userEmail: "N/A",
-    userResume: "N/A",
   });
 
   useEffect(() => {
     setFormData({
       userName: userProfile?.profile.name || "N/A",
       userEmail: userProfile?.profile.email || "N/A",
-      userResume: userProfile?.profile.resume || "N/A",
     });
   }, [userProfile]);
 
@@ -37,10 +32,9 @@ const ProfileForm = ({ userProfile }) => {
     });
   }
 
-  function handleEdit(){
-    
-    setEdit(true)
-    inputRef.current.focus()
+  function handleEdit() {
+    setEdit(true);
+    inputRef.current.focus();
   }
 
   async function handleSubmit(e) {
@@ -50,9 +44,9 @@ const ProfileForm = ({ userProfile }) => {
         method: "PUT",
         url: "/user/myProfile",
         data: formData,
-        params:{
-          userRole:"job_seeker"
-        }
+        params: {
+          userRole: "job_seeker",
+        },
       });
 
       if (response.status === 200) {
@@ -65,90 +59,68 @@ const ProfileForm = ({ userProfile }) => {
     }
   }
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="my-4 flex flex-col gap-4 "
-    >
-      <div className=" flex flex-col ">
+    <>
+      <form onSubmit={handleSubmit} className="my-4 flex flex-col gap-4">
+        <div className="flex flex-col">
+          <label className="font-medium" htmlFor="userName">
+            Name
+          </label>
+          <input
+            ref={inputRef}
+            id="userName"
+            className={`input-style capitalize dark:bg-dark ${
+              edit ? "" : "cursor-auto border-none"
+            }`}
+            type="text"
+            name="userName"
+            onChange={handleChange}
+            value={formData.userName}
+            required
+            readOnly={edit ? false : true}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label
+            className="col-span-3 font-medium md:col-span-3"
+            htmlFor="userEmail"
+          >
+            Email
+          </label>
+          <input
+            id="userEmail"
+            className={`input-style col-span-6 md:col-span-6 dark:bg-dark ${
+              edit ? "" : "cursor-auto border-none"
+            }`}
+            type="email"
+            name="userEmail"
+            onChange={handleChange}
+            value={formData.userEmail}
+            required
+            readOnly={edit ? false : true}
+          />
+        </div>
+      </form>
 
-        <label
-          className="font-medium"
-          htmlFor="userName"
-        >
-          Name
-        </label>
-        <input
-          ref={inputRef}
-          id="userName"
-          className={`inputStyle dark:bg-darkColor ${
-            edit ? "" : "cursor-auto border-none"
-          }`}
-          type="text"
-          name="userName"
-          onChange={handleChange}
-          value={formData.userName}
-          required
-          autoFocus
-          readOnly={edit ? false : true}
-        />
-        
-        
-        
+      <div className="absolute right-4 top-4 font-semibold tracking-wide">
+        {edit ? (
+          <input
+            type="submit"
+            value="Update"
+            className="btn btn-sm border-none bg-brand text-white hover:bg-brand-dark"
+          />
+        ) : (
+          <button
+            className="flex items-center text-blue-500"
+            onClick={handleEdit}
+          >
+            <EditIcon className="" fontSize="small" />
+            <span className="-mb-0.5 flex">
+              Edit<span className="ml-1 hidden sm:block">profile</span>
+            </span>
+          </button>
+        )}
       </div>
-      <div className=" flex flex-col ">
-        <label
-          className="col-span-3 font-medium md:col-span-3"
-          htmlFor="userEmail"
-        >
-          Email
-        </label>
-        <input
-          
-          id="userEmail"
-          className={`inputStyle col-span-6 md:col-span-6 dark:bg-darkColor ${
-            edit ? "" : "cursor-auto border-none"
-          }`}
-          type="email"
-          name="userEmail"
-          onChange={handleChange}
-          value={formData.userEmail}
-          required
-          readOnly={edit ? false : true}
-        />
-       
-      </div>
-      <div className=" flex flex-col ">
-        <label
-          className="font-medium "
-          htmlFor="userResume"
-        >
-          Resume link
-        </label>
-        <input
-        
-          id="userResume"
-          className={`inputStyle  truncate  dark:bg-darkColor ${
-            edit ? "" : "cursor-pointer border-none underline text-blue-500"
-          }`}
-          type="text"
-          onClick={!edit?()=>window.open(formData.userResume):undefined}
-          name="userResume"
-          onChange={handleChange}
-          value={formData.userResume}
-          readOnly={edit ? false : true}
-        />
-       
-        
-        <div className="absolute top-4 right-4 font-semibold tracking-wide ">
-            {edit?<input
-              type="submit"
-              value="Update"
-              className="  bg-brandColor  text-white btn btn-sm  border-none hover:bg-brandColor-dark"
-            />: <button className=" text-blue-500 flex items-end" onClick={handleEdit}><EditIcon  className="mb-0.5 p-0.5 pb-0 pr-0" fontSize="small"/>Edit<span className="hidden sm:block ml-1">profile</span></button>}
-          </div>
-        
-      </div>
-    </form>
+    </>
   );
 };
 

@@ -1,123 +1,88 @@
 import React from "react";
-import { useState } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
-import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { passwordChangeSchema } from "../../schemas/authSchema";
 
 const PasswordChangeForm = () => {
   const navigate = useNavigate();
-  
-  const [formData, setFormData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    ConfirmNewPassword: "",
-  });
 
-  const formValid =
-    Object.values(formData).every((value) => value.trim() !== "") &&
-    formData.currentPassword !== formData.newPassword &&
-    formData.newPassword === formData.ConfirmNewPassword;
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  }
+  const { handleSubmit, register, formState: { errors } } = useForm({ resolver: zodResolver(passwordChangeSchema) })
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function changePassword(data) {
+
     try {
-      console.log("submit");
-
       const response = await axiosInstance({
         method: "POST",
-        url: "/user/changePassword",
-        data: formData,
-        params:{
-          userRole:"job_seeker"
-        }
+        url: "/user/changeMyPassword",
+        data: data,
       });
 
       if (response.status === 200) {
-        console.log("password change success fe");
-        toast.success("Password Updated Successfully")
-        navigate("/")
+        toast.success("Password Updated Successfully");
+        navigate("/");
       }
-      
     } catch (err) {
-      console.log("password change failed", err);
-      if(err.response.status === 401){
-        toast.error("Incorrect Password")
+      if (err.status === 401) {
+        toast.error("Incorrect password");
+      }
+      else if(err.status == 400){
+        toast.error("Current and new passwords can't be same")
       }
     }
+
   }
+
   return (
-    <div className="w-11/12 sm:w-80  tracking-wide mx-auto sm:mx-1 shadow-md rounded-lg bg-white dark:bg-darkColor px-8 py-4">
-        <form
-        className=" flex flex-col gap-2.5"
-          onSubmit={handleSubmit}
+    <form className="flex flex-col gap-2.5 dark:text-dark-text" onSubmit={handleSubmit(changePassword)}>
+      <div className="flex flex-col gap-1">
+        <label htmlFor="password">Current password</label>
+        <input
+          id="password"
+          {...register("password")}
+          className="input-style"
+          placeholder="****"
+        />
+        {errors.password && <p className="text-xs tracking-wide text-red-500">{errors?.password.message}</p>}
+      </div>
+      <div className="-mt-1.5 text-end">
+        <span
+          onClick={() => navigate("/forgotPassword")}
+          className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600"
         >
-        <div className="flex flex-col gap-1">
-            <label htmlFor="currentPassword">Current password</label>
-            <input
-              id="currentPassword"
-              type="text"
-              name="currentPassword"
-              value={formData.currentPassword}
-              onChange={handleChange}
-              className="inputStyle "
-              placeholder="****"
-            />
-          </div>
-          <div className="text-end -mt-1.5 ">
-            <span
-              onClick={() => navigate("/forgotPassword")}
-            className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600"
-            >
-              Forgot password?
-            </span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="newPassword">New password</label>
-            <input
-              id="newPassword"
-              type="text"
-              name="newPassword"
-              value={formData.newPassword}
-              onChange={handleChange}
-              className="inputStyle "
-              placeholder="****"
-              minLength={4}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="ConfirmNewPassword">Confirm new password</label>
-            <input
-              id="ConfirmNewPassword"
-              type="text"
-              name="ConfirmNewPassword"
-              value={formData.ConfirmNewPassword}
-              onChange={handleChange}
-              className="inputStyle "
-              placeholder="****"
-            />
-          </div>
-          <input
-            type="submit"
-            value="Update"
-          className="btn btn-wide text-base  
-            border-none bg-brandColor text-white hover:bg-brandColor-dark"
-            disabled={!formValid}
-          />
-        </form>
-      
-    </div>
+          Forgot password?
+        </span>
+      </div>
+      <div className="flex flex-col gap-1">
+        <label htmlFor="newPassword">New password</label>
+        <input
+          id="newPassword"
+          {...register("newPassword")}
+          className="input-style"
+          placeholder="****"
+
+        />
+        {errors.newPassword && <p className="text-xs tracking-wide text-red-500">{errors?.newPassword.message}</p>}
+      </div>
+      <div className="flex flex-col gap-1">
+        <label htmlFor="ConfirmNewPassword">Confirm new password</label>
+        <input
+          id="ConfirmNewPassword"
+          {...register("confirmNewPassword")}
+          className="input-style"
+          placeholder="****"
+        />
+        {errors.confirmNewPassword && <p className="text-xs tracking-wide text-red-500">{errors?.confirmNewPassword.message}</p>}
+      </div>
+      <input
+        type="submit"
+        value="Update"
+        className="btn btn-wide border-none bg-brand text-base text-white hover:bg-brand-dark"
+      />
+    </form>
+
   );
 };
 

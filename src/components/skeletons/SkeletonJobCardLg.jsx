@@ -1,93 +1,90 @@
-import React from 'react'
+import React from "react";
 
 const SkeletonJobCardLg = () => {
-    return (
-
-        <div className='w-full max-h-full overflow-hidden flex-col rounded-md  skeleton'>
-            <div className='flex flex-col gap-2.5 p-4 pt-5 skeleton dark:bg-darkColor-input  rounded-t-md rounded-b-none'>
-                <div className='flex justify-between gap-2 items-center'>
-                    <div className='h-10 w-80 skeleton-custom-color '></div>
-                    <div className='h-8 w-6  skeleton-custom-color'></div>
-                    </div>
-                <div className='flex gap-2'>
-                    <div className='h-6 w-36 skeleton-custom-color'></div>
-                    <div className='h-6 w-36 skeleton-custom-color '></div>
-                </div>
-                <div className='w-32 h-6 skeleton-custom-color '></div>
-                <div className='w-24 h-8 skeleton-custom-color '></div>
-            </div>
-            <div className='skeleton dark:bg-gray-300 p-4 rounded-t-none'>
-                  <div className='h-4 w-60  skeleton-custom-color '></div>
-                <div className='h-6 w-40 skeleton-custom-color  mt-3'></div>
-                <div className="my-2 ">
-
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w-6 skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-96 skeleton-custom-color  mt-2'></div>
-                        <div className='h-4 w-96  skeleton-custom-color mt-2'></div>
-                    </div>
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w- skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-96  skeleton-custom-color mt-2'></div>
-                        <div className='h-4 w-96 skeleton-custom-color  mt-2'></div>
-                    </div>
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w-6 skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-96 skeleton-custom-color  mt-2'></div>
-                    </div>
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w-6 skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-96 skeleton-custom-color  mt-2'></div>
-                    </div>
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w-6 skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-32 skeleton-custom-color  mt-2'></div>
-                        <div className='h-4 w-32  skeleton-custom-color mt-2'></div>
-                        <div className='h-4 w-32 skeleton-custom-color  mt-2'></div>
-                    </div>
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w-6 skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-32 skeleton-custom-color  mt-2'></div>
-                    </div>
-                </div>
-                <div className="my-4 flex gap-2">
-                    <div className='h-6 w-6 skeleton-custom-color '></div>
-                    <div>
-                        <div className='w-36 h-6 skeleton-custom-color '></div>
-                        <div className='h-4 w-32 skeleton-custom-color  mt-2'></div>
-                    </div>
-                </div>
-                
-                <div className="my-6 mb-0 ml-1 flex justify-between items-center">
-                    <div className='h-6 w-40 skeleton-custom-color '></div>
-                    <div className='h-6 w-28 skeleton-custom-color '></div>
-                </div>
-                <div className="my-2 "></div>
-                <div className="my-2 "></div>
-                <div className="my-2 "></div>
-                <div className="my-2 "></div>
-                <div className="my-2 "></div>
-            </div>
+  return (
+    <div className="skeleton max-h-full w-full flex-col overflow-hidden rounded-md">
+      <div className="dark:bg-darkColor-input skeleton flex flex-col gap-2.5 rounded-b-none rounded-t-md p-4 pt-5">
+        <div className="flex items-center justify-between gap-2">
+          <div className="skeleton-custom-color h-10 w-80"></div>
+          <div className="skeleton-custom-color h-8 w-6"></div>
         </div>
-    )
-}
+        <div className="flex gap-2">
+          <div className="skeleton-custom-color h-6 w-36"></div>
+          <div className="skeleton-custom-color h-6 w-36"></div>
+        </div>
+        <div className="skeleton-custom-color h-6 w-32"></div>
+        <div className="skeleton-custom-color h-8 w-24"></div>
+      </div>
+      <div className="skeleton rounded-t-none p-4 dark:bg-gray-300">
+        <div className="skeleton-custom-color h-4 w-60"></div>
+        <div className="skeleton-custom-color mt-3 h-6 w-40"></div>
+        <div className="my-2"></div>
+        <div className="my-4 flex gap-2">
+          <div className="skeleton-custom-color h-6 w-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-96"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-96"></div>
+          </div>
+        </div>
+        <div className="my-4 flex gap-2">
+          <div className="w- skeleton-custom-color h-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-96"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-96"></div>
+          </div>
+        </div>
+        <div className="my-4 flex gap-2">
+          <div className="skeleton-custom-color h-6 w-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-96"></div>
+          </div>
+        </div>
+        <div className="my-4 flex gap-2">
+          <div className="skeleton-custom-color h-6 w-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-96"></div>
+          </div>
+        </div>
+        <div className="my-4 flex gap-2">
+          <div className="skeleton-custom-color h-6 w-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
+          </div>
+        </div>
+        <div className="my-4 flex gap-2">
+          <div className="skeleton-custom-color h-6 w-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
+          </div>
+        </div>
+        <div className="my-4 flex gap-2">
+          <div className="skeleton-custom-color h-6 w-6"></div>
+          <div>
+            <div className="skeleton-custom-color h-6 w-36"></div>
+            <div className="skeleton-custom-color mt-2 h-4 w-32"></div>
+          </div>
+        </div>
 
-export default SkeletonJobCardLg
+        <div className="my-6 mb-0 ml-1 flex items-center justify-between">
+          <div className="skeleton-custom-color h-6 w-40"></div>
+          <div className="skeleton-custom-color h-6 w-28"></div>
+        </div>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+      </div>
+    </div>
+  );
+};
+
+export default SkeletonJobCardLg;

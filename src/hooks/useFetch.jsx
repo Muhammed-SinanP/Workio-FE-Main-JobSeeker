@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 
-const useFetch = (url,dependency=[]) => {
+const useFetch = (url, dependency = []) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -16,18 +16,18 @@ const useFetch = (url,dependency=[]) => {
 
     async function fetchData() {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const response = await axiosInstance({
           method: "GET",
           url: url,
-          params:{
-            userRole:"job_seeker"
-          }
+          params: {
+            userRole: "job_seeker",
+          },
         });
         if (isMounted) {
           setData(response?.data?.data);
           setError(null);
-          setIsLoading(false)
+          setIsLoading(false);
         }
       } catch (err) {
         if (isMounted) {
@@ -35,7 +35,7 @@ const useFetch = (url,dependency=[]) => {
         }
       } finally {
         if (isMounted) {
-           setIsLoading(false);
+          setIsLoading(false);
         }
       }
     }
@@ -45,7 +45,7 @@ const useFetch = (url,dependency=[]) => {
     return () => {
       isMounted = false;
     };
-  }, [url,...dependency]);
+  }, [url, ...dependency]);
 
   return [data, error, isLoading];
 };

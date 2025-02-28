@@ -11,8 +11,9 @@ const Logo = () => {
     >
       <img src={brandLogo} alt="brand logo" className="h-8" />
       <div className="-mb-1 hidden sm:block">
-        <h1 className="font-brandFont text-2xl text-brandColor">
-          <span className="text-3xl">W</span><span className="-ml-1 ">orkio</span>
+        <h1 className="font-brand-font text-2xl text-brand">
+          <span className="text-3xl">W</span>
+          <span className="-ml-1">orkio</span>
         </h1>
       </div>
     </div>

@@ -1,20 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-
-import RegisterPage from "../pages/RegisterPage";
-import JobsPage from "../pages/JobsPage";
-import MyProfilePage from "../pages/MyProfilePage";
-import MyApplications from "../pages/MyApplications";
-import JobDetails from "../pages/JobDetails";
-
+import HomePage from "../pages/public/HomePage";
+import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/RegisterPage";
+import JobsPage from "../pages/public/JobsPage";
+import ProfilePage from "../pages/user/ProfilePage";
 import ProtectedRoutes from "./ProtectedRoutes";
-import ErrorPage from "../pages/ErrorPage";
-import ForgotPasswordPage from "../pages/ForgotPasswordPage";
-import ResetPasswordPage from "../pages/ResetPasswordPage";
-import ChangePasswordPage from "../pages/ChangePasswordPage";
-import SaveListPage from "../pages/SaveListPage";
+import ErrorPage from "../pages/public/ErrorPage";
+import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
+import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
+import ChangePasswordPage from "../pages/user/ChangePasswordPage";
+import SavedJobsPage from "../pages/user/SavedJobsPage";
+import ApplicationsPage from "../pages/user/ApplicationsPage";
+import JobDetailsPage from "../pages/public/JobDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -30,8 +28,7 @@ export const router = createBrowserRouter([
         path: "/forgotPassword",
         element: <ForgotPasswordPage />,
       },
-      {
-      },
+      {},
       {
         path: "/resetPassword/:resetToken",
         element: <ResetPasswordPage />,
@@ -42,34 +39,33 @@ export const router = createBrowserRouter([
       },
       {
         path: "jobDetails/:jobId",
-        element: <JobDetails />,
+        element: <JobDetailsPage />,
       },
       {
-        element: <ProtectedRoutes signIn={true} />,
+        element: <ProtectedRoutes signInRequired={true} />,
         children: [
           {
             path: "myProfile",
-            element: <MyProfilePage />,
-
+            element: <ProfilePage />,
           },
           {
-            path: "changePassword",
-            element: <ChangePasswordPage />
+            path: "changeMyPassword",
+            element: <ChangePasswordPage />,
           },
-             {
-              path:"mySaveList",
-              element:<SaveListPage/>
-             },
+          {
+            path: "mySavedList",
+            element: <SavedJobsPage />,
+          },
           {
             path: "myApplications",
-            element: <MyApplications />,
+            element: <ApplicationsPage />,
           },
         ],
       },
 
       {
-        path: "sign",
-        element: <ProtectedRoutes signIn={false} />,
+        path: "auth",
+        element: <ProtectedRoutes signInRequired={false} />,
         children: [
           {
             path: "login",

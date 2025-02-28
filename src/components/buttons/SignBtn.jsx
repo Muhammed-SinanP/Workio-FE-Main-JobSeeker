@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useNavigate } from "react-router-dom";
 
 const SignBtn = ({ action, text, icon }) => {
@@ -7,16 +6,14 @@ const SignBtn = ({ action, text, icon }) => {
   return (
     <button
       onClick={() =>
-        navigate(`${action === "login" ? "/sign/login" : "/sign/register"}`)
+        navigate(`${action === "login" ? "/auth/login" : "/auth/register"}`)
       }
-      className={`signBtn ${
-        action === "login"
-          ? "bg-brandColor dark:bg-brandColor dark:text-white"
-          : "bg-black dark:bg-darkColor-text dark:text-darkColor-input"
-      } text-white dark:hover:bg-brandColor-dark dark:hover:text-white dark:active:bg-brandColor-light`}
+      className={`sign-btn ${action === "login"
+        ? "bg-brand"
+        : "bg-black dark:bg-dark-text dark:text-dark-input"
+        } `}
     >
-      {icon && icon}
-
+      {icon}
       <span className="tracking-wide">{text}</span>
     </button>
   );

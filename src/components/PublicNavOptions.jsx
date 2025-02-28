@@ -2,7 +2,7 @@ import React from "react";
 import { NavbarData } from "./Data";
 import { NavLink } from "react-router-dom";
 
-const BasePages = () => {
+const PublicNavOptions = () => {
   return (
     <div className="ml-4 hidden gap-2 sm:flex">
       {NavbarData &&
@@ -11,12 +11,12 @@ const BasePages = () => {
             key={index}
             to={element.path}
             className={({ isActive }) =>
-              `flex h-full justify-center pb-1 text-sm ${
+              `flex justify-center pb-1 text-sm ${
                 element.title == "Home" ? "font-bold" : "font-medium"
               } border-b-2 border-white tracking-wide ${
                 isActive
-                  ? "border-b-brandColor text-brandColor"
-                  : " hover:border-b-brandColor-text dark:border-darkColor-input dark:text-darkColor-text dark:hover:border-darkColor-text dark:hover:text-darkColor-text"
+                  ? "border-b-brand text-brand"
+                  : "hover:border-b-brand-text dark:border-dark-input dark:text-dark-text dark:hover:border-dark-text dark:hover:text-dark-text"
               }`
             }
           >
@@ -27,4 +27,4 @@ const BasePages = () => {
   );
 };
 
-export default BasePages;
+export default PublicNavOptions;

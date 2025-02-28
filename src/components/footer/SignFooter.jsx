@@ -5,7 +5,7 @@ import XIcon from "@mui/icons-material/X";
 
 const SignFooter = () => {
   return (
-    <div className="py-4">
+    <div className="py-6">
       <div className="m-2 flex justify-center gap-2 p-2">
         <FacebookIcon
           fontSize="small"
