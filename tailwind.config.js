@@ -27,7 +27,7 @@ export default {
         }
       },
       backgroundImage: {
-        card: "url('./backgroundCard.jpg')",
+        card: "url('/backgroundCard.jpg')",
       },
       fontSize: {
         xxs: "0.7rem",
