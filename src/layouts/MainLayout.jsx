@@ -57,7 +57,7 @@ const MainLayout = () => {
   }, []);
   return (
     <div className="flex min-h-screen flex-col bg-brand-extralight dark:bg-dark-light">
-      {!hasResume && <ResumeWarningBtn />}
+      {initialized && userLoggedIn && !hasResume && <ResumeWarningBtn />}
       {location.pathname == "/auth/login" ||
       location.pathname == "/auth/register" ? (
         <SignHeader />
