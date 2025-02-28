@@ -44,7 +44,7 @@ const SavedJobsPage = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="outer-div min-h-screen">
+    <div className="outer-div min-h-screen pb-16">
       <div className="inner-div pb-0">
         <div className="mt-4 grid min-h-44 grid-cols-12 gap-4 px-10">
           {initialLoading ? (

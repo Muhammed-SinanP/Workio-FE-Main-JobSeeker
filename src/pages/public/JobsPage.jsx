@@ -349,7 +349,7 @@ const JobsPage = () => {
               </div>
             ))
           ) : (
-            <div className="col-span-12 text-center tracking-wide">
+            <div className="col-span-12 text-center dark:text-dark-text tracking-wide">
               No jobs found, try another filtering.
             </div>
           )}

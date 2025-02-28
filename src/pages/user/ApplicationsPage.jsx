@@ -6,6 +6,8 @@ import PaginationBtn from "../../components/buttons/PaginationBtn";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useConfirm } from "material-ui-confirm";
 import { axiosInstance } from "../../config/axiosInstance";
+import toast from "react-hot-toast";
+import ApplicationsTable from "../../components/user/ApplicationsTable";
 
 const ApplicationsPage = () => {
   const [filteredApplications, setFilteredApplications] = useState([]);
@@ -16,22 +18,20 @@ const ApplicationsPage = () => {
     sortOrder: "desc",
   });
   const [rowsPerPage, setRowsPerPage] = useState(8);
-  const [refresh, setRefresh] = useState(true);
+  const [refreshApplications, setRefreshApplications] = useState(false);
   const [pageNo, setPageNo] = useState(0);
   const [pageCount, setpageCount] = useState(0);
   const confirm = useConfirm();
 
-  const [data, error, isLoading] = useFetch(
+  const [applicationsData, applicationsError, applicationsLoading] = useFetch(
     `/user/myApplications?status=${status}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&rowsPerPage=${rowsPerPage}`,
-    [refresh],
+    [refreshApplications],
   );
 
   useEffect(() => {
-    console.log(data);
-    
-    setFilteredApplications(data?.filteredApplications);
-    setpageCount(data?.totalPages);
-  }, [data]);
+   applicationsData && setFilteredApplications(applicationsData.filteredApplications);
+   applicationsData && setpageCount(applicationsData.totalPages);
+  }, [applicationsData]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -68,11 +68,9 @@ const ApplicationsPage = () => {
           method: "DELETE",
         });
         if (response.status === 200) {
-          console.log("deleted");
-          setRefresh(!refresh);
-        } else {
-          console.log("not deleted");
-        }
+          setRefreshApplications(!refreshApplications);
+          toast.success("Rejected applications removed successfully")
+        } 
       } catch (err) {
         console.log(err, "error occured while removal");
       }
@@ -231,55 +229,7 @@ const ApplicationsPage = () => {
       </div>
 
       <div className="inner-div mt-4 pt-0">
-        <table className="w-full tracking-wide dark:text-dark-text">
-          <thead>
-            <tr className="grid grid-cols-12 gap-2 rounded-t-md bg-brand py-2 text-lg text-white">
-              <th className="col-span-4">Status</th>
-              <th className="col-span-4">Job</th>
-              <th className="col-span-4">Employer</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
-              Array.from({ length: rowsPerPage }, (_, i) => (
-                <tr
-                  key={i}
-                  className={`grid grid-cols-12 items-center gap-2 border-b border-dark-input py-2`}
-                >
-                  <td className="col-span-4 text-center">
-                    <div className="skeleton mx-auto h-6 w-1/2"></div>
-                  </td>
-                  <td className="col-span-4 text-center">
-                    <div className="skeleton mx-auto h-6 w-4/5"></div>
-                  </td>
-                  <td className="col-span-4 text-center">
-                    <div className="skeleton mx-auto h-6 w-4/5"></div>
-                  </td>
-                </tr>
-              ))
-            ) : filteredApplications && filteredApplications.length > 0 ? (
-              filteredApplications.map((application, index) => (
-                <tr
-                  className={`capitalize ${application.status === "approved" && "bg-white text-brand dark:bg-gray-100"} ${application.status === "in-review" && "bg-white text-yellow-500 dark:bg-gray-100"} ${application.status === "rejected" && "bg-white text-red-500 dark:bg-gray-100"} col-span-12 grid w-full grid-cols-12 items-center gap-2 border-b border-dark-input py-2 font-medium`}
-                >
-                  <td className="col-span-4 text-center">
-                    {application?.status}
-                  </td>
-                  <td className="col-span-4 text-center">
-                    {application?.job?.title}
-                  </td>
-                  <td className="col-span-4 text-center">
-                    {application?.job?.employer?.name}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <div className="mt-4 text-center">
-                No data available to display.
-              </div>
-            )}
-          </tbody>
-        </table>
+        <ApplicationsTable isLoading={applicationsLoading} rowsPerPage={rowsPerPage} applications={filteredApplications}/>
       </div>
 
       <div className="flex w-full justify-center">

@@ -55,12 +55,10 @@ const LoginForm = ({ submitAuthForm }) => {
           >
             {showPassword ? (
               <VisibilityIcon
-                fontSize="small"
                 className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900"
               />
             ) : (
               <VisibilityOffIcon
-                fontSize="small"
                 className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900"
               />
             )}

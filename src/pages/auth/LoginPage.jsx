@@ -22,7 +22,7 @@ const LoginPage = () => {
                 account with you credentials. If you do not have an existing
                 account,
                 <span
-                  className="cursor-pointer font-medium text-blue-500 underline"
+                  className="cursor-pointer font-semibold mx-1 text-blue-500 underline"
                   onClick={() => navigate("/auth/register")}
                 >
                   create

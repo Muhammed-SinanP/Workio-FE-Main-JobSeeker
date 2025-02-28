@@ -21,8 +21,8 @@ const RegisterPage = () => {
                 Enter your details and start your journey and explore the
                 opportunities with us. If you do have a job seeker's account,
                 <span
-                  className="cursor-pointer font-medium text-blue-500 underline"
-                  onClick={() => navigate("/sign/login")}
+                  className="cursor-pointer font-semibold mx-1 text-blue-500 underline"
+                  onClick={() => navigate("/auth/login")}
                 >
                   login
                 </span>
