@@ -12,7 +12,7 @@ import ResumeWarningBtn from "../components/buttons/ResumeWarningBtn";
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { initialized, userLoggedIn } = useSelector((state) => state.user);
-  const [hasResume, setHasResume] = useState(false);
+  const [hasResume, setHasResume] = useState(true);
   const location = useLocation();
 
   async function checkUser() {
