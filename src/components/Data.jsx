@@ -9,7 +9,7 @@ const PrepImg = "/prep.png";
 const LearnImg = "/learn.png";
 const NetworkImg = "/network.png";
 
-export const NavbarData = [
+export const navbarData = [
   {
     title: "Home",
     path: "/",

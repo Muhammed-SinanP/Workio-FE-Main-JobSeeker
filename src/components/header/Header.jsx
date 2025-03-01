@@ -18,6 +18,20 @@ const Header = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [headShadow, setHeadShadow] = useState(false);
 
+
+  useEffect(() => {
+    if (sideBarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [sideBarOpen]);
+
+
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 0) {
@@ -38,7 +52,7 @@ const Header = () => {
           : "shadow-none"
       }`}
     >
-      <div className="flex items-end justify-between rounded-b-xl bg-white px-2 pt-2.5 sm:px-4 dark:bg-dark-input">
+      <div className="flex items-end justify-between rounded-b-xl bg-white px-2 pt-3 sm:px-4 dark:bg-dark-input">
         <div className="flex items-end justify-start gap-2">
           <div className="mb-2.5 scale-125 sm:hidden">
             <MenuIcon

@@ -12,6 +12,7 @@ import ResumeWarningBtn from "../components/buttons/ResumeWarningBtn";
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { initialized, userLoggedIn } = useSelector((state) => state.user);
+  const {refresh} = useSelector(state => state.refresh)
   const [hasResume, setHasResume] = useState(true);
   const location = useLocation();
 
@@ -31,26 +32,28 @@ const MainLayout = () => {
     }
   }
 
-  if (initialized && userLoggedIn) {
-    checkResume();
-    async function checkResume() {
-      try {
-        const response = await axiosInstance({
-          url: "/user/myProfile",
-        });
-        if (response.status === 200) {
-          const resume = response?.data?.data?.profile?.resume;
-          resume ? setHasResume(true) : setHasResume(false);
-        }
-      } catch (err) {
-        setHasResume(false);
+  async function checkResume() {
+    try {
+      const response = await axiosInstance({
+        url: "/user/myProfile",
+      });
+      if (response.status === 200) {
+        const resume = response?.data?.data?.profile?.resume;
+        resume ? setHasResume(true) : setHasResume(false);
       }
+    } catch (err) {
+      setHasResume(false);
     }
   }
 
+  
+
   useEffect(() => {
+    initialized && userLoggedIn && checkResume()
+    console.log(initialized,userLoggedIn);
+    
     checkUser();
-  }, [location.pathname]);
+  }, [location.pathname,refresh,userLoggedIn,initialized]);
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     document.documentElement.setAttribute("data-theme", theme);

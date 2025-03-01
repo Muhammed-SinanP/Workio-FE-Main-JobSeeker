@@ -1,12 +1,12 @@
 import React from "react";
-import { NavbarData } from "./Data";
+import { navbarData } from "./Data";
 import { NavLink } from "react-router-dom";
 
 const PublicNavOptions = () => {
   return (
     <div className="ml-4 hidden gap-2 sm:flex">
-      {NavbarData &&
-        NavbarData.map((element, index) => (
+      {navbarData &&
+        navbarData.map((element, index) => (
           <NavLink
             key={index}
             to={element.path}

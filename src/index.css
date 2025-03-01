@@ -3,6 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html,
 body {
   scrollbar-width: thin;
@@ -26,15 +27,9 @@ body {
   }
 
   .input-style {
-    @apply w-full cursor-pointer rounded-md border border-custom-border-color p-1.5 outline-none;
+    @apply w-full cursor-pointer bg-white dark:bg-dark-input rounded-md border border-custom-border-color p-1.5 outline-none;
   }
-  /* .input-style:focus {
-    @apply border-brand outline-none;
-  } */
-  /* .filterInput{
-    @apply w-full p-1 outline-none border-0.5 border-borderColor rounded-sm
-  } */
-
+  
   .search-input {
     @apply h-10 w-full border-dark-text bg-white px-1 md:border-r-0.5 dark:bg-dark-input;
   }

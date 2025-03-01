@@ -8,11 +8,11 @@ const ResumeWarningBtn = () => {
   const [showWarning, setShowWarning] = useState(false);
   return (
     <div
-      className={`fixed ${showWarning ? "translate-x-28" : "translate-x-0"} right-0 top-20 z-50 flex transform items-center rounded-l-md bg-white text-xs font-medium text-red-500 shadow-md shadow-gray-600 transition-transform ease-in-out`}
+      className={`fixed ${showWarning ? "translate-x-28 -right-1.5" : "translate-x-0 -right-1"}  top-16 z-20 flex transform items-center rounded-l-md bg-white dark:bg-dark-input text-xs font-medium  shadow-md shadow-gray-500 dark:shadow-black transition-transform ease-in-out`}
     >
       <span
         onClick={() => setShowWarning(!showWarning)}
-        className="rounded-l-md bg-gray-200 px-0.5 py-2"
+        className="rounded-l-md bg-gray-300 px-0.5 py-2"
       >
         {showWarning ? (
           <KeyboardDoubleArrowLeftIcon />
@@ -22,7 +22,7 @@ const ResumeWarningBtn = () => {
       </span>
       <span
         onClick={() => navigate("/myprofile")}
-        className="cursor-pointer p-2"
+        className="cursor-pointer text-red-500 tracking-wide p-2 pr-3"
       >
         Upload Resume !
       </span>

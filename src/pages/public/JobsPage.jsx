@@ -13,7 +13,7 @@ const JobsPage = () => {
   const [showDiv, setShowDiv] = useState(["filter", "sort"]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
-  const [jobsPerPage, setJobsPerPage] = useState(8);
+  const [jobsPerPage, setJobsPerPage] = useState(12);
   const [pageNo, setPageNo] = useState(0);
   const [pageCount, setpageCount] = useState(0);
 
@@ -278,7 +278,7 @@ const JobsPage = () => {
                 </select>
               </div>
 
-              <div className="col-span-6 flex flex-col gap-1 sm:col-span-8 md:col-span-6 lg:col-span-4">
+              <div className="col-span-6 flex flex-col gap-1 sm:col-span-6 md:col-span-5 lg:col-span-4 xl:col-span-3">
                 <select
                   name="sortOrder"
                   id="sortOrder"
@@ -313,8 +313,6 @@ const JobsPage = () => {
             className="input-style ml-1 w-14 sm:ml-2"
             onChange={handleJobsPerPage}
           >
-            <option value={6}>6</option>
-            <option value={8}>8</option>
             <option value={12}>12</option>
             <option value={24}>24</option>
           </select>

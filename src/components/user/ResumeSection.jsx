@@ -4,9 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { resumeSchema } from "../../schemas/uploadSchema";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { toggleRefresh } from "../../redux/features/refreshSlice";
 
 const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
   const [uploading, setUploading] = useState(false);
+  const dispatch = useDispatch()
 
   const {
     register,
@@ -44,6 +47,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
       console.error(err);
     } finally {
       setUploading(false);
+      dispatch(toggleRefresh())
     }
   }
 
@@ -57,13 +61,14 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
       });
       if (response.status === 200) {
         toast.dismiss(toastLoading);
-        toast.success("Resume removed successfully.");
+        toast.success("Resume removed successfully");
       }
     } catch (err) {
       toast.dismiss(toastLoading);
       toast.error("Resume removal failed");
     } finally {
       setRefreshProfile(!refreshProfile);
+      dispatch(toggleRefresh())
     }
   }
 
@@ -109,7 +114,8 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         >
           <input
             type="file"
-            className="w-52 truncate"
+            title="Choose file"
+            className="w-52 text-transparent truncate"
             {...register("resume")}
           />
           {errors.resume && (

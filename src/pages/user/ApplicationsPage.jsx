@@ -116,7 +116,7 @@ const ApplicationsPage = () => {
           </div>
           {showDiv.includes("filter") && (
             <div className="ml-1 grid grid-cols-12 gap-4 gap-y-2 sm:ml-2 sm:gap-6">
-              <div className="col-span-6 flex flex-col gap-1 sm:col-span-3">
+              <div className="col-span-6 flex flex-col gap-1 sm:col-span-4 md:col-span-3 lg:col-span-2">
                 {" "}
                 <div>Status</div>
                 <select
@@ -168,7 +168,7 @@ const ApplicationsPage = () => {
                 </select>
               </div>
 
-              <div className="col-span-6 flex flex-col gap-1 sm:col-span-8 md:col-span-6 lg:col-span-4">
+              <div className="col-span-6 flex flex-col gap-1 sm:col-span-6 md:col-span-5 lg:col-span-4 xl:col-span-3 ">
                 <select
                   name="sortOrder"
                   id="sortOrder"

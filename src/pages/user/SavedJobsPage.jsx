@@ -21,18 +21,19 @@ const SavedJobsPage = () => {
     navigate(`/jobDetails/${job?._id}`);
   }
   useEffect(() => {
-    if (data?.savedJobs && data?.savedJobs.length > 0) {
+    if (data) {
+      setInitialLoading(false);
+    }
+    if (data?.savedJobs) {
       setSavedJobs([...data?.savedJobs]);
     }
   }, [data]);
-  useEffect(() => {
-    if (savedJobs && savedJobs.length > 0) {
-      setInitialLoading(false);
-    }
+ 
+  useEffect(()=>{
     if (savedJobs && savedJobs.length === data?.savedJobsCount) {
       setShowBtn(false);
     }
-  }, [savedJobs]);
+  },[savedJobs])
 
   function handleLoadMore() {
     setLimit(limit + 12);
@@ -79,14 +80,18 @@ const SavedJobsPage = () => {
               >
                 jobs page
               </span>
-              .
+                  {" "}or <span
+                onClick={() => navigate("/")}
+                className="cursor-pointer font-medium text-blue-500 underline"
+              >search jobs</span> to add jobs to saved list.
+              
             </div>
           )}
         </div>
       </div>
 
       <div className="flex w-full justify-center">
-        {showBtn && (
+        {showBtn && !initialLoading && (
           <button
             onClick={handleLoadMore}
             className="btn btn-sm my-10 bg-brand tracking-wide text-white hover:bg-brand-dark active:bg-brand-dark"
