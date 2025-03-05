@@ -82,7 +82,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
           {resume ? (
             <div className="flex gap-4 text-sm tracking-wide">
               <span
-                onClick={() => window.open(resume, "_blank", "noopener,noreferrer")}
+                onClick={() => window.open(resume)}
                 className="text-blue-500 underline"
               >
                 View resume

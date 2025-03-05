@@ -13,7 +13,7 @@ import SignInBtn from "../buttons/SignInBtn";
 
 
 const Header = () => {
-  const { initialized, userLoggedIn } = useSelector((state) => state.user);
+  const { userLoggedIn } = useSelector((state) => state.user);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [headShadow, setHeadShadow] = useState(false);
 
@@ -73,13 +73,13 @@ const Header = () => {
           ) : (
             <div className="mb-3 flex gap-2">
               <div className="sm:hidden">
-                <SignInBtn/>
+                <SignInBtn />
               </div>
               <div className="hidden sm:block">
-                <LoginBtn/>
+                <LoginBtn />
               </div>
               <div className="hidden sm:block">
-                <RegisterBtn/>
+                <RegisterBtn />
               </div>
             </div>
           )}
@@ -111,7 +111,7 @@ const Header = () => {
           }`}
         onClick={() => setSideBarOpen(false)}
       ></div>
-      
+
     </header>
   );
 };
