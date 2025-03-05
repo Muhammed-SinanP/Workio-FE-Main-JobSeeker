@@ -81,14 +81,14 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         <div className="p-1.5">
           {resume ? (
             <div className="flex gap-4 text-sm tracking-wide">
-              <span
+              <a
                 href={`https://docs.google.com/viewer?url=${resume}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 underline"
               >
                 View resume
-              </span>
+              </a>
               <span
                 onClick={handleRemoveResume}
                 className="cursor-pointer text-red-500 underline"
