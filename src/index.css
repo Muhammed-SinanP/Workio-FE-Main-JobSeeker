@@ -66,4 +66,7 @@ body {
   .custom-scrollbar {
     @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-brand-dark scrollbar-thumb-rounded-full;
   }
+  .header{
+    @apply rounded-b-xl border-b-0.5 border-brand-dark bg-white dark:border-dark-text dark:bg-dark-input
+  }
 }

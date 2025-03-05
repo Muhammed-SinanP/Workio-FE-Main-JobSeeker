@@ -110,7 +110,7 @@ const ProfileForm = ({ userProfile }) => {
             />
           ) : (
             <button
-              className="flex items-center text-blue-500"
+                className="flex items-center text-xs md:text-sm text-blue-500"
               onClick={handleEdit}
             >
               <EditIcon className="" fontSize="small" />

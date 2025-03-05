@@ -28,12 +28,12 @@ const SavedJobsPage = () => {
       setSavedJobs([...data?.savedJobs]);
     }
   }, [data]);
- 
-  useEffect(()=>{
+
+  useEffect(() => {
     if (savedJobs && savedJobs.length === data?.savedJobsCount) {
       setShowBtn(false);
-    }
-  },[savedJobs])
+    } 
+  }, [savedJobs])
 
   function handleLoadMore() {
     setLimit(limit + 12);
@@ -47,7 +47,8 @@ const SavedJobsPage = () => {
   return (
     <div className="outer-div min-h-screen pb-16">
       <div className="inner-div pb-0">
-        <div className="mt-4 grid min-h-44 grid-cols-12 gap-4 px-10">
+
+        <div className="mt-4 grid  grid-cols-12 gap-4 px-10">
           {initialLoading ? (
             Array.from({ length: limit }, (_, i) => (
               <div
@@ -57,7 +58,7 @@ const SavedJobsPage = () => {
                 <SkeletonJobCardSm />
               </div>
             ))
-          ) : savedJobs && savedJobs.length > 0 ? (
+          ) : savedJobs && savedJobs.length > 0 && (
             savedJobs.map((element, index) => (
               <div
                 key={index}
@@ -71,24 +72,30 @@ const SavedJobsPage = () => {
                 />
               </div>
             ))
-          ) : (
-            <div className="col-span-12 text-center">
-              Your saved list is empty. Go to{" "}
-              <span
-                onClick={() => navigate("/jobs")}
-                className="cursor-pointer font-medium text-blue-500 underline"
-              >
-                jobs page
-              </span>
-                  {" "}or <span
-                onClick={() => navigate("/")}
-                className="cursor-pointer font-medium text-blue-500 underline"
-              >search jobs</span> to add jobs to saved list.
-              
-            </div>
-          )}
+          )
+
+          }
         </div>
+
+        {savedJobs && savedJobs.length === 0 && <div className="text-center dark:text-dark-text">
+          Your saved list is empty. Go to{" "}
+          <span
+            onClick={() => navigate("/jobs")}
+            className="cursor-pointer font-medium text-blue-500 underline"
+          >
+            jobs page
+          </span>
+          {" "}or <span
+            onClick={() => navigate("/")}
+            className="cursor-pointer font-medium text-blue-500 underline"
+          >search jobs</span> to add jobs to saved list.
+
+        </div>
+        }
+
       </div>
+
+
 
       <div className="flex w-full justify-center">
         {showBtn && !initialLoading && (

@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector } from "react-redux";
 import SideBar from "../SideBar";
-
 import DarkModeBtn from "../buttons/DarkModeBtn";
-import SignBtn from "../buttons/SignBtn";
 import Logo from "../Logo";
-
 import EmployerBtn from "../buttons/EmployerBtn";
-import PersonIcon from "@mui/icons-material/Person";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import PublicNavOptions from "../PublicNavOptions";
 import UserNavOptions from "../user/UserNavOptions";
+import LoginBtn from "../buttons/LoginBtn";
+import RegisterBtn from "../buttons/RegisterBtn";
+import SignInBtn from "../buttons/SigninBtn";
+
 
 const Header = () => {
   const { initialized, userLoggedIn } = useSelector((state) => state.user);
@@ -46,11 +45,10 @@ const Header = () => {
 
   return (
     <header
-      className={`outer-div sticky top-0 z-20 rounded-b-xl border-b-0.5 border-brand-dark bg-white dark:border-dark-text dark:bg-dark-input ${
-        headShadow
-          ? "border-none shadow-sm shadow-brand-dark dark:shadow-black"
-          : "shadow-none"
-      }`}
+      className={`header sticky top-0 z-20 ${headShadow
+        ? "border-none shadow-sm shadow-brand-dark dark:shadow-black"
+        : "shadow-none"
+        }`}
     >
       <div className="flex items-end justify-between rounded-b-xl bg-white px-2 pt-3 sm:px-4 dark:bg-dark-input">
         <div className="flex items-end justify-start gap-2">
@@ -65,43 +63,27 @@ const Header = () => {
             <Logo />
           </div>
 
-          <PublicNavOptions />
+          <div className="ml-2"> <PublicNavOptions /></div>
         </div>
 
         <div className="flex items-end justify-end gap-2">
-          {initialized && (
-            <div>
-              {userLoggedIn ? (
-                <UserNavOptions />
-              ) : (
-                <div className="mb-3 flex gap-2">
-                  <div className="sm:hidden">
-                    <SignBtn
-                      action={"login"}
-                      text={"Sign in"}
-                      icon={<PersonIcon fontSize="small" className="p-1" />}
-                    />
-                  </div>
-                  <div className="hidden sm:block">
-                    <SignBtn
-                      action={"login"}
-                      text={"Login"}
-                      icon={<PersonIcon fontSize="small" className="p-1" />}
-                    />
-                  </div>
-                  <div className="hidden sm:block">
-                    <SignBtn
-                      action={"register"}
-                      text={"Register"}
-                      icon={
-                        <AppRegistrationIcon fontSize="small" className="p-1" />
-                      }
-                    />
-                  </div>
-                </div>
-              )}
+
+          {userLoggedIn ? (
+            <UserNavOptions />
+          ) : (
+            <div className="mb-3 flex gap-2">
+              <div className="sm:hidden">
+                <SignInBtn/>
+              </div>
+              <div className="hidden sm:block">
+                <LoginBtn/>
+              </div>
+              <div className="hidden sm:block">
+                <RegisterBtn/>
+              </div>
             </div>
           )}
+
 
           <div className="mb-2.5 ml-0 flex items-center gap-2 sm:ml-2.5">
             <div className="hidden sm:block">
@@ -125,11 +107,11 @@ const Header = () => {
         setSideBarOpen={setSideBarOpen}
       />
       <div
-        className={`fixed left-0 top-0 h-screen w-full bg-black bg-opacity-30 transition-opacity duration-500 sm:hidden ${
-          sideBarOpen ? "visible" : "invisible"
-        }`}
+        className={`fixed left-0 top-0 h-screen w-full bg-black bg-opacity-30 transition-opacity duration-500 sm:hidden ${sideBarOpen ? "visible" : "invisible"
+          }`}
         onClick={() => setSideBarOpen(false)}
       ></div>
+      
     </header>
   );
 };

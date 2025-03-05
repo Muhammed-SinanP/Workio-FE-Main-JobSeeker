@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <div
       onClick={() => navigate("/")}
-      className="flex cursor-pointer items-end"
+      className="flex scale-95 cursor-pointer items-end"
     >
       <img src={brandLogo} alt="brand logo" className="h-8" />
       <div className="-mb-1 hidden sm:block">

@@ -83,7 +83,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
             <div className="flex gap-4 text-sm tracking-wide">
               <a
                 href={resume}
-                target="_black"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 underline"
               >
@@ -102,11 +102,11 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         </div>
       </div>
       <div className="my-1 flex flex-col gap-2 text-sm tracking-wide">
-        <div className="flex">
-          <p className="cursor-pointer underline">
-            {resume ? "Update" : "Upload"} Resume
-          </p>
-        </div>
+
+        <p>
+          {resume ? "Update" : "Upload"} Resume:
+        </p>
+
 
         <form
           className={`flex flex-col items-start justify-center gap-1.5`}
@@ -130,7 +130,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
           )}
 
           <button
-            className={`btn btn-xs ${uploading && "btn-disabled"}`}
+            className={`btn btn-xs border-0.5 border-dark-light hover:border-dark-light dark:hover:border-dark-text dark:border-dark-text ${uploading && "btn-disabled"}`}
             type="submit"
           >
             {resume ? "Update" : "Upload"}

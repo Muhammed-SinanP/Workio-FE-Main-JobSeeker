@@ -97,6 +97,7 @@ const HomePage = () => {
                     />
                   </div>
                 ))}
+                <span className="text-center text-xxs tracking-wide text-dark-light">End of the results.</span>
             </div>
             <div className="2xl: hidden h-5/6 w-2/3 px-2 md:block">
               {selectedJob && (

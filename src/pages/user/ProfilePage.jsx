@@ -90,12 +90,12 @@ const ProfilePage = () => {
           <SkeletonProfilePage />
         ) : (
           <div className="flex flex-col gap-4 pb-32">
-            <div className="flex justify-between gap-2 rounded-md bg-brand-light p-6 shadow-md dark:bg-dark-input">
+            <div className="flex justify-between gap-2 rounded-md bg-brand-light p-4 sm:p-6 shadow-sm dark:bg-dark-input">
               <div className="flex flex-col gap-2 pb-2">
-                <div className="text-2xl font-bold text-brand-dark lg:text-3xl dark:text-brand">
+                <div className="text-xl font-bold text-brand-dark lg:text-3xl dark:text-brand">
                   {userProfile?.profile?.name}
                 </div>
-                <div className="tracking-wide dark:text-dark-text">
+                <div className="tracking-wide text-sm dark:text-dark-text">
                   Manage your job seeker profile
                 </div>
               </div>
@@ -107,8 +107,8 @@ const ProfilePage = () => {
                 size="70px"
               />
             </div>
-            <div className="rounded-md bg-white p-4 shadow-md dark:bg-dark dark:text-dark-text">
-              <div className="relative rounded-md border p-2 pb-20 sm:p-4 sm:pb-28">
+            <div className="rounded-md bg-white p-4 shadow-sm dark:bg-dark dark:text-dark-text">
+              <div className="relative rounded-md border p-2 pl-3 pb-20 sm:p-4 sm:pb-28">
                 <div className="flex flex-col gap-1">
                   <div className="mt-1.5 flex items-center gap-1">
                     <PersonIcon className="dark:text-dark-text" />
@@ -117,7 +117,7 @@ const ProfilePage = () => {
                       Personal info
                     </div>
                   </div>
-                  <div className="w-2/3 text-xxs text-gray-600 sm:text-xs dark:text-dark-text">
+                  <div className="w-2/3 text-xxs tracking-wide text-gray-600 sm:text-xs dark:text-dark-text">
                     Your name is visible to other users
                   </div>
                 </div>

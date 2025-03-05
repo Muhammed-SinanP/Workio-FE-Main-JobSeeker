@@ -37,6 +37,7 @@ export default {
       },
       borderWidth: {
         0.5: "0.5px",
+        3: "2px",
       },
     },
   },

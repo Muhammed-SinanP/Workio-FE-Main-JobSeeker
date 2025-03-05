@@ -6,7 +6,7 @@ import EmployerBtn from "../buttons/EmployerBtn";
 const SignHeader = () => {
   return (
     <header
-      className={`outer-div rounded-b-xl border-b-0.5 border-brand-dark bg-white dark:border-dark-text dark:bg-dark-input`}
+      className={`header`}
     >
       <div className="flex items-end justify-between rounded-b-xl bg-white px-2 pt-3 sm:px-4 dark:bg-dark-input">
         <div className="flex items-end justify-start gap-2">
