@@ -81,14 +81,12 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         <div className="p-1.5">
           {resume ? (
             <div className="flex gap-4 text-sm tracking-wide">
-              <a
-                href={resume}
-                target="_blank"
-                rel="noopener noreferrer"
+              <span
+                onClick={() => window.open(resume, "_blank", "noopener,noreferrer")}
                 className="text-blue-500 underline"
               >
                 View resume
-              </a>
+              </span>
               <span
                 onClick={handleRemoveResume}
                 className="cursor-pointer text-red-500 underline"
