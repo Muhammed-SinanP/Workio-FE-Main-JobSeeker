@@ -9,7 +9,7 @@ import PublicNavOptions from "../PublicNavOptions";
 import UserNavOptions from "../user/UserNavOptions";
 import LoginBtn from "../buttons/LoginBtn";
 import RegisterBtn from "../buttons/RegisterBtn";
-import SignInBtn from "../buttons/SigninBtn";
+import SignInBtn from "../buttons/SignInBtn";
 
 
 const Header = () => {
