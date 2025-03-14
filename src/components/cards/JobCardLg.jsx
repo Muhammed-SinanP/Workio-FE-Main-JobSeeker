@@ -3,7 +3,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import DescriptionIcon from "@mui/icons-material/Description";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import ErrorIcon from "@mui/icons-material/Error";
 import WorkIcon from "@mui/icons-material/Work";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
@@ -25,13 +25,13 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
   const navigate = useNavigate();
   const [job, jobError, jobLoading] = useFetch(`/job/${jobId}`);
   const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [
-    refreshCardLg,
+    refreshCardLg,jobId
   ]);
   const [savedJobs, setSavedJobs] = useState([]);
 
   useEffect(() => {
     setSavedJobs(savedData?.savedJobs);
-  }, [savedData]);
+  }, [savedData,jobId]);
 
   useEffect(() => {
     const detailsSection = detailsRef.current;
@@ -178,7 +178,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
               </div>
             </div>
             <div className="flex items-center gap-2 capitalize">
-              <div className="text-sm">{job?.employer?.name}</div>
+                <div className="text-sm">{job?.employer?.profile.company ? job.employer.profile.company: job.employer.name}</div>
               <div className="h-6 w-1 border-r border-dark-text"></div>
               <div className="flex items-center text-sm">
                 <LocationOnIcon fontSize="small" className="p-1 px-0" />
@@ -216,7 +216,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
             </div>
             <div className="border-b border-gray-300 px-4 py-4">
               <span className="flex items-center gap-1 font-medium">
-                <DescriptionIcon fontSize="small" />
+                <AssignmentIcon fontSize="small"/>
                 Description
               </span>
               <div className="font-paraFont mt-1 pl-6 text-sm">
@@ -231,7 +231,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
               <div className="font-paraFont mt-1 pl-6 text-sm">
                 {job?.requirements?.map((element, index) => {
                   if (element.length > 0) {
-                    return <li key={index}>{element}.</li>;
+                    return <li key={index}>{element}</li>;
                   }
                 })}
               </div>

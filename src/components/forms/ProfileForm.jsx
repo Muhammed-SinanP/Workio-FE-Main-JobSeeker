@@ -1,112 +1,85 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
+import {useForm} from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { profileSchema } from "../../schemas/userSchema";
 
 const ProfileForm = ({ userProfile }) => {
   const [edit, setEdit] = useState(false);
-  const inputRef = useRef(null);
-
-  const [formData, setFormData] = useState({
-    userName: "N/A",
-    userEmail: "N/A",
-  });
-
-  useEffect(() => {
-    setFormData({
+  
+  const {register,handleSubmit,formState:{errors},setFocus} = useForm({resolver:zodResolver(profileSchema),
+    defaultValues:{
       userName: userProfile?.profile.name || "N/A",
       userEmail: userProfile?.profile.email || "N/A",
-    });
-  }, [userProfile]);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  }
+    }
+  })
+  
 
   function handleEdit() {
     setEdit(true);
-    inputRef.current.focus();
+    setFocus("userName")
   }
 
-  async function handleSubmit(e) {
-    console.log("aa");
-
-    e.preventDefault();
+  async function handleProfileUpdate(data) {
+    
     try {
       const response = await axiosInstance({
         method: "PUT",
         url: "/user/myProfile",
-        data: formData,
-        params: {
-          userRole: "job_seeker",
-        },
+        data: data,
       });
 
       if (response.status === 200) {
         toast.success("Profile update success");
-        console.log("update profile success");
-        setEdit("");
+        setEdit(false);
       }
     } catch (err) {
-      console.log("update profile failed", err);
+      toast.error("Profile updation failed")
     }
   }
   return (
     <>
-      <form onSubmit={handleSubmit} className="my-4 flex flex-col gap-4">
+      <form onSubmit={handleSubmit(handleProfileUpdate)} className="mb-2 gap-2 flex flex-col  text-dark dark:text-dark-text">
         <div className="flex flex-col">
           <label className="font-medium" htmlFor="userName">
-            Name
+           Your Name
           </label>
           <input
-            ref={inputRef}
             id="userName"
-            className={`input-style capitalize dark:bg-dark ${
-              edit ? "" : "cursor-auto border-none"
+            className={`input-style capitalize bg-transparent ${
+              edit ? "" : "cursor-auto border-none -mt-1.5"
             }`}
-            type="text"
-            name="userName"
-            onChange={handleChange}
-            value={formData.userName}
-            required
+           {...register("userName")}
             readOnly={edit ? false : true}
           />
+          {errors.userName && <p className="err-msg">{errors.userName.message}</p>}
         </div>
         <div className="flex flex-col">
           <label
-            className="col-span-3 font-medium md:col-span-3"
+            className="font-medium"
             htmlFor="userEmail"
           >
             Email
           </label>
           <input
             id="userEmail"
-            className={`input-style col-span-6 md:col-span-6 dark:bg-dark ${
-              edit ? "" : "cursor-auto border-none"
+            className={`input-style bg-transparent  ${
+              edit ? "" : "cursor-auto border-none -mt-1.5"
             }`}
-            type="email"
-            name="userEmail"
-            onChange={handleChange}
-            value={formData.userEmail}
-            required
+            {...register("userEmail")}
             readOnly={edit ? false : true}
           />
+          {errors.userEmail && <p className="err-msg">{errors.userEmail.message}</p>}
         </div>
         <div className="absolute right-4 top-4 font-semibold tracking-wide">
           {edit ? (
             <input
               type="submit"
               value="Update"
-              className="btn btn-sm border-none bg-brand text-white hover:bg-brand-dark"
+              className="btn btn-sm bg-green-500 hover:bg-green-600 text-white "
             />
           ) : (
             <button

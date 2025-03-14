@@ -7,7 +7,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { axiosInstance } from "../../config/axiosInstance";
 import toast from "react-hot-toast";
 
-const JobCardSm = ({ job, cardClick, savedJobs, refreshPage }) => {
+const JobCardSm = ({ job, handleCardClick, savedJobs, refreshPage }) => {
   const timeoutRef = useRef(null);
 
   function calculateDays(date) {
@@ -67,7 +67,7 @@ const JobCardSm = ({ job, cardClick, savedJobs, refreshPage }) => {
 
   return (
     <div
-      onClick={() => cardClick(job)}
+      onClick={() => handleCardClick(job)}
       className={`group relative flex h-full w-full cursor-pointer flex-col items-start gap-1 rounded-md border border-white bg-white p-3 dark:border-dark-input dark:bg-dark-input dark:text-dark-text`}
     >
       <div className="flex w-full justify-between gap-2.5">
@@ -90,7 +90,7 @@ const JobCardSm = ({ job, cardClick, savedJobs, refreshPage }) => {
           )}
         </button>
       </div>
-      <div className="text-sm capitalize">{job?.employer?.name}</div>
+      <div className="text-sm capitalize">{job?.employer?.profile.company ? job.employer.profile.company : job.employer.name}</div>
       <div className="flex items-center text-xs capitalize">
         <LocationOnIcon fontSize="small" className="-ml-1 px-0 py-1" />
         {job?.location?.city}, {job?.location?.state}, {job?.location?.country}

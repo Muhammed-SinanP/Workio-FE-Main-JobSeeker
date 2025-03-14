@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const ErrorDiv = ({ info }) => {
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="outer-div bg-brand-lightest min-h-screen dark:bg-dark-light dark:text-dark-text">
       <div className="inner-div text-center tracking-wide">

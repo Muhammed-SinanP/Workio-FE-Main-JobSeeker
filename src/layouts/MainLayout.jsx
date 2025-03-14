@@ -50,13 +50,21 @@ const MainLayout = () => {
 
 
   useEffect(() => {
-    initialized && userLoggedIn && checkResume()
     checkUser();
-  }, [location.pathname, refresh, userLoggedIn, initialized]);
+  }, [location.pathname]);
+
+  useEffect(()=>{
+    initialized && userLoggedIn && checkResume()
+  },[refresh,userLoggedIn])
+
+
+
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     document.documentElement.setAttribute("data-theme", theme);
   }, []);
+  
+  
   return (
 
     initialized ?

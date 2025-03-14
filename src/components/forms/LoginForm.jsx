@@ -54,9 +54,9 @@ const LoginForm = ({ submitAuthForm }) => {
             className="absolute right-1.5 top-1 rounded-full"
           >
             {showPassword ? (
-              <VisibilityIcon className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900" />
+              <VisibilityIcon className="cursor-pointer text-dark-text" />
             ) : (
-              <VisibilityOffIcon className="cursor-pointer text-gray-800 opacity-60 hover:text-gray-900" />
+              <VisibilityOffIcon className="cursor-pointer text-dark-text" />
             )}
           </span>
         </div>

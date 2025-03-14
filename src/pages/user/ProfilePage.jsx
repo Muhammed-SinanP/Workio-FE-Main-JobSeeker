@@ -27,13 +27,9 @@ const ProfilePage = () => {
       try {
         const response = await axiosInstance({
           method: "DELETE",
-          url: "/user/deleteAccount",
-          params: {
-            userRole: "job_seeker",
-          },
+          url: "/user/deleteMyAccount",
         });
         if (response.status === 200) {
-          console.log("account and jobs deleted");
           navigate("/");
         }
       } catch (err) {
@@ -58,9 +54,6 @@ const ProfilePage = () => {
         const response = await axiosInstance({
           method: "POST",
           url: "/user/logout",
-          params: {
-            userRole: "job_seeker",
-          },
         });
         if (response.status === 200) {
           navigate("/auth/login");
@@ -122,7 +115,7 @@ const ProfilePage = () => {
                   </div>
                 </div>
 
-                <div className="my-4">
+                <div className="mt-4">
                   <ProfileForm userProfile={userProfile} />
 
                   <ResumeSection

@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import PasswordResetForm from "../../components/forms/PasswordResetForm";
 

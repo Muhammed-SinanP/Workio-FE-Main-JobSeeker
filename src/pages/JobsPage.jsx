@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../hooks/useFetch";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import JobCardSm from "../../components/cards/JobCardSm";
-import SkeletonJobCardSm from "../../components/skeletons/SkeletonJobCardSm";
-import PaginationBtn from "../../components/buttons/PaginationBtn";
+import JobCardSm from "../components/cards/JobCardSm";
+import SkeletonJobCardSm from "../components/skeletons/SkeletonJobCardSm";
+import PaginationBtn from "../components/buttons/PaginationBtn";
+import { useSelector } from "react-redux";
 
 const JobsPage = () => {
   const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
+  const { userLoggedIn } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [showDiv, setShowDiv] = useState(["filter", "sort"]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -29,13 +31,14 @@ const JobsPage = () => {
   });
 
   const [data, error, isLoading] = useFetch(
-    `/job/allOpen?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`,
+    `/job/allOpenJobs?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`,
   );
 
   const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [
     refreshSavedJobs,
   ]);
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -85,7 +88,7 @@ const JobsPage = () => {
     }
   }
 
-  function cardClick(job) {
+  function handleCardClick(job) {
     navigate(`/jobDetails/${job?._id}`);
   }
 
@@ -338,7 +341,7 @@ const JobsPage = () => {
               >
                 <JobCardSm
                   job={element}
-                  cardClick={cardClick}
+                  handleCardClick={handleCardClick}
                   savedJobs={savedJobs}
                   refreshPage={refreshPage}
                 />

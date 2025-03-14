@@ -15,7 +15,7 @@ const SavedJobsPage = () => {
   const [initialLoading, setInitialLoading] = useState(true);
   const [data, error, isLoading] = useFetch(
     `/user/mySavedJobs?limit=${limit}`,
-    [refresh],
+    [refresh]
   );
   function cardClick(job) {
     navigate(`/jobDetails/${job?._id}`);

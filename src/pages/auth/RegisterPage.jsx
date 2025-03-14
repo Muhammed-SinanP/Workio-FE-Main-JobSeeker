@@ -15,7 +15,7 @@ const RegisterPage = () => {
           <div className="flex flex-col items-center justify-between gap-6 text-center sm:gap-10 sm:text-start">
             <div>
               <h1 className="mb-2 font-brand-font text-2xl text-brand sm:text-4xl">
-                Welcome to Workio!
+                Welcome To Workio!
               </h1>
               <p className="px-2 font-para-font text-sm tracking-wider text-brand-dark lg:text-base dark:text-dark-text">
                 Enter your details and start your journey and explore the

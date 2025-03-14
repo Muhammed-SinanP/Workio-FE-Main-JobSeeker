@@ -2,7 +2,7 @@ import React from "react";
 
 const SkeletonJobCardSm = () => {
   return (
-    <div className="dark:bg-darkColor-input skeleton flex h-full w-full flex-col items-start gap-1.5 rounded-md p-3 pt-4 shadow-sm">
+    <div className="dark:bg-dark-input skeleton flex h-full w-full flex-col items-start gap-1.5 rounded-md p-3 pt-4 shadow-sm">
       <div className="flex w-full items-center justify-between gap-2">
         <div className="skeleton-custom-color h-8 w-56"></div>
         <div className="skeleton-custom-color mb-1 mr-1 h-6 w-4"></div>

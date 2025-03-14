@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import JobSearchForm from "../../components/forms/JobSearchForm";
-import JobCardSm from "../../components/cards/JobCardSm";
+import JobSearchForm from "../components/forms/JobSearchForm";
+import JobCardSm from "../components/cards/JobCardSm";
 import CloseIcon from "@mui/icons-material/Close";
-import JobCardLg from "../../components/cards/JobCardLg";
-import useFetch from "../../hooks/useFetch";
-import ArticleSuggestions from "../../components/ArticleSuggestions";
+import JobCardLg from "../components/cards/JobCardLg";
+import useFetch from "../hooks/useFetch";
+import ArticleSuggestions from "../components/ArticleSuggestions";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
   const [refreshCardLg, setRefreshCardLg] = useState(false);
-
-  const [savedData, error, loading] = useFetch("/user/mySavedJobs", [
+  const { initialized, userLoggedIn } = useSelector((state) => state.user);
+  const [savedData, error, loading] = useFetch( userLoggedIn?"/user/mySavedJobs":null, [
     refreshSavedJobs,
   ]);
   const [savedJobs, setSavedJobs] = useState([]);
@@ -36,7 +37,7 @@ const HomePage = () => {
     }
   }
 
-  function cardClick(job) {
+  function handleCardClick(job) {
     setSelectedJob(job);
     setBottomCard(true);
   }
@@ -46,7 +47,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    if (bottomCard) {
+    if (bottomCard && window.innerWidth<768) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -91,7 +92,7 @@ const HomePage = () => {
                   >
                     <JobCardSm
                       job={element}
-                      cardClick={cardClick}
+                      handleCardClick={handleCardClick}
                       savedJobs={savedJobs}
                       refreshPage={refreshPage}
                     />
