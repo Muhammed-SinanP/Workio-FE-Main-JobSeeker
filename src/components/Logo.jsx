@@ -10,7 +10,7 @@ const Logo = () => {
       className="flex scale-95 cursor-pointer items-end"
     >
       <img src={brandLogo} alt="brand logo" className="h-8" />
-      <div className="-mb-1 hidden sm:block">
+      <div className="-mb-1 ">
         <h1 className="font-brand-font text-2xl text-brand">
           <span className="text-3xl">W</span>
           <span className="-ml-1">orkio</span>

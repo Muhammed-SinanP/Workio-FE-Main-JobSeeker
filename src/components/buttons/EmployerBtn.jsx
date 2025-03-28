@@ -9,7 +9,7 @@ const EmployerBtn = () => {
   return (
     <button
       onClick={openEmployerSite}
-      className="cursor-pointer text-sm font-light tracking-wide hover:text-gray-800 dark:text-dark-text dark:hover:text-gray-400"
+      className="cursor-pointer text-sm font-light tracking-wide hover:text-black dark:text-dark-text dark:hover:text-gray-300"
     >
       <span className="hidden sm:flex">
         Employers<span className="mx-0.5 scale-110 font-thin">/</span>Post Job

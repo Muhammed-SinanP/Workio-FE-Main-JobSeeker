@@ -5,16 +5,17 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { jobSearchSchema } from "../../schemas/searchSchema";
+import { jobsSearchSchema } from "../../schemas/searchSchema";
 import useFetch from "../../hooks/useFetch";
 
 const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
-  const [data, error, isLoading] = useFetch("/job/availableJobTitles")
-  const [focusTitle, setFocusTitle] = useState(false)
-  const [showTitleSuggestions, setShowTitleSuggestions] = useState(false)
-  const [selectedTitle, setSelectedTitle] = useState("")
-  const [selectedTitleSuggestion, setSelectedTitleSuggestion] = useState(-1)
+  const [suggestions, suggestionsError, suggestionsLoading] = useFetch("/job/availableJobTitles");
+  const [isJobsLoading, setIsJobsLoading] = useState(false);
 
+  const [focusTitle, setFocusTitle] = useState(false);
+  const [showTitleSuggestions, setShowTitleSuggestions] = useState(false);
+  const [selectedTitle, setSelectedTitle] = useState("");
+  const [selectedTitleSuggestion, setSelectedTitleSuggestion] = useState(-1);
 
   useEffect(() => {
     function removeTitleSuggestions(event) {
@@ -36,30 +37,26 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
     };
   }, []);
 
-
   const {
     register,
     watch,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(jobSearchSchema) });
+  } = useForm({ resolver: zodResolver(jobsSearchSchema) });
   const jobExperience = watch("jobExperience", "");
   const jobTitle = watch("jobTitle");
   const jobLocation = watch("jobLocation");
-
-  const [isJobsLoading, setIsJobsLoading] = useState(false);
-
   useEffect(() => {
-
     !filteredJobs && setFilteredJobs([]);
-
   }, [jobTitle, jobExperience, jobLocation]);
 
   useEffect(() => {
-    jobTitle === selectedTitle ? setShowTitleSuggestions(false) : setShowTitleSuggestions(true)
-    setSelectedTitleSuggestion(-1)
-  }, [jobTitle])
+    jobTitle === selectedTitle
+      ? setShowTitleSuggestions(false)
+      : setShowTitleSuggestions(true);
+    setSelectedTitleSuggestion(-1);
+  }, [jobTitle]);
 
   async function searchJobs(data) {
     setIsJobsLoading(true);
@@ -78,64 +75,66 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
         setSelectedJob(firstSelectedJob);
       }
     } catch (err) {
-      console.log("err in filtereing", err);
-    } finally {
+      setFilteredJobs(null)
+     } finally {
       setIsJobsLoading(false);
     }
   }
 
   const filteredSuggestions = useMemo(() => {
-    if (data) {
-      return data.filter((element, index) => element.title.toLowerCase().includes(jobTitle.toLowerCase()))
+    if (suggestions) {
+      return suggestions.filter(element => element.title.toLowerCase().includes(jobTitle.toLowerCase()),
+      );
     }
-  }, [jobTitle, data])
+  }, [jobTitle, suggestions]);
 
   function handleStyleSuggestion(title, searchString) {
-
     const regex = new RegExp(`(${searchString})`, "gi"); // searchString case-insensitively
     const parts = title.split(regex);
 
     const styledSuggestion = parts.map((part, index) =>
       part.toLowerCase() === searchString.toLowerCase() ? (
-        <span className="font-semibold" key={index}>{part}</span>
+        <span className="font-semibold" key={index}>
+          {part}
+        </span>
       ) : (
         part
-      )
+      ),
     );
     return styledSuggestion;
   }
+
   function handleSelectSuggestion(e) {
-    console.log("adfafdffafdff");
-
-
-    setValue("jobTitle", e.target.innerText, { shouldValidate: true })
-    setSelectedTitle(e.target.innerText)
-
+    setValue("jobTitle", e.target.innerText, { shouldValidate: true });
+    setSelectedTitle(e.target.innerText);
   }
 
   function handleKeyDown(e) {
-    const key = e.key
-
-
-    if (key === "ArrowUp" || key === "ArrowDown" || key === "Enter" && filteredSuggestions.length > 0) {
-      e.preventDefault()
+    const key = e.key;
+    if (
+      key === "ArrowUp" ||
+      key === "ArrowDown" ||
+      key === "Enter"
+    ) {
+      e.preventDefault();
       if (key === "ArrowUp" && selectedTitleSuggestion >= 0) {
-        setSelectedTitleSuggestion(prev => prev - 1)
+        setSelectedTitleSuggestion((prev) => prev - 1);
+      } else if (
+        key === "ArrowDown" &&
+        selectedTitleSuggestion < filteredSuggestions.length - 1
+      ) {
+        setSelectedTitleSuggestion((prev) => prev + 1);
+      } else if (key === "Enter" && selectedTitleSuggestion >= 0) {
+        setValue(
+          "jobTitle",
+          filteredSuggestions[selectedTitleSuggestion].title,
+          { shouldValidate: true },
+        );
+        setSelectedTitle(filteredSuggestions[selectedTitleSuggestion].title);
+        setSelectedTitleSuggestion(-1);
       }
-      else if (key === "ArrowDown" && selectedTitleSuggestion < filteredSuggestions.length - 1) {
-        setSelectedTitleSuggestion(prev => prev + 1)
-      }
-      else if (key === "Enter" && selectedTitleSuggestion >= 0) {
-        setValue("jobTitle", filteredSuggestions[selectedTitleSuggestion].title, { shouldValidate: true })
-        setSelectedTitle(filteredSuggestions[selectedTitleSuggestion].title)
-        setSelectedTitleSuggestion(-1)
-      }
-
-    } else return
-
-
+    } else return;
   }
-
 
   return (
     <form
@@ -146,41 +145,45 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
       <div className="job-search-form-column relative">
         <SearchIcon className="dark:text-dark-text" />
         <input
-
           onKeyDown={handleKeyDown}
           id="jobTitle"
           onFocus={() => {
             setFocusTitle(true);
           }}
-
-
           {...register("jobTitle")}
           placeholder="Job title"
           autoComplete="off"
           className={`search-input ${errors?.jobTitle && "border-b border-b-red-500 text-red-500 dark:text-red-500"} pl-2 md:pl-1 dark:text-dark-text`}
         />
         {errors.jobTitle && (
-          <p className="absolute text-center -top-7 left-7 rounded-md bg-white px-1.5 py-0.5 text-xxs font-medium tracking-wide text-red-500 shadow-md dark:bg-dark-light">
+          <p className="absolute -top-7 left-7 rounded-md bg-white px-1.5 py-0.5 text-center text-xxs font-medium tracking-wide text-red-500 shadow-md dark:bg-dark-light">
             {errors.jobTitle?.message}
           </p>
         )}
 
-
-        {focusTitle && jobTitle && jobTitle.length > 0 && showTitleSuggestions && <ul id="jobSuggestions" className="absolute top-9  w-full shadow-md  rounded-md z-10 bg-white border-0.5 dark:bg-dark dark:text-dark-text p-1"> {filteredSuggestions && filteredSuggestions.length > 0 ? filteredSuggestions.slice(0, 10).map((suggestion, index) => <li key={suggestion._id} onClick={handleSelectSuggestion} className={`${selectedTitleSuggestion === index && "bg-gray-200"} p-1 text-xs hover:bg-gray-200 dark:hover:text-dark-input cursor-pointer`}>{handleStyleSuggestion(suggestion.title, jobTitle)}</li>)
-
-          :
-          <li className="p-1 text-xs">/ No data available /</li>
-        }
-
-
-        </ul>}
-
-
-
-
-
-
-
+        {focusTitle &&
+          jobTitle &&
+          jobTitle.length > 0 &&
+          showTitleSuggestions && (
+            <ul
+              id="jobSuggestions"
+              className="absolute top-9 z-10 w-full rounded-md border-0.5 bg-white p-1 shadow-md dark:bg-dark dark:text-dark-text"
+            >
+              {filteredSuggestions && filteredSuggestions.length > 0 ? (
+                filteredSuggestions.slice(0, 10).map((suggestion, index) => (
+                  <li
+                    key={suggestion._id}
+                    onClick={handleSelectSuggestion}
+                    className={`${selectedTitleSuggestion === index && "bg-gray-200"} cursor-pointer p-1 text-sm hover:bg-gray-200 dark:hover:text-dark-input`}
+                  >
+                    {handleStyleSuggestion(suggestion.title, jobTitle)}
+                  </li>
+                ))
+              ) : (
+                <li className="p-1 text-sm">/ No data available /</li>
+              )}
+            </ul>
+          )}
       </div>
 
       <div className="job-search-form-column">
@@ -198,12 +201,11 @@ const JobSearchForm = ({ filteredJobs, setFilteredJobs, setSelectedJob }) => {
         <WorkIcon className="dark:text-dark-text" />
         <select
           id="jobExperience"
-          // name="jobExperience"
           {...register("jobExperience")}
           className={`search-input cursor-pointer border-none ${jobExperience === "" ? "text-placeholder" : "text-black dark:text-dark-text"}`}
         >
           <option value="" className="hidden">
-            Experience
+            Experience (not compulsory)
           </option>
           <option value={0} className="text-xs">
             Fresher / &lt; 1 year

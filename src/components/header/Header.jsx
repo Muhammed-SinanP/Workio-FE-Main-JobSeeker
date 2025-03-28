@@ -11,12 +11,10 @@ import LoginBtn from "../buttons/LoginBtn";
 import RegisterBtn from "../buttons/RegisterBtn";
 import SignInBtn from "../buttons/SignInBtn";
 
-
 const Header = () => {
   const { userLoggedIn } = useSelector((state) => state.user);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [headShadow, setHeadShadow] = useState(false);
-
 
   useEffect(() => {
     if (sideBarOpen) {
@@ -29,7 +27,6 @@ const Header = () => {
       document.body.style.overflow = "auto";
     };
   }, [sideBarOpen]);
-
 
   useEffect(() => {
     function handleScroll() {
@@ -45,10 +42,11 @@ const Header = () => {
 
   return (
     <header
-      className={`header sticky top-0 z-20 ${headShadow
-        ? "border-none shadow-sm shadow-brand-dark dark:shadow-black"
-        : "shadow-none"
-        }`}
+      className={`header sticky top-0 z-20 ${
+        headShadow
+          ? "border-none shadow-sm shadow-brand-dark dark:shadow-black"
+          : "shadow-none"
+      }`}
     >
       <div className="flex items-end justify-between rounded-b-xl bg-white px-2 pt-3 sm:px-4 dark:bg-dark-input">
         <div className="flex items-end justify-start gap-2">
@@ -63,11 +61,13 @@ const Header = () => {
             <Logo />
           </div>
 
-          <div className="ml-2"> <PublicNavOptions /></div>
+          <div className="ml-2">
+            {" "}
+            <PublicNavOptions />
+          </div>
         </div>
 
         <div className="flex items-end justify-end gap-2">
-
           {userLoggedIn ? (
             <UserNavOptions />
           ) : (
@@ -83,7 +83,6 @@ const Header = () => {
               </div>
             </div>
           )}
-
 
           <div className="mb-2.5 ml-0 flex items-center gap-2 sm:ml-2.5">
             <div className="hidden sm:block">
@@ -107,11 +106,11 @@ const Header = () => {
         setSideBarOpen={setSideBarOpen}
       />
       <div
-        className={`fixed left-0 top-0 h-screen w-full bg-black bg-opacity-30 transition-opacity duration-500 sm:hidden ${sideBarOpen ? "visible" : "invisible"
-          }`}
+        className={`fixed left-0 top-0 h-screen w-full bg-black bg-opacity-30 transition-opacity duration-500 sm:hidden ${
+          sideBarOpen ? "visible" : "invisible"
+        }`}
         onClick={() => setSideBarOpen(false)}
       ></div>
-
     </header>
   );
 };

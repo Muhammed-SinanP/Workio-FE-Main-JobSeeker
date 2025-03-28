@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AuthForm from "../../components/forms/AuthForm";
 import { useNavigate } from "react-router-dom";
 const registerImg = "/registerImg.png";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const navigate = useNavigate()
   return (
-    <div className="outer-div -mt-4 min-h-screen py-4">
+    <div className="page-div">
       <div className="inner-div flex flex-col gap-2 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
         <div className="">
           <div className="flex flex-col items-center justify-between gap-6 text-center sm:gap-10 sm:text-start">

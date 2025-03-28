@@ -16,21 +16,24 @@ const PasswordChangeForm = () => {
   } = useForm({ resolver: zodResolver(passwordChangeSchema) });
 
   async function changePassword(data) {
+    toast.dismiss()
+    const loading = toast.loading("Updating password")
     try {
       const response = await axiosInstance({
         method: "POST",
         url: "/user/changeMyPassword",
         data: data,
       });
-
+       toast.dismiss(loading)
       if (response.status === 200) {
-        toast.success("Password Updated Successfully");
-        navigate("/");
+        toast.success("Password updated successfully");
+        navigate(-1);
       }
     } catch (err) {
+      toast.dismiss(loading)
       if (err.status === 401) {
         toast.error("Incorrect password");
-      } else if (err.status == 400) {
+      } else if (err.status == 409) {
         toast.error("Current and new passwords can't be same");
       }
     }
@@ -58,7 +61,7 @@ const PasswordChangeForm = () => {
       <div className="-mt-1.5 text-end">
         <span
           onClick={() => navigate("/forgotPassword")}
-          className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600"
+          className="forgot-password"
         >
           Forgot password?
         </span>

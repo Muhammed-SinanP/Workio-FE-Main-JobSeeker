@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import SignHeader from "../components/header/SignHeader";
 import SignFooter from "../components/footer/SignFooter";
 import Footer from "../components/footer/Footer";
-
 import ResumeWarningBtn from "../components/buttons/ResumeWarningBtn";
 import Header from "../components/header/Header";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { initialized, userLoggedIn } = useSelector((state) => state.user);
-  const { refresh } = useSelector(state => state.refresh)
+  const { refresh } = useSelector((state) => state.refresh);
   const [hasResume, setHasResume] = useState(true);
   const location = useLocation();
 
@@ -47,57 +46,44 @@ const MainLayout = () => {
     }
   }
 
-
-
   useEffect(() => {
     checkUser();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
-  useEffect(()=>{
-    initialized && userLoggedIn && checkResume()
-  },[refresh,userLoggedIn])
-
-
+  useEffect(() => {
+    initialized && userLoggedIn && checkResume();
+  }, [refresh, userLoggedIn]);
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     document.documentElement.setAttribute("data-theme", theme);
   }, []);
-  
-  
-  return (
 
-    initialized ?
-      <div className="flex min-h-screen flex-col bg-brand-extralight dark:bg-dark-light">
-        {initialized && userLoggedIn && !hasResume && <ResumeWarningBtn />}
-        {
-          location.pathname == "/auth/login" ||
-            location.pathname == "/auth/register" ? (
-            <SignHeader />
-          ) : (
-            <Header />
-          )
-        }
+  return initialized ? (
+    <div className="flex min-h-screen flex-col bg-brand-extralight dark:bg-dark-light">
+      {userLoggedIn && !hasResume && <ResumeWarningBtn />}
+      {location.pathname == "/auth/login" ||
+        location.pathname == "/auth/register" ? (
+        <SignHeader />
+      ) : (
+        <Header />
+      )}
 
-        <div className="relative flex grow flex-col">
-          <Outlet />
-        </div>
-        {
-          location.pathname == "/auth/login" ||
-            location.pathname == "/auth/register" ? (
-            <SignFooter />
-          ) : (
-            <Footer />
-          )
-        }
-      </div >
-
-      :
-
-      <div className="min-h-screen dark:bg-dark-light bg-brand-extralight flex justify-center items-center">
-        <span className="loading loading-bars loading-lg text-brand"></span>
+      <div className="relative flex grow flex-col">
+        <Outlet />
       </div>
-
+      {location.pathname == "/auth/login" ||
+        location.pathname == "/auth/register" ? (
+        <SignFooter />
+      ) : (
+        <Footer />
+      )}
+    </div>
+  ) : (
+    <div className="flex min-h-screen items-center justify-center bg-brand-extralight dark:bg-dark-light">
+      <span className="loading loading-bars loading-lg text-brand"></span>
+    </div>
   );
 };
 

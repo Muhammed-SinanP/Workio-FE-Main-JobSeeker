@@ -2,49 +2,48 @@ import React from "react";
 import { useState } from "react";
 import { axiosInstance } from "../../config/axiosInstance";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { forgotPasswordSchema } from "../../schemas/authSchema";
+
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    userRole: "job_seeker",
-    userEmail: "",
-  });
+  const [disableBtn, setDisableBtn] = useState(false)
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(forgotPasswordSchema) })
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  }
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handlePasswordReset(data) {
+    setDisableBtn(true)
+    toast.dismiss()
+    const loading = toast.loading("Sending email")
     try {
       const response = await axiosInstance({
         method: "POST",
         url: "/auth/forgotPassword",
-        data: formData,
+        data: data,
       });
+      toast.dismiss(loading)
       if (response.status == 200) {
-        toast.success("Email Sent Successfully");
+        toast.success("Email sent successfully")
         navigate("/");
+      }else{
+        toast.error("Failed to send email")
       }
     } catch (err) {
-      console.log("err in send email", err);
-      if (err.response.status === 404) {
-        toast.error("User Not Found");
+      toast.dismiss(loading)
+      if (err.status == 404) {
+        toast.error("User does not exist");
+      } else {
+        toast.error("Failed to send email")
       }
+    } finally {
+      toast.dismiss(loading)
+      setDisableBtn(false)
     }
   }
+
   return (
-    <div className="outer-div min-h-screen tracking-wide">
+    <div className="page-div tracking-wide">
       <div className="inner-div flex flex-col items-center justify-center gap-6">
         <div className="text-center font-medium">
           A password reset link will be send to your registered email once you
@@ -53,27 +52,25 @@ const ForgotPasswordPage = () => {
         <div className="text-center font-medium">
           NB: Reset URL will be expired after the time limit.
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-1">
+        <form onSubmit={handleSubmit(handlePasswordReset)} className="flex flex-col gap-1">
           <div className="flex w-80 flex-col gap-1">
             <label htmlFor="userEmail" className="text-base">
               Provide the registered email
             </label>
             <input
-              type="email"
               id="userEmail"
-              name="userEmail"
-              onChange={handleChange}
-              value={formData.userEmail}
+              {...register("email")}
               className="input-style"
               placeholder="abcd@gmail.com"
             />
+            {errors?.email && <p className="err-msg">{errors.email.message}</p>}
           </div>
           <div className="mt-2 text-center">
-            <input
+            <button
               type="submit"
-              value="Send Reset URL"
-              className="cursor-pointer rounded-md bg-brand p-1.5 px-2 text-white hover:bg-brand-dark active:scale-95"
-            />
+              disabled={disableBtn}
+              className="btn bg-brand  text-white hover:bg-brand-dark "
+            >Send Reset URL</button>
           </div>
         </form>
       </div>

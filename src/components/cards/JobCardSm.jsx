@@ -90,7 +90,11 @@ const JobCardSm = ({ job, handleCardClick, savedJobs, refreshPage }) => {
           )}
         </button>
       </div>
-      <div className="text-sm capitalize">{job?.employer?.profile.company ? job.employer.profile.company : job.employer.name}</div>
+      <div className="text-sm capitalize">
+        {job?.employer?.profile.company
+          ? job.employer.profile.company
+          : job.employer.name}
+      </div>
       <div className="flex items-center text-xs capitalize">
         <LocationOnIcon fontSize="small" className="-ml-1 px-0 py-1" />
         {job?.location?.city}, {job?.location?.state}, {job?.location?.country}

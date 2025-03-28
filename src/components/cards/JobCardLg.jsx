@@ -3,7 +3,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import ErrorIcon from "@mui/icons-material/Error";
 import WorkIcon from "@mui/icons-material/Work";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
@@ -23,15 +23,16 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
   const timeoutRef = useRef(null);
   const [smallHead, setSmallHead] = useState(false);
   const navigate = useNavigate();
-  const [job, jobError, jobLoading] = useFetch(`/job/${jobId}`);
-  const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [
-    refreshCardLg,jobId
-  ]);
   const [savedJobs, setSavedJobs] = useState([]);
+  const [job, jobError, jobLoading] = useFetch(`/job/${jobId}`);
+  const [savedData, savedError, savedLoading] = useFetch(userLoggedIn ? "/user/mySavedJobs" : null, [
+    refreshCardLg,
+    jobId,
+  ]);
 
   useEffect(() => {
     setSavedJobs(savedData?.savedJobs);
-  }, [savedData,jobId]);
+  }, [savedData]);
 
   useEffect(() => {
     const detailsSection = detailsRef.current;
@@ -56,25 +57,29 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
 
   function findDate(createdDate) {
     const d = new Date(createdDate);
-    const date = d.getDate();
-    const month = d.getMonth() + 1;
+    const date = d.getDate().toString();
+    const month = (d.getMonth() + 1).toString();
     const year = d.getFullYear();
-
-    return `${date < 10 ? "0" + date : date}-${month < 10 ? "0" + month : month}-${year}`;
+    return `${date.padStart(2,"0")}-${month.padStart(2,"0")}-${year}`;
   }
 
   async function sendApplication(jobId) {
-    toast.dismiss();
     if (userLoggedIn) {
+      toast.dismiss();
+      const loading = toast.loading("Sending application")
       try {
         const response = await axiosInstance({
           method: "POST",
           url: `/user/apply/${jobId}`,
         });
+        toast.dismiss(loading)
         if (response.status === 200) {
           toast.success("Application sent successfully");
+        }else{
+          toast.error("Application send failed")
         }
       } catch (err) {
+        toast.dismiss(loading)
         if (err.status === 403) {
           toast("Already applied", {
             icon: "❗",
@@ -105,7 +110,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
         method: "POST",
         data: { jobId },
       });
-
+      
       if (response.status === 201) {
         timeoutRef.current = setTimeout(() => {
           toast.dismiss(toastLoading);
@@ -178,7 +183,11 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
               </div>
             </div>
             <div className="flex items-center gap-2 capitalize">
-                <div className="text-sm">{job?.employer?.profile.company ? job.employer.profile.company: job.employer.name}</div>
+              <div className="text-sm">
+                {job?.employer?.profile.company
+                  ? job.employer.profile.company
+                  : job.employer.name}
+              </div>
               <div className="h-6 w-1 border-r border-dark-text"></div>
               <div className="flex items-center text-sm">
                 <LocationOnIcon fontSize="small" className="p-1 px-0" />
@@ -216,7 +225,7 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
             </div>
             <div className="border-b border-gray-300 px-4 py-4">
               <span className="flex items-center gap-1 font-medium">
-                <AssignmentIcon fontSize="small"/>
+                <AssignmentIcon fontSize="small" />
                 Description
               </span>
               <div className="font-paraFont mt-1 pl-6 text-sm">
@@ -228,13 +237,13 @@ const JobCardLg = ({ jobId, refreshPage, refreshCardLg }) => {
                 <ErrorIcon fontSize="small" />
                 Requirements
               </span>
-              <div className="font-paraFont mt-1 pl-6 text-sm">
+              <ul className="font-paraFont list-disc mt-1 pl-6 text-sm">
                 {job?.requirements?.map((element, index) => {
                   if (element.length > 0) {
                     return <li key={index}>{element}</li>;
                   }
                 })}
-              </div>
+              </ul>
             </div>
             <div className="border-b border-gray-300 px-4 py-4">
               <span className="flex items-center gap-1 font-medium">

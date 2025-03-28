@@ -8,25 +8,22 @@ import ArticleSuggestions from "../components/ArticleSuggestions";
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
-  const [refreshCardLg, setRefreshCardLg] = useState(false);
-  const { initialized, userLoggedIn } = useSelector((state) => state.user);
-  const [savedData, error, loading] = useFetch( userLoggedIn?"/user/mySavedJobs":null, [
-    refreshSavedJobs,
-  ]);
-  const [savedJobs, setSavedJobs] = useState([]);
-
-  const [bottomCard, setBottomCard] = useState(false);
+  const { userLoggedIn } = useSelector((state) => state.user);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [bottomCard, setBottomCard] = useState(false);
+  const [savedJobs, setSavedJobs] = useState([]);
+  const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
+  const [refreshCardLg, setRefreshCardLg] = useState(false);
+
+  const [savedData, savedError, savedLoading] = useFetch(
+    userLoggedIn ? "/user/mySavedJobs" : null,
+    [refreshSavedJobs],
+  );
 
   useEffect(() => {
-    savedData && setSavedJobs(savedData?.savedJobs);
+    savedData && setSavedJobs(savedData.savedJobs);
   }, [savedData]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   function refreshPage(job) {
     if (selectedJob._id === job._id) {
@@ -39,7 +36,7 @@ const HomePage = () => {
 
   function handleCardClick(job) {
     setSelectedJob(job);
-    setBottomCard(true);
+    window.innerWidth < 768 && setBottomCard(true);
   }
 
   function closeBottomCard() {
@@ -47,24 +44,21 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    if (bottomCard && window.innerWidth<768) {
+    if (bottomCard && window.innerWidth < 768) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [bottomCard]);
 
   return (
-    <div className="outer-div">
-      <div className="dark:to-bg-dark-light bg-gradient-to-t from-green-50 to-brand-light dark:from-dark-text">
+    <main className="page-div dark:bg-dark-text">
+      <div className="dark:to-dark-light bg-gradient-to-t from-green-50 to-brand-light dark:from-dark-text">
         <div
-          className={`inner-div -mt-4 flex flex-col items-center justify-center gap-4 py-10 transition-all duration-500 ease-in-out ${
-            filteredJobs && filteredJobs.length > 0 ? "md:py-10" : "md:py-32"
-          }`}
+          className={`inner-div -mt-4 flex flex-col items-center justify-center gap-4 py-10 transition-all duration-500 ease-in-out ${filteredJobs && filteredJobs.length > 0 ? "md:py-10" : "md:py-32"}`}
         >
           <JobSearchForm
             filteredJobs={filteredJobs}
@@ -73,10 +67,10 @@ const HomePage = () => {
           />
 
           <div
-            className={`${!filteredJobs ? "visible" : "invisible"} ${filteredJobs && filteredJobs.length > 0 && "hidden"} px-6 pt-2 text-center text-sm font-medium tracking-wide text-red-500 dark:text-red-900`}
+            className={`${!filteredJobs ? "visible" : "invisible"} ${filteredJobs && filteredJobs.length > 0 && "hidden"} px-6 pt-2 text-center text-sm  tracking-wide text-red-800 `}
           >
             No jobs found for the given search criteria. Please try another
-            query !
+            query!
           </div>
         </div>
 
@@ -98,7 +92,9 @@ const HomePage = () => {
                     />
                   </div>
                 ))}
-                <span className="text-center text-xxs tracking-wide text-dark-light">End of the results.</span>
+              <span className="text-center text-xxs tracking-wide text-dark-light">
+                End of the results.
+              </span>
             </div>
             <div className="2xl: hidden h-5/6 w-2/3 px-2 md:block">
               {selectedJob && (
@@ -143,10 +139,10 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="outer-div bg-brand-extralight dark:bg-dark-text">
+      <div className="bg-brand-extralight dark:bg-dark-text">
         <ArticleSuggestions />
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -13,7 +13,7 @@ const ArticleSuggestions = () => {
           <div
             onClick={() => window.open(element.link)}
             key={index}
-            className={`col-span-6 flex scale-90 cursor-pointer flex-col items-center gap-2 rounded-md bg-white bg-card bg-center px-2 py-6 shadow-md transition-all duration-500 ease-in-out hover:scale-95 active:scale-90 md:col-span-3 dark:bg-dark `}
+            className={`col-span-6 flex scale-90 cursor-pointer flex-col items-center gap-2 rounded-md bg-white bg-card bg-center px-2 py-6 shadow-md transition-all duration-500 ease-in-out hover:scale-95 active:scale-90 md:col-span-3 dark:bg-dark`}
           >
             <div>
               <img
@@ -25,7 +25,7 @@ const ArticleSuggestions = () => {
             <div className="text-xl font-medium tracking-wide text-brand">
               {element.title}
             </div>
-            <div className="text-center text-sm font-medium tracking-wide ">
+            <div className="text-center text-sm font-medium tracking-wide">
               {element.subtitle}
             </div>
           </div>

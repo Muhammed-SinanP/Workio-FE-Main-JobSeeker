@@ -2,7 +2,7 @@ import React from "react";
 import { userNavbarData } from "../Data";
 import { NavLink } from "react-router-dom";
 
-const UserNavOptionsSidebar = () => {
+const UserNavOptionsSidebar = ({ setSideBarOpen }) => {
   return (
     <>
       {userNavbarData &&

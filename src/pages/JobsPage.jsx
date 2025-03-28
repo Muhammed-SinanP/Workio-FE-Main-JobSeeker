@@ -6,11 +6,12 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import JobCardSm from "../components/cards/JobCardSm";
 import SkeletonJobCardSm from "../components/skeletons/SkeletonJobCardSm";
 import PaginationBtn from "../components/buttons/PaginationBtn";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
 const JobsPage = () => {
-  const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
   const { userLoggedIn } = useSelector((state) => state.user);
+  const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
   const navigate = useNavigate();
   const [showDiv, setShowDiv] = useState(["filter", "sort"]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -18,30 +19,27 @@ const JobsPage = () => {
   const [jobsPerPage, setJobsPerPage] = useState(12);
   const [pageNo, setPageNo] = useState(0);
   const [pageCount, setpageCount] = useState(0);
+  const { register, watch } = useForm({
+    defaultValues: {
+      experience: 100,
+      salary: 100,
+      jobType: "",
+      workModel: "",
+    }
+  })
 
-  const [filterData, setFilterData] = useState({
-    experience: 100,
-    salary: 100,
-    jobType: "",
-    workModel: "",
-  });
-  const [sortData, setSortData] = useState({
-    sortCriteria: "name",
-    sortOrder: "asc",
-  });
+  const experience = watch("experience")
+  const salary = watch("salary")
+  const jobType = watch("jobType")
+  const workModel = watch("workModel")
+  const sortCriteria = watch("sortCriteria")
+  const sortOrder = watch("sortOrder")
 
   const [data, error, isLoading] = useFetch(
-    `/job/allOpenJobs?experience=${filterData.experience}&salary=${filterData.salary}&jobType=${filterData.jobType}&workModel=${filterData.workModel}&sortCriteria=${sortData.sortCriteria}&sortOrder=${sortData.sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`,
+    `/job/allOpenJobs?experience=${experience}&salary=${salary}&jobType=${jobType}&workModel=${workModel}&sortCriteria=${sortCriteria}&sortOrder=${sortOrder}&pageNo=${pageNo + 1}&jobsPerPage=${jobsPerPage}`,
   );
 
-  const [savedData, savedError, savedLoading] = useFetch("/user/mySavedJobs", [
-    refreshSavedJobs,
-  ]);
-
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [savedData, savedError, savedLoading] = useFetch(userLoggedIn ? "/user/mySavedJobs" : null, [refreshSavedJobs]);
 
   function refreshPage() {
     setRefreshSavedJobs(!refreshSavedJobs);
@@ -50,30 +48,19 @@ const JobsPage = () => {
   useEffect(() => {
     setFilteredJobs(data?.jobs);
     setpageCount(data?.totalPages);
+
+  }, [data]);
+
+  useEffect(() => {
     setSavedJobs(savedData?.savedJobs);
-  }, [data, savedData]);
+  }, [savedData])
 
-  function handleFitlerChange(e) {
-    const { name, value } = e.target;
-    setFilterData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-    setPageNo(null);
-  }
 
-  function handleSortChange(e) {
-    const { name, value } = e.target;
-    setSortData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-    setPageNo(0);
-  }
+  useEffect(() => {
+    setPageNo(0)
+  }, [experience, salary, jobType, workModel, sortCriteria, sortOrder])
+
+
   function handleJobsPerPage(e) {
     const value = e.target.value;
     setJobsPerPage(value);
@@ -105,9 +92,9 @@ const JobsPage = () => {
   }
 
   return (
-    <div className="outer-div min-h-screen">
+    <div className="page-div">
       <div className="inner-div flex flex-col gap-4 pb-0 text-sm capitalize tracking-wider dark:text-dark-text">
-        <div className="flex flex-col gap-2 rounded-md border bg-white p-4 dark:bg-dark">
+        <div className="flex flex-col gap-2 rounded-md border bg-white p-2 dark:bg-dark">
           <div
             className="flex cursor-pointer justify-between text-base font-medium"
             onClick={() => handleVisibilty("filter")}
@@ -124,11 +111,8 @@ const JobsPage = () => {
               <div className="col-span-6 flex flex-col gap-1 sm:col-span-3">
                 <div>Experience</div>
                 <select
-                  name="experience"
-                  id="experience"
-                  className="input-style"
-                  defaultValue={filterData.experience}
-                  onChange={handleFitlerChange}
+                  {...register("experience")}
+                  className="input-style cursor-pointer"
                 >
                   <option value={100} className="text-xs">
                     All
@@ -139,7 +123,6 @@ const JobsPage = () => {
                   <option value={1} className="text-xs">
                     1 year
                   </option>
-
                   {[...Array(49)].map((_, id) => (
                     <option key={id} value={id + 2} className="text-xs">
                       {id + 2} Years
@@ -150,11 +133,8 @@ const JobsPage = () => {
               <div className="col-span-6 flex flex-col gap-1 sm:col-span-3">
                 <div>Salary</div>
                 <select
-                  name="salary"
-                  id="salary"
-                  className="input-style"
-                  defaultValue={filterData.salary}
-                  onChange={handleFitlerChange}
+                  {...register("salary")}
+                  className="input-style cursor-pointer"
                 >
                   <option value={100} className="text-xs">
                     All
@@ -185,11 +165,8 @@ const JobsPage = () => {
               <div className="col-span-6 flex flex-col gap-1 sm:col-span-3">
                 <div>Job Type</div>
                 <select
-                  name="jobType"
-                  id="jobType"
-                  className="input-style"
-                  defaultValue={filterData.jobType}
-                  onChange={handleFitlerChange}
+                  {...register("jobType")}
+                  className="input-style cursor-pointer"
                 >
                   <option value="" className="text-xs">
                     All
@@ -217,11 +194,8 @@ const JobsPage = () => {
               <div className="col-span-6 flex flex-col gap-1 sm:col-span-3">
                 <div>Work Model</div>
                 <select
-                  name="workModel"
-                  id="workModel"
-                  className="input-style"
-                  defaultValue={filterData.workModel}
-                  onChange={handleFitlerChange}
+                  {...register("workModel")}
+                  className="input-style cursor-pointer"
                 >
                   <option value="" className="text-xs">
                     All
@@ -250,7 +224,7 @@ const JobsPage = () => {
           )}
         </div>
 
-        <div className="flex flex-col gap-2 rounded-md border bg-white p-4 dark:bg-dark">
+        <div className="flex flex-col gap-2 rounded-md border bg-white p-2 dark:bg-dark">
           <div
             className="flex cursor-pointer justify-between text-base font-medium"
             onClick={() => handleVisibilty("sort")}
@@ -266,11 +240,8 @@ const JobsPage = () => {
             <div className="grid grid-cols-12 gap-4 sm:gap-6">
               <div className="col-span-6 flex flex-col gap-1 sm:col-span-4 md:col-span-3 lg:col-span-2">
                 <select
-                  name="sortCriteria"
-                  id="sortCriteria"
-                  className="input-style"
-                  defaultValue={sortData.sortCriteria}
-                  onChange={handleSortChange}
+                  {...register("sortCriteria")}
+                  className="input-style cursor-pointer"
                 >
                   <option value="name" className="text-xs">
                     Job Title
@@ -283,21 +254,18 @@ const JobsPage = () => {
 
               <div className="col-span-6 flex flex-col gap-1 sm:col-span-6 md:col-span-5 lg:col-span-4 xl:col-span-3">
                 <select
-                  name="sortOrder"
-                  id="sortOrder"
-                  className="input-style"
-                  defaultValue={sortData.sortOrder}
-                  onChange={handleSortChange}
+                  {...register("sortOrder")}
+                  className="input-style cursor-pointer"
                 >
                   <option value="asc" className="text-xs">
                     Ascending
-                    {sortData.sortCriteria === "name"
+                    {sortCriteria === "name"
                       ? "(A-Z)"
                       : "(Oldest to Newest)"}
                   </option>
                   <option value="desc" className="text-xs">
                     Descending
-                    {sortData.sortCriteria === "name"
+                    {sortCriteria === "name"
                       ? "(Z-A)"
                       : "(Newest to Oldest)"}
                   </option>
@@ -313,7 +281,7 @@ const JobsPage = () => {
             name="jobsPerPage"
             id="jobsPerPage"
             defaultValue={jobsPerPage}
-            className="input-style ml-1 w-14 sm:ml-2"
+            className="input-style cursor-pointer ml-1 w-14 sm:ml-2"
             onChange={handleJobsPerPage}
           >
             <option value={12}>12</option>

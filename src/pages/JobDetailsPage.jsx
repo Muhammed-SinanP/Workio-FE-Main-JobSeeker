@@ -12,12 +12,8 @@ const JobDetailsPage = () => {
     setRefreshCardLg(!refreshCardLg);
   }
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
-    <div className="outer-div h-screen">
+    <div className="page-div">
       <div className="inner-div h-screen sm:px-10 lg:px-20 2xl:h-auto">
         <JobCardLg
           jobId={jobId}

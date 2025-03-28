@@ -32,20 +32,13 @@ const AuthForm = ({ isRegister }) => {
       } else if (err.status === 401) {
         toast.error("Incorrect password");
       } else {
-        console.error("Error during sign:", err.response?.data?.message || err);
+        toast.error(isRegister ? "Register failed" : "Login failed")
       }
     }
   }
 
   function googleSignIn() {
-    try {
-      window.location.href = `${
-        import.meta.env.VITE_BACKEND_URL
-      }/api/auth/googleSign/job_seeker`;
-    } catch (err) {
-      console.log(err);
-      navigate("/");
-    }
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/auth/googleSign/job_seeker`;
   }
 
   return (

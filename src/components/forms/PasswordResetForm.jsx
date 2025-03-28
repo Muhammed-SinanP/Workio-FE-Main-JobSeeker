@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { passwordResetSchema } from "../../schemas/authSchema";
 import { axiosInstance } from "../../config/axiosInstance";
@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const PasswordResetForm = ({ resetToken }) => {
+  const [disableBtn,setDisableBtn] = useState(false)
   const {
     register,
     handleSubmit,
@@ -15,17 +16,24 @@ const PasswordResetForm = ({ resetToken }) => {
   const navigate = useNavigate();
 
   async function resetPassword(data) {
+   setDisableBtn(true)
+   const loading = toast.loading("Resetting password")
     try {
       const response = await axiosInstance({
         method: "POST",
         url: `/auth/resetPassword/${resetToken}`,
         data: data,
       });
+      toast.dismiss(loading)
       if (response.status === 200) {
-        toast.success("Password Reseted Successfully");
+        toast.success("Password reseted successfully");
         navigate("/");
+      }else{
+        toast.error("Password reset failed")
+        navigate("/forgotPassword");
       }
     } catch (err) {
+      toast.dismiss(loading)
       if (err.status === 401) {
         toast.error("Expired / Invalid token");
         navigate("/forgotPassword");
@@ -33,8 +41,11 @@ const PasswordResetForm = ({ resetToken }) => {
         toast.error("Passwords do not match");
         navigate("/forgotPassword");
       } else {
+        toast.error("Password reset failed")
         navigate("/forgotPassword");
       }
+    }finally{
+      setDisableBtn(false)
     }
   }
 
@@ -50,9 +61,10 @@ const PasswordResetForm = ({ resetToken }) => {
           {...register("password")}
           className="input-style"
           placeholder="****"
+          autoComplete="off"
         />
         {errors.password && (
-          <p className="text-xs tracking-wide text-red-500">
+          <p className="err-msg">
             {errors.password.message}
           </p>
         )}
@@ -64,18 +76,19 @@ const PasswordResetForm = ({ resetToken }) => {
           {...register("confirmPassword")}
           className="input-style"
           placeholder="****"
+          autoComplete="off"
         />
         {errors.confirmPassword && (
-          <p className="text-xs tracking-wide text-red-500">
+          <p className="err-msg">
             {errors.confirmPassword.message}
           </p>
         )}
       </div>
       <div className="mt-2 text-center">
-        <input
-          type="submit"
+        <button
+          disabled={disableBtn}
           className="btn btn-wide bg-brand text-base text-white hover:bg-brand-dark"
-        />
+        >Submit</button>
       </div>
     </form>
   );

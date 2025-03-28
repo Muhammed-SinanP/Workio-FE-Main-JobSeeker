@@ -13,7 +13,7 @@ const DarkModeBtn = ({ text = false }) => {
       >
         {/* this hidden checkbox controls the state */}
         <input
-          id="darkModeBtn"
+          name="darkModeBtn"
           type="checkbox"
           onChange={() => dispatch(toggleTheme())}
           checked={theme === "dark"}

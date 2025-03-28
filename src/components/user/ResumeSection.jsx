@@ -9,7 +9,7 @@ import { toggleRefresh } from "../../redux/features/refreshSlice";
 
 const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
   const [uploading, setUploading] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -36,18 +36,19 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
+      toast.dismiss(toastLoading);
       if (response.status == 200) {
-        toast.dismiss(toastLoading);
         setRefreshProfile(!refreshProfile);
         toast.success("Resume uploaded successfully");
+      }else{
+        toast.error("Resume upload failed");
       }
     } catch (err) {
       toast.dismiss(toastLoading);
       toast.error("Resume upload failed");
-      console.error(err);
     } finally {
       setUploading(false);
-      dispatch(toggleRefresh())
+      dispatch(toggleRefresh());
     }
   }
 
@@ -59,22 +60,24 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         url: "/user/removeResume",
         method: "DELETE",
       });
+      toast.dismiss(toastLoading);
       if (response.status === 200) {
-        toast.dismiss(toastLoading);
         toast.success("Resume removed successfully");
+      }else{
+        toast.error("Resume removal failed");
       }
     } catch (err) {
       toast.dismiss(toastLoading);
       toast.error("Resume removal failed");
     } finally {
       setRefreshProfile(!refreshProfile);
-      dispatch(toggleRefresh())
+      dispatch(toggleRefresh());
     }
   }
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col text-sm">
         <p className="font-medium" htmlFor="userResume">
           Resume
         </p>
@@ -102,11 +105,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
         </div>
       </div>
       <div className="my-1 flex flex-col gap-2 text-sm tracking-wide">
-
-        <p>
-          {resume ? "Update" : "Upload"} Resume:
-        </p>
-
+        <p>{resume ? "Update" : "Upload"} Resume:</p>
 
         <form
           className={`flex flex-col items-start justify-center gap-1.5`}
@@ -115,7 +114,7 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
           <input
             type="file"
             title="Choose file"
-            className="w-52 text-transparent truncate"
+            className="w-52 truncate text-transparent"
             {...register("resume")}
           />
           {errors.resume && (
@@ -130,8 +129,9 @@ const ResumeSection = ({ resume, refreshProfile, setRefreshProfile }) => {
           )}
 
           <button
-            className={`btn btn-xs border-0.5 border-dark-light hover:border-dark-light dark:hover:border-dark-text dark:border-dark-text ${uploading && "btn-disabled"}`}
+            className={`btn btn-xs border-0.5 border-dark-light hover:border-dark-light dark:border-dark-text dark:hover:border-dark-text ${uploading && "btn-disabled"}`}
             type="submit"
+            disabled={uploading}
           >
             {resume ? "Update" : "Upload"}
           </button>

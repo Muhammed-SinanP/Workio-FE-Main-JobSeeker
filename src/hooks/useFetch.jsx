@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 
 const useFetch = (url, dependency = []) => {
@@ -7,6 +7,7 @@ const useFetch = (url, dependency = []) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     if (!url) {
       setError("URL not provided");
       setIsLoading(false);
@@ -15,8 +16,8 @@ const useFetch = (url, dependency = []) => {
     let isMounted = true;
 
     async function fetchData() {
+      
       try {
-        setIsLoading(true);
         const response = await axiosInstance({
           method: "GET",
           url: url,

@@ -1,6 +1,5 @@
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-
 import DarkModeBtn from "./buttons/DarkModeBtn";
 import PublicNavOptionsSidebar from "./PublicNavOptionsSidebar";
 import UserNavOptionsSidebar from "./user/UserNavOptionsSidebar";
@@ -17,7 +16,7 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
     >
       <div className="flex h-full w-full flex-col">
         <div className="flex items-center justify-between bg-gray-300 px-2 py-2.5 text-xl font-medium dark:bg-dark-text">
-          <p>Pages</p>{" "}
+          <p>Pages</p>
           <CloseIcon
             className="cursor-pointer"
             onClick={() => setSideBarOpen(false)}
@@ -25,9 +24,11 @@ const SideBar = ({ userLoggedIn, sideBarOpen, setSideBarOpen }) => {
         </div>
         <div className="flex h-4/5 flex-col justify-between gap-6 overflow-auto scrollbar-hide">
           <div className="mt-2 flex flex-col gap-2">
-            <PublicNavOptionsSidebar />
+            <PublicNavOptionsSidebar setSideBarOpen={setSideBarOpen} />
 
-            {userLoggedIn && <UserNavOptionsSidebar />}
+            {userLoggedIn && (
+              <UserNavOptionsSidebar setSideBarOpen={setSideBarOpen} />
+            )}
           </div>
           <div className="mb-4 flex justify-center">
             <DarkModeBtn text={true} />

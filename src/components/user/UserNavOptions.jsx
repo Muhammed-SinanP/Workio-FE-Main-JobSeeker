@@ -5,7 +5,7 @@ import { userNavbarData } from "../Data";
 const UserNavOptions = () => {
   return (
     <div className="flex items-center">
-      <div className=" hidden items-end justify-evenly gap-2 sm:flex">
+      <div className="hidden items-end justify-evenly gap-2 sm:flex">
         {userNavbarData &&
           userNavbarData.map((element, index) => (
             <NavLink

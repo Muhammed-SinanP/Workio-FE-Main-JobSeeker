@@ -9,9 +9,13 @@ body {
   scrollbar-width: thin;
   color: #202124;
 }
+
 @layer components {
   .outer-div {
     @apply w-full;
+  }
+  .page-div {
+    @apply min-h-screen pb-10;
   }
   .inner-div {
     @apply mx-auto max-w-[1536px] p-6 sm:px-10;
@@ -27,9 +31,9 @@ body {
   }
 
   .input-style {
-    @apply w-full cursor-pointer bg-white dark:bg-dark-input rounded-md border border-custom-border-color p-1.5 outline-none;
+    @apply w-full cursor-text rounded-md border border-custom-border-color bg-white p-1.5 outline-none dark:bg-dark-input;
   }
-  
+
   .search-input {
     @apply h-10 w-full border-dark-text bg-white px-1 md:border-r-0.5 dark:bg-dark-input;
   }
@@ -50,7 +54,6 @@ body {
   .footer-content-title {
     @apply font-semibold text-gray-50 dark:text-gray-200;
   }
-
   .pagination-btn {
     @apply flex h-8 w-8 items-center justify-center rounded-md border-0.5 border-custom-border-color bg-white shadow-sm dark:bg-gray-300;
   }
@@ -66,7 +69,13 @@ body {
   .custom-scrollbar {
     @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-brand-dark scrollbar-thumb-rounded-full;
   }
-  .header{
-    @apply rounded-b-xl border-b-0.5 border-brand-dark bg-white dark:border-dark-text dark:bg-dark-input
+  .header {
+    @apply rounded-b-xl border-b-0.5 border-brand-dark bg-white dark:border-dark-text dark:bg-dark-input;
+  }
+  .err-msg{
+    @apply text-xs text-red-500
+  }
+  .forgot-password{
+    @apply cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600 sm:text-xs
   }
 }

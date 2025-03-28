@@ -6,51 +6,49 @@ import SkeletonJobCardSm from "../../components/skeletons/SkeletonJobCardSm";
 
 const SavedJobsPage = () => {
   const navigate = useNavigate();
-
   const [limit, setLimit] = useState(12);
   const [refresh, setRefresh] = useState(false);
   const [savedJobs, setSavedJobs] = useState([]);
   const [showBtn, setShowBtn] = useState(true);
-
   const [initialLoading, setInitialLoading] = useState(true);
-  const [data, error, isLoading] = useFetch(
+  const [savedData, savedError, savedIsLoading] = useFetch(
     `/user/mySavedJobs?limit=${limit}`,
-    [refresh]
+    [refresh],
   );
-  function cardClick(job) {
+  function handleCardClick(job) {
     navigate(`/jobDetails/${job?._id}`);
   }
-  useEffect(() => {
-    if (data) {
-      setInitialLoading(false);
-    }
-    if (data?.savedJobs) {
-      setSavedJobs([...data?.savedJobs]);
-    }
-  }, [data]);
 
   useEffect(() => {
-    if (savedJobs && savedJobs.length === data?.savedJobsCount) {
+    if (savedData) {
+      setInitialLoading(false);
+    }
+    if (savedData?.savedJobs) {
+      setSavedJobs([...savedData?.savedJobs]);
+    }
+  }, [savedData]);
+
+  useEffect(() => {
+    if (savedJobs && savedJobs.length === savedData?.savedJobsCount) {
       setShowBtn(false);
-    } 
-  }, [savedJobs])
+    }
+  }, [savedJobs]);
 
   function handleLoadMore() {
     setLimit(limit + 12);
   }
+
   function refreshPage() {
     setRefresh(!refresh);
   }
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return (
-    <div className="outer-div min-h-screen pb-16">
-      <div className="inner-div pb-0">
 
-        <div className="mt-4 grid  grid-cols-12 gap-4 px-10">
-          {initialLoading ? (
-            Array.from({ length: limit }, (_, i) => (
+
+  return (
+    <div className="page-div">
+      <div className="inner-div pb-0">
+        <div className="mt-4 grid grid-cols-12 gap-4 px-10">
+          {initialLoading
+            ? Array.from({ length: limit }, (_, i) => (
               <div
                 key={i}
                 className="relative col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3"
@@ -58,7 +56,8 @@ const SavedJobsPage = () => {
                 <SkeletonJobCardSm />
               </div>
             ))
-          ) : savedJobs && savedJobs.length > 0 && (
+            : savedJobs &&
+            savedJobs.length > 0 &&
             savedJobs.map((element, index) => (
               <div
                 key={index}
@@ -66,36 +65,34 @@ const SavedJobsPage = () => {
               >
                 <JobCardSm
                   job={element?.job}
-                  cardClick={cardClick}
+                  handleCardClick={handleCardClick}
                   savedJobs={savedJobs}
                   refreshPage={refreshPage}
                 />
               </div>
-            ))
-          )
-
-          }
+            ))}
         </div>
 
-        {savedJobs && savedJobs.length === 0 && <div className="text-center dark:text-dark-text">
-          Your saved list is empty. Go to{" "}
-          <span
-            onClick={() => navigate("/jobs")}
-            className="cursor-pointer font-medium text-blue-500 underline"
-          >
-            jobs page
-          </span>
-          {" "}or <span
-            onClick={() => navigate("/")}
-            className="cursor-pointer font-medium text-blue-500 underline"
-          >search jobs</span> to add jobs to saved list.
-
-        </div>
-        }
-
+        {savedJobs && savedJobs.length === 0 && (
+          <div className="text-center dark:text-dark-text">
+            Your saved list is empty. Go to{" "}
+            <span
+              onClick={() => navigate("/jobs")}
+              className="cursor-pointer  text-blue-500 underline"
+            >
+              jobs page
+            </span>{" "}
+            or{" "}
+            <span
+              onClick={() => navigate("/")}
+              className="cursor-pointer  text-blue-500 underline"
+            >
+              search jobs
+            </span>{" "}
+            to add jobs to saved list.
+          </div>
+        )}
       </div>
-
-
 
       <div className="flex w-full justify-center">
         {showBtn && !initialLoading && (
@@ -103,7 +100,7 @@ const SavedJobsPage = () => {
             onClick={handleLoadMore}
             className="btn btn-sm my-10 bg-brand tracking-wide text-white hover:bg-brand-dark active:bg-brand-dark"
           >
-            {isLoading ? "Loading ..." : "Load more"}
+            {savedIsLoading ? "Loading ..." : "Load more"}
           </button>
         )}
       </div>

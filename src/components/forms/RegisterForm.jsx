@@ -19,7 +19,7 @@ const RegisterForm = ({ submitAuthForm }) => {
     >
       <div className="flex flex-col gap-1">
         <label htmlFor="name" className="dark:text-dark-text">
-          Your full name
+          Your name
         </label>
         <input
           type="text"
@@ -29,7 +29,7 @@ const RegisterForm = ({ submitAuthForm }) => {
           className={`${errors.name && "border-red-500"} input-style text-brand-dark dark:text-dark-text`}
         />
         {errors.name && (
-          <p className="text-xs text-red-500">{errors.name.message}</p>
+          <p className="err-msg">{errors.name.message}</p>
         )}
       </div>
 
@@ -46,7 +46,7 @@ const RegisterForm = ({ submitAuthForm }) => {
           className={`${errors.email && "border-red-500"} input-style dark:text-dark-text`}
         />
         {errors.email && (
-          <p className="text-xs text-red-500">{errors.email.message}</p>
+          <p className="err-msg">{errors.email.message}</p>
         )}
       </div>
 
@@ -64,7 +64,7 @@ const RegisterForm = ({ submitAuthForm }) => {
             {...register("password")}
           />
           {errors.password && (
-            <p className="text-xs text-red-500">{errors.password.message}</p>
+            <p className="err-msg">{errors.password.message}</p>
           )}
           <span
             onClick={() => setShowPassword(!showPassword)}
@@ -92,7 +92,7 @@ const RegisterForm = ({ submitAuthForm }) => {
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && (
-            <p className="text-xs text-red-500">
+            <p className="err-msg">
               {errors.confirmPassword.message}
             </p>
           )}

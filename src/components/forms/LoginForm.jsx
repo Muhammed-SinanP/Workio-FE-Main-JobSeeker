@@ -31,7 +31,7 @@ const LoginForm = ({ submitAuthForm }) => {
           {...register("email")}
         />
         {errors.email && (
-          <p className="text-xs text-red-500">{errors.email.message}</p>
+          <p className="err-msg">{errors.email.message}</p>
         )}
       </div>
       <div className="flex flex-col gap-1">
@@ -47,7 +47,7 @@ const LoginForm = ({ submitAuthForm }) => {
             {...register("password")}
           />
           {errors.password && (
-            <p className="text-xs text-red-500">{errors.password.message}</p>
+            <p className="err-msg">{errors.password.message}</p>
           )}
           <span
             onClick={() => setShowPassword(!showPassword)}
@@ -65,7 +65,7 @@ const LoginForm = ({ submitAuthForm }) => {
       <div className="-mt-2 text-end">
         <span
           onClick={() => navigate("/forgotPassword")}
-          className="cursor-pointer text-sm font-medium text-blue-500 hover:text-blue-600 sm:text-xs"
+          className="forgot-password"
         >
           forgot password?
         </span>

@@ -10,6 +10,7 @@ import ProfileForm from "../../components/forms/ProfileForm";
 import SkeletonProfilePage from "../../components/skeletons/SkeletonProfilePage";
 import LaunchIcon from "@mui/icons-material/Launch";
 import ResumeSection from "../../components/user/ResumeSection";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
   const [refreshProfile, setRefreshProfile] = useState(false);
@@ -18,35 +19,41 @@ const ProfilePage = () => {
   ]);
   const confirm = useConfirm();
   const navigate = useNavigate();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
+  function refreshPage(){
+    setRefreshProfile(!refreshProfile)
+  }
+  
 
   function handleDeleteAccount() {
     async function deleteAccount() {
+      toast.dismiss()
+      const loading = toast.loading("Deleting account")
       try {
         const response = await axiosInstance({
           method: "DELETE",
           url: "/user/deleteMyAccount",
         });
+        toast.dismiss(loading)
         if (response.status === 200) {
+          toast.success("Account deleted successfully")
           navigate("/");
+        }else{
+          toast.error("Account deletion failed")
         }
       } catch (err) {
-        console.log("err in delete account ", err);
+        toast.dismiss(loading)
+        toast.error("Account deletion failed")
       }
     }
     confirm({
       title: "Confirm Delete Account",
-      description: "Account deletion can't be undone. All data will be removed",
+      description: "Account deletion can't be undone. All your data will be removed",
       confirmationText: "Delete Account",
     })
       .then(() => {
         deleteAccount();
       })
-      .catch(() => {
-        console.log("Delete account cancel");
-      });
   }
   function handleLogout() {
     async function userLogout() {
@@ -56,10 +63,13 @@ const ProfilePage = () => {
           url: "/user/logout",
         });
         if (response.status === 200) {
+          toast.success("Logged out successfully")
           navigate("/auth/login");
+        }else{
+          toast.error("User logout failed")
         }
       } catch (err) {
-        console.log("logout err occured", err);
+        toast.error("User logout failed")
       }
     }
 
@@ -72,23 +82,20 @@ const ProfilePage = () => {
       .then(() => {
         userLogout();
       })
-      .catch(() => {
-        console.log("logout cancelled");
-      });
   }
   return (
-    <div className="outer-div">
-      <div className="inner-div min-h-screen">
-        {isLoading ? (
+    <div className="page-div">
+      <div className="inner-div">
+        {!userProfile ? (
           <SkeletonProfilePage />
         ) : (
           <div className="flex flex-col gap-4 pb-32">
-            <div className="flex justify-between gap-2 rounded-md bg-brand-light p-4 sm:p-6 shadow-sm dark:bg-dark-input">
+            <div className="flex justify-between gap-2 rounded-md bg-brand-light p-4 shadow-sm sm:p-6 dark:bg-dark-input">
               <div className="flex flex-col gap-2 pb-2">
                 <div className="text-xl font-bold text-brand-dark lg:text-3xl dark:text-brand">
                   {userProfile?.profile?.name}
                 </div>
-                <div className="tracking-wide text-sm dark:text-dark-text">
+                <div className="text-sm tracking-wide dark:text-dark-text">
                   Manage your job seeker profile
                 </div>
               </div>
@@ -101,7 +108,7 @@ const ProfilePage = () => {
               />
             </div>
             <div className="rounded-md bg-white p-4 shadow-sm dark:bg-dark dark:text-dark-text">
-              <div className="relative rounded-md border p-2 pl-3 pb-20 sm:p-4 sm:pb-28">
+              <div className="relative rounded-md border p-2 pb-20 pl-3 sm:p-4 sm:pb-28">
                 <div className="flex flex-col gap-1">
                   <div className="mt-1.5 flex items-center gap-1">
                     <PersonIcon className="dark:text-dark-text" />
@@ -116,7 +123,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="mt-4">
-                  <ProfileForm userProfile={userProfile} />
+                  <ProfileForm userProfile={userProfile} refreshPage={refreshPage}/>
 
                   <ResumeSection
                     resume={userProfile?.profile.resume}

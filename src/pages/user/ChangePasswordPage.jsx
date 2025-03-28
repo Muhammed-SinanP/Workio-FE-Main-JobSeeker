@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PasswordChangeForm from "../../components/forms/PasswordChangeForm";
 
 const ChangePasswordPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   return (
-    <div className="outer-div min-h-screen">
+    <div className="page-div">
       <div className="inner-div mt-8 flex items-center justify-center">
         <PasswordChangeForm />
       </div>
