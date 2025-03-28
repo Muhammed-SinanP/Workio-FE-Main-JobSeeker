@@ -32,7 +32,7 @@ const PasswordChangeForm = () => {
     } catch (err) {
       toast.dismiss(loading)
       if (err.status === 401) {
-        toast.error("Incorrect password");
+        toast.error("Incorrect old password");
       } else if (err.status == 409) {
         toast.error("Current and new passwords can't be same");
       }

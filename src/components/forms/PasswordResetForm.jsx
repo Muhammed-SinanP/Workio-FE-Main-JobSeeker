@@ -26,7 +26,7 @@ const PasswordResetForm = ({ resetToken }) => {
       });
       toast.dismiss(loading)
       if (response.status === 200) {
-        toast.success("Password reseted successfully");
+        toast.success("Password resetted successfully");
         navigate("/");
       }else{
         toast.error("Password reset failed")
