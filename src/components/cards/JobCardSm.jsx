@@ -24,6 +24,12 @@ const JobCardSm = ({ job, handleCardClick, savedJobs, refreshPage }) => {
     if (dateDiffernce === 1) {
       return "yesterday";
     }
+    if(dateDiffernce>21 && dateDiffernce<=60){
+      return "weeks ago"
+    }
+    if(dateDiffernce>60){
+      return "months ago"
+    }
     return `${dateDiffernce} days ago`;
   }
 

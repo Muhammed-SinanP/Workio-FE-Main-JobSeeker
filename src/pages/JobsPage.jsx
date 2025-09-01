@@ -8,12 +8,13 @@ import SkeletonJobCardSm from "../components/skeletons/SkeletonJobCardSm";
 import PaginationBtn from "../components/buttons/PaginationBtn";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import ErrorDiv from "../components/ErrorDiv";
 
 const JobsPage = () => {
   const { userLoggedIn } = useSelector((state) => state.user);
   const [refreshSavedJobs, setRefreshSavedJobs] = useState(false);
   const navigate = useNavigate();
-  const [showDiv, setShowDiv] = useState(["filter", "sort"]);
+  const [showDiv, setShowDiv] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
   const [jobsPerPage, setJobsPerPage] = useState(12);
@@ -291,7 +292,7 @@ const JobsPage = () => {
       </div>
 
       <div className="inner-div pt-0">
-        <div className="mt-4 grid min-h-44 grid-cols-12 gap-4 px-10">
+        <div className="mt-4 grid min-h-44 grid-cols-12 gap-4 px-2">
           {isLoading ? (
             Array.from({ length: jobsPerPage }, (_, i) => (
               <div
