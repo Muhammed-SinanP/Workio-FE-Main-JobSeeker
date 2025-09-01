@@ -26,6 +26,7 @@ const JobsPage = () => {
       salary: 100,
       jobType: "",
       workModel: "",
+      sortCriteria:"name"
     }
   })
 

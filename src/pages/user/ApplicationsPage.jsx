@@ -22,7 +22,7 @@ const ApplicationsPage = () => {
   const sortCriteria = watch("sortCriteria")
   const sortOrder = watch("sortOrder")
   const [filteredApplications, setFilteredApplications] = useState([]);
-  const [showDiv, setShowDiv] = useState(["filter", "sort"]);
+  const [showDiv, setShowDiv] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(8);
   const [refreshApplications, setRefreshApplications] = useState(false);
   const [pageNo, setPageNo] = useState(0);
